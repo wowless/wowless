@@ -113,6 +113,33 @@ describe('wowless.toc', function()
       assert.same({ ['A' .. gametype .. 'Key'] = 'B' .. gametype .. 'Value' .. gametype }, toc.attrs)
       assert.same({ { name = 'a' .. gametype .. 'b' } }, toc.files)
     end)
+    it('substitutes game and family only outside directives with filenameonlysubstitution', function()
+      local lines = {
+        '# [Family] [Game] comment blah blah',
+        '## A[Family]Key: B[Family]Value',
+        '## C[Game]Key: D[Game]Value',
+        '## Plain: value',
+        '',
+        'a[Family]b',
+        'c[Game]d',
+      }
+      local c = cfg()
+      c.filenameonlysubstitution = true
+      local toc = parse(c, table.concat(lines, '\n'))
+      assert.same({ Plain = 'value' }, toc.attrs)
+      assert.same({ { name = 'a' .. family .. 'b' }, { name = 'c' .. gametype .. 'd' } }, toc.files)
+    end)
+    it('does regional text locale substitution', function()
+      local lines = {
+        '# [RegionalTextLocale] comment blah blah',
+        '## A[RegionalTextLocale]Key: B[RegionalTextLocale]Value[RegionalTextLocale]',
+        '',
+        'a[RegionalTextLocale]b',
+      }
+      local toc = parse(cfg(), table.concat(lines, '\n'))
+      assert.same({ AenUSKey = 'BenUSValueenUS' }, toc.attrs)
+      assert.same({ { name = 'aenUSb' } }, toc.files)
+    end)
     it('does AllowLoad filtering', function()
       local lines = {
         'algame [AllowLoad Game]',

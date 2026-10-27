@@ -41,10 +41,12 @@ AccountData:
     UILayout: 6
 AccountDataUpdateStatus:
   values:
+    ContentSetTooLarge: 5
     Corrupt: 2
     Failed: 1
     Success: 0
     Toobig: 3
+    UnexpectedContentSet: 4
 AccountExportResult:
   values:
     AlreadyInProgress: 11
@@ -103,6 +105,7 @@ AccountStateLoadedFlags:
     CurrencyTransferLogLoaded: '0x0000020000000000'
     DataElementsLoaded: '0x0000001000000000'
     DynamicCriteriaLoaded: '0x0000000001000000'
+    DynamicDistrictsLoaded: '0x0000800000000000'
     EventRecordsLoaded: '0x0000200000000000'
     HousingDataLoaded: '0x0000080000000000'
     ItemCollectionsLoaded: '0x0000000000001000'
@@ -270,6 +273,18 @@ ActionBarOrientation:
   values:
     Horizontal: 0
     Vertical: 1
+ActionBarSet:
+  values:
+    All: 3
+    Gamepad: 2
+    Mkb: 1
+    None: 0
+ActionBarSpellTypeRestriction:
+  values:
+    None: 0
+    WoWHackDefensiveActions: 2
+    WoWHackOffensiveActions: 1
+    WoWHackUltimateActions: 3
 ActionBarVisibleSetting:
   values:
     Always: 0
@@ -522,7 +537,6 @@ BagFlag:
     IgnoreExisting: 8192
     IgnorePetBankcheck: 131072
     IgnoreReagentBags: 8388608
-    IgnoreSoulbound: 4194304
     LookInAccountBankOnly: 16777216
     LookInCharacterBankOnly: 32768
     LookInInventory: 32
@@ -538,11 +552,15 @@ BagFlag:
 BagIndex:
   values:
     Accountbanktab: -3
-    AccountBankTab_1: 12
-    AccountBankTab_2: 13
-    AccountBankTab_3: 14
-    AccountBankTab_4: 15
-    AccountBankTab_5: 16
+    AccountBankTab_1: 15
+    AccountBankTab_2: 16
+    AccountBankTab_3: 17
+    AccountBankTab_4: 18
+    AccountBankTab_5: 19
+    AccountBankTab_6: 20
+    AccountBankTab_7: 21
+    AccountBankTab_8: 22
+    AccountBankTab_9: 23
     Backpack: 0
     Bag_1: 1
     Bag_2: 2
@@ -555,6 +573,9 @@ BagIndex:
     CharacterBankTab_4: 9
     CharacterBankTab_5: 10
     CharacterBankTab_6: 11
+    CharacterBankTab_7: 12
+    CharacterBankTab_8: 13
+    CharacterBankTab_9: 14
     Keyring: -1
     ReagentBag: 5
 BagsDirection:
@@ -589,6 +610,9 @@ BankLockedReason:
     BankDisabled: 2
     NoAccountInventoryLock: 1
     None: 0
+BankTabFlags:
+  values:
+    AllowMissingBag: 1
 BankType:
   values:
     Account: 2
@@ -717,8 +741,13 @@ BattlePetSources:
     Vendor: 2
     WildPet: 4
     WorldEvent: 6
+Bc26Experience:
+  values:
+    Dungeon: 1
+    Skyborne: 0
 BindingContext:
   values:
+    GamepadModeInGameCore: 9
     HousingEditor: 1
     HousingEditorBasicAndExpertDecorMode: 7
     HousingEditorBasicDecorMode: 2
@@ -728,7 +757,6 @@ BindingContext:
     HousingEditorExteriorCustomizationMode: 8
     HousingEditorLayoutMode: 6
     None: 0
-    ReservedFutureFeatureBinding01: 9
 BindingSet:
   values:
     Account: 1
@@ -758,6 +786,7 @@ BnetAccountFlag:
     RafVeteranNotified: 2
     TwitterHasTempSecret: 8
     TwitterLinked: 4
+    Unused: 2097152
     WasSecured: 8192
 BonusStatIndex:
   values:
@@ -765,10 +794,25 @@ BonusStatIndex:
     AgilityOrIntellect: 73
     AgilityOrStrength: 72
     AgilityOrStrengthOrIntellect: 71
+    AlchemySkill: 106
+    ArcaneDamageDone: 89
+    ArcanePenetration: 123
     ArcaneResistance: 56
+    ArmorPenetrationRating: 44
     AttackPower: 38
+    AttackPowerVsBeast: 131
+    AttackPowerVsDemon: 127
+    AttackPowerVsDragonkin: 129
+    AttackPowerVsElemental: 126
+    AttackPowerVsGiant: 130
+    AttackPowerVsHumanoid: 125
+    AttackPowerVsMechanical: 132
+    AttackPowerVsUndead: 128
+    AxesSkill: 93
+    BlacksmithingSkill: 107
     BlockRating: 15
-    BlockValueObsolete: 48
+    BlockValue: 48
+    BowsSkill: 94
     CombatRatingAvoidance: 63
     CombatRatingLifesteal: 62
     CombatRatingSpeed: 61
@@ -782,6 +826,7 @@ BonusStatIndex:
     CombatRatingUnused_3: 60
     CombatRatingUnused_7: 65
     CombatRatingUnused_9: 67
+    CookingSkill: 115
     Corruption: 22
     CorruptionResistance: 23
     CritMeleeRating: 19
@@ -791,35 +836,58 @@ BonusStatIndex:
     CritTakenRangedRatingObsolete: 26
     CritTakenRatingObsolete: 34
     CritTakenSpellRatingObsolete: 27
+    CrossbowsSkill: 95
+    DaggersSkill: 96
     DefenseSkillRating: 12
     DodgeRating: 13
+    DualWieldSkill: 97
+    EnchantingSkill: 108
     Endurance: 2
     Energy: 8
+    EngineeringSkill: 109
     ExpertiseRating: 37
     ExtraArmor: 50
+    FireDamageDone: 85
+    FirePenetration: 119
     FireResistance: 51
+    FirstAidSkill: 116
+    FishingSkill: 117
+    FistWeaponsSkill: 98
     Focus: 10
+    FrostDamageDone: 87
+    FrostPenetration: 121
     FrostResistance: 52
+    GunsSkill: 99
     HasteMeleeRatingObsolete: 28
     HasteRangedRatingObsolete: 29
     HasteRating: 36
     HasteSpellRatingObsolete: 30
     Health: 1
     HealthRegen: 46
+    HerbalismSkill: 112
     HitMeleeRating: 16
     HitRangedRating: 17
     HitRating: 31
     HitSpellRating: 18
     HitTakenRatingObsolete: 33
+    HolyDamageDone: 84
     HolyResistance: 53
     Intellect: 5
+    JewelcraftingSkill: 110
+    LeatherworkingSkill: 111
+    MacesSkill: 100
     Mana: 0
-    ManaRegenerationObsolete: 43
+    ManaRegeneration: 43
     MasteryRating: 49
+    MiningSkill: 113
     ModifiedCraftingStat_1: 24
     ModifiedCraftingStat_2: 25
+    NatureDamageDone: 86
+    NaturePenetration: 120
     NatureResistance: 55
     ParryRating: 14
+    PhysicalDamageDone: 83
+    PolearmsSkill: 101
     ProfessionCraftingSpeed: 80
     ProfessionDeftness: 78
     ProfessionFinesse: 77
@@ -831,19 +899,44 @@ BonusStatIndex:
     PvPPower: 57
     Rage: 9
     RangedAttackPower: 39
+    Reserved_141: 141
     ResilienceRating: 35
+    ShadowDamageDone: 88
+    ShadowPenetration: 122
     ShadowResistance: 54
+    SkinningSkill: 114
     SpellDamageDone: 42
+    SpellDamageVsBeast: 139
+    SpellDamageVsDemon: 135
+    SpellDamageVsDragonkin: 137
+    SpellDamageVsElemental: 134
+    SpellDamageVsGiant: 138
+    SpellDamageVsHumanoid: 133
+    SpellDamageVsMechanical: 140
+    SpellDamageVsUndead: 136
     SpellHealingDone: 41
     SpellPenetration: 47
     SpellPower: 45
+    SpellResistanceAllSchools: 124
     Spirit: 6
     Stamina: 7
+    StavesSkill: 102
     Strength: 4
     StrengthOrIntellect: 74
-    Unused: 44
+    SwordsSkill: 103
+    TailoringSkill: 118
+    ThrownSkill: 104
+    TwohandedAxesSkill: 90
+    TwohandedMacesSkill: 91
+    TwohandedSwordsSkill: 92
     Versatility: 40
-    WeaponSkillRatingObsolete: 11
+    WandsSkill: 105
+    WeaponSkillRating: 11
+BossFrameGrowDirection:
+  values:
+    Center: 1
+    Left: 0
+    Right: 2
 BrawlType:
   values:
     Arena: 2
@@ -852,11 +945,20 @@ BrawlType:
     None: 0
     SoloRbg: 5
     SoloShuffle: 4
+BreakType:
+  values:
+    Character: 0
+    Line: 3
+    Sentence: 2
+    Word: 1
 BulkPurchaseResult:
   values:
     ResultFailed: 3
+    ResultFailedServerValidation: 9
+    ResultFailedServerValidationMissingAchievement: 10
     ResultInProgress: 1
     ResultInsufficientFunds: 6
+    ResultInvalidCurrencyType: 8
     ResultOk: 0
     ResultPartialSuccess: 2
     ResultPurchaseTimeout: 7
@@ -1081,6 +1183,14 @@ CaptureBarWidgetFillDirectionType:
   values:
     LeftToRight: 1
     RightToLeft: 0
+CatalogShopPurchaseEligibility:
+  values:
+    Eligible: 0
+    IneligibleMissingRequiredAchievement: 3
+    IneligibleOwned: 1
+    IneligibleOwnTooManyFromSelectionGroup: 4
+    IneligibleTokenOnGlues: 2
+    IneligibleUnknownProduct: 5
 Causeofdeath:
   values:
     Creature: 3
@@ -1148,6 +1258,9 @@ ChatChannelType:
   values:
     Communities: 4
     Custom: 1
+    DiscordGuild: 6
+    DiscordParty: 5
+    DiscordSolo: 7
     None: 0
     PrivateParty: 2
     PublicParty: 3
@@ -1187,6 +1300,17 @@ ChrRacesAllianceType:
     Alliance: 0
     Horde: 1
     NeutralOrNpc: 2
+ChrSpecializationFlags:
+  values:
+    AllowedSpecForBoost: 256
+    ChallengeModeSpiritAsHit: 8
+    DisabledForTesting: 128
+    IsCaster: 1
+    IsMelee: 4
+    IsRanged: 2
+    OverrideSpec: 32
+    RecommendedSpec: 64
+    SheatheInvertedForDualWield: 16
 CinematicType:
   values:
     GameCinematicSequence: 3
@@ -1415,6 +1539,13 @@ ClubType:
     Character: 1
     Guild: 2
     Other: 3
+CollationStrength:
+  values:
+    Identical: 4
+    Primary: 0
+    Quaternary: 3
+    Secondary: 1
+    Tertiary: 2
 ColorOverride:
   values:
     ItemQualityAccount: 7
@@ -1437,6 +1568,7 @@ CombatAudioAlertCategory:
     PlayerCast: 3
     PlayerDebuffs: 8
     PlayerHealth: 1
+    PlayerHealthPulse: 9
     PlayerResource1: 5
     PlayerResource2: 6
     TargetCast: 4
@@ -1493,6 +1625,18 @@ CombatAudioAlertPlayerResourceFormatValues:
     ResourceFull: 0
     ResourceNoPercent: 1
     ResourceNoPercentDiv10: 2
+CombatAudioAlertPulsePercentValues:
+  values:
+    Off: 0
+    Under10Percent: 9
+    Under20Percent: 8
+    Under30Percent: 7
+    Under40Percent: 6
+    Under50Percent: 5
+    Under60Percent: 4
+    Under70Percent: 3
+    Under80Percent: 2
+    Under90Percent: 1
 CombatAudioAlertSayIfTargetedType:
   values:
     Aggro: 1
@@ -1732,6 +1876,7 @@ CooldownSetSpellFlags:
   values:
     HideAura: 1
     HideByDefault: 2
+    SelectHighestLevelLinkedSpell: 4
 CooldownViewerAddAlertStatus:
   values:
     DuplicateAlert: 3
@@ -2060,6 +2205,7 @@ CreateAllAccountData:
     CurrencycapsDone: '0x0000000000000010'
     CurrencyTransferLogDone: '0x0000020000000000'
     DataElementsDone: '0x0000001000000000'
+    DynamicDistrictsDone: '0x0000800000000000'
     EventRecordsDone: '0x0000200000000000'
     ItemCollectionItemsDone: '0x0000000000001000'
     LgVendorPurchaseDone: '0x0000040000000000'
@@ -2094,6 +2240,7 @@ CurioRarity:
   values:
     Common: 1
     Epic: 4
+    EpicTier2: 5
     Rare: 3
     Uncommon: 2
 CurioType:
@@ -2185,6 +2332,13 @@ CurrencyGainFlags:
     DroppedFromDeath: 2
     FromAccountServer: 4
     None: 0
+CurrencyNameStyle:
+  values:
+    FormalSymbol: 3
+    Long: 2
+    NarrowSymbol: 1
+    Symbol: 0
+    VariantSymbol: 4
 CurrencyTokenCategoryFlags:
   values:
     FlagPlayerItemAssignment: 2
@@ -2197,100 +2351,105 @@ CurrencyType:
     Copper: 0
     Gold: 2
     Silver: 1
+CurrencyWeeksFromStartOption:
+  values:
+    DebugLogging: 1
+    IgnoreTimeBeforeStart: 2
 Cursormode:
   values:
     AttackCursor: 4
-    AttackErrorCursor: 50
+    AttackErrorCursor: 51
     BroomCursor: 42
-    BroomErrorCursor: 88
+    BroomErrorCursor: 89
     BuyCursor: 3
-    BuyErrorCursor: 49
+    BuyErrorCursor: 50
     CampaignQuestCursor: 23
-    CampaignQuestErrorCursor: 69
+    CampaignQuestErrorCursor: 70
     CampaignQuestTurninCursor: 24
-    CampaignQuestTurninErrorCursor: 70
+    CampaignQuestTurninErrorCursor: 71
     CastCursor: 2
-    CastErrorCursor: 48
-    CustomCursor: 91
+    CastErrorCursor: 49
+    CustomCursor: 92
     EnchantCursor: 39
-    EnchantErrorCursor: 85
+    EnchantErrorCursor: 86
+    GamepadInteractCursor: 47
     GatherCursor: 13
-    GatherErrorCursor: 59
+    GatherErrorCursor: 60
     GrabbingHandCursor: 44
-    GrabbingHandErrorCursor: 90
+    GrabbingHandErrorCursor: 91
     HoldingHandCursor: 43
-    HoldingHandErrorCursor: 89
+    HoldingHandErrorCursor: 90
     InnkeeperCursor: 22
-    InnkeeperErrorCursor: 68
+    InnkeeperErrorCursor: 69
     InspectCursor: 7
-    InspectErrorCursor: 53
+    InspectErrorCursor: 54
     InteractCursor: 5
-    InteractErrorCursor: 51
+    InteractErrorCursor: 52
     ItemCursor: 19
-    ItemErrorCursor: 65
+    ItemErrorCursor: 66
     LockCursor: 14
-    LockErrorCursor: 60
+    LockErrorCursor: 61
     LootAllCursor: 16
-    LootAllErrorCursor: 62
+    LootAllErrorCursor: 63
     MailCursor: 15
-    MailErrorCursor: 61
+    MailErrorCursor: 62
     MapPinCursor: 37
-    MapPinErrorCursor: 83
+    MapPinErrorCursor: 84
     MineCursor: 11
-    MineErrorCursor: 57
+    MineErrorCursor: 58
     NoCursor: 0
     PaletteCursor: 41
-    PaletteErrorCursor: 87
+    PaletteErrorCursor: 88
     PickupCursor: 8
-    PickupErrorCursor: 54
+    PickupErrorCursor: 55
     PingCursor: 38
-    PingErrorCursor: 84
+    PingErrorCursor: 85
     PointCursor: 1
-    PointErrorCursor: 47
+    PointErrorCursor: 48
     QuestCursor: 25
-    QuestErrorCursor: 71
+    QuestErrorCursor: 72
     QuestImportantCursor: 30
-    QuestImportantErrorCursor: 76
+    QuestImportantErrorCursor: 77
     QuestImportantTurninCursor: 31
-    QuestImportantTurninErrorCursor: 77
+    QuestImportantTurninErrorCursor: 78
     QuestLegendaryCursor: 28
-    QuestLegendaryErrorCursor: 74
+    QuestLegendaryErrorCursor: 75
     QuestLegendaryTurninCursor: 29
-    QuestLegendaryTurninErrorCursor: 75
+    QuestLegendaryTurninErrorCursor: 76
     QuestMetaCursor: 32
-    QuestMetaErrorCursor: 78
+    QuestMetaErrorCursor: 79
     QuestMetaTurninCursor: 33
-    QuestMetaTurninErrorCursor: 79
+    QuestMetaTurninErrorCursor: 80
     QuestRecurringCursor: 34
-    QuestRecurringErrorCursor: 80
+    QuestRecurringErrorCursor: 81
     QuestRecurringTurninCursor: 35
-    QuestRecurringTurninErrorCursor: 81
+    QuestRecurringTurninErrorCursor: 82
     QuestRepeatableCursor: 26
-    QuestRepeatableErrorCursor: 72
+    QuestRepeatableErrorCursor: 73
     QuestTurninCursor: 27
-    QuestTurninErrorCursor: 73
+    QuestTurninErrorCursor: 74
     RepairCursor: 17
-    RepairErrorCursor: 63
+    RepairErrorCursor: 64
     RepairnpcCursor: 18
-    RepairnpcErrorCursor: 64
+    RepairnpcErrorCursor: 65
     SkinAllianceCursor: 21
-    SkinAllianceErrorCursor: 67
+    SkinAllianceErrorCursor: 68
     SkinCursor: 12
-    SkinErrorCursor: 58
+    SkinErrorCursor: 59
     SkinHordeCursor: 20
-    SkinHordeErrorCursor: 66
+    SkinHordeErrorCursor: 67
     SpeakCursor: 6
-    SpeakErrorCursor: 52
+    SpeakErrorCursor: 53
     StablemasterCursor: 40
-    StablemasterErrorCursor: 86
+    StablemasterErrorCursor: 87
     TaxiCursor: 9
-    TaxiErrorCursor: 55
+    TaxiErrorCursor: 56
     TrainerCursor: 10
-    TrainerErrorCursor: 56
+    TrainerErrorCursor: 57
     UIMoveCursor: 45
     UIResizeCursor: 46
     VehicleCursor: 36
-    VehicleErrorCursor: 82
+    VehicleErrorCursor: 83
 CursorStyle:
   values:
     Crosshair: 1
@@ -2436,6 +2595,13 @@ DamageMeterVisibility:
     Hidden: 2
     InCombat: 1
     InGroup: 3
+DateTimeStyle:
+  values:
+    Full: 4
+    Long: 3
+    Medium: 2
+    None: 0
+    Short: 1
 DeveloperLogAssertDomain:
   values:
     Art: 1
@@ -2470,14 +2636,32 @@ DiscordAccountType:
   values:
     Normal: 0
     Provisional: 1
+DiscordChannelID:
+  values:
+    InvalidDiscordID: '0x0000000000000000'
 DiscordDisplayNameType:
   values:
     Default: 0
     GlobalName: 2
     LastOnline: 1
+DiscordGuildID:
+  values:
+    InvalidDiscordID: '0x0000000000000000'
 DiscordGuildSettings:
   values:
     SeparateStream: 1
+DiscordID:
+  values:
+    InvalidDiscordID: '0x0000000000000000'
+DiscordLobbyID:
+  values:
+    InvalidDiscordID: '0x0000000000000000'
+DiscordMemberID:
+  values:
+    InvalidDiscordID: '0x0000000000000000'
+DiscordMessageID:
+  values:
+    InvalidDiscordID: '0x0000000000000000'
 DurationTextBindingProperty:
   values:
     ElapsedDuration: 2
@@ -2511,9 +2695,10 @@ EditModeAccountSetting:
     ShowExternalDefensives: 32
     ShowExtraAbilities: 9
     ShowGrid: 0
+    ShowGroupFinder: 35
     ShowHudTooltip: 19
     ShowLootFrame: 18
-    ShowLossOfControl: 35
+    ShowLossOfControl: 36
     ShowPartyFrames: 12
     ShowPersonalResourceDisplay: 29
     ShowPetActionBar: 5
@@ -2523,6 +2708,7 @@ EditModeAccountSetting:
     ShowRaidWarning: 33
     ShowStanceBar: 4
     ShowStatusTrackingBar2: 20
+    ShowSwingTimer: 37
     ShowTalkingHeadFrame: 14
     ShowTargetAndFocus: 3
     ShowTimerBars: 25
@@ -2652,6 +2838,16 @@ EditModeEncounterEventsSystemIndices:
     MediumWarnings: 3
     NormalWarnings: 4
     Timeline: 1
+EditModeGamepadMainActionBarSetting:
+  values:
+    Compact: 0
+    ShouldExpand: 4
+    ShowButtonPrompts: 2
+    ShowEmptyBars: 1
+    ShowHighlight: 3
+EditModeGroupFinderSetting:
+  values:
+    Size: 0
 EditModeLayoutType:
   values:
     Account: 1
@@ -2661,9 +2857,16 @@ EditModeLayoutType:
 EditModeLossOfControlSetting:
   values:
     Size: 0
+EditModeMainActionBarEndCapSetting:
+  values:
+    Hidden: 0
+EditModeMainActionBarEndCapSystemIndices:
+  values:
+    EndCapLeft: 1
+    EndCapRight: 2
 EditModeMicroMenuSetting:
   values:
-    EyeSize: 3
+    DeprecatedEyeSize: 3
     Order: 1
     Orientation: 0
     Size: 2
@@ -2680,6 +2883,7 @@ EditModeObjectiveTrackerSetting:
     TextSize: 2
 EditModePersonalResourceDisplaySetting:
   values:
+    AllowMouseoverThrough: 15
     BarWidth: 12
     DeprecatedOnlyShowInCombat: 1
     HealthBarHeight: 4
@@ -2698,6 +2902,7 @@ EditModePersonalResourceDisplaySetting:
 EditModePresetLayouts:
   values:
     Classic: 1
+    Gamepad: 2
     Modern: 0
 EditModeRaidWarningSetting:
   values:
@@ -2717,6 +2922,25 @@ EditModeStatusTrackingBarSystemIndices:
   values:
     StatusTrackingBar1: 1
     StatusTrackingBar2: 2
+EditModeSwingTimerSetting:
+  values:
+    Height: 4
+    Opacity: 1
+    Scale: 0
+    ShowBarTitle: 5
+    ShowTime: 6
+    Visibility: 2
+    Width: 3
+EditModeSwingTimerSystemIndices:
+  values:
+    MainHand: 1
+    OffHand: 2
+    Ranged: 3
+EditModeSwingTimerVisibility:
+  values:
+    Always: 0
+    Hidden: 2
+    InCombat: 1
 EditModeSystem:
   values:
     ActionBar: 0
@@ -2731,15 +2955,19 @@ EditModeSystem:
     EncounterBar: 4
     EncounterEvents: 22
     ExtraAbilities: 5
+    GamepadMainActionBar: 30
+    GroupFinder: 27
     HudTooltip: 11
     LootFrame: 10
-    LossOfControl: 26
+    LossOfControl: 28
+    MainActionBarEndCap: 26
     MicroMenu: 13
     Minimap: 2
     ObjectiveTracker: 12
     PersonalResourceDisplay: 21
     RaidWarning: 24
     StatusTrackingBar: 15
+    SwingTimer: 29
     TalkingHeadFrame: 7
     TimerBars: 17
     TotemActionBar: 25
@@ -2762,6 +2990,7 @@ EditModeUnitFrameSetting:
     FrameHeight: 11
     FrameSize: 16
     FrameWidth: 10
+    GrowDirection: 24
     HidePortrait: 0
     Opacity: 20
     RaidGroupDisplayType: 13
@@ -2770,6 +2999,7 @@ EditModeUnitFrameSetting:
     ShowPartyFrameBackground: 5
     SortPlayersBy: 14
     UseHorizontalGroups: 6
+    UseHorizontalLayout: 23
     UseLargerFrame: 3
     UseRaidStylePartyFrames: 4
     ViewArenaSize: 17
@@ -2954,6 +3184,7 @@ EventToastEventType:
     PvPTierUpdate: 20
     QuestBossEmote: 10
     QuestTurnedIn: 12
+    RenownFactionLeveledUp: 27
     Scenario: 14
     SpellLearned: 21
     SpellScript: 18
@@ -2964,6 +3195,15 @@ EventToastEventType:
 EventToastFlags:
   values:
     DisableRightClickDismiss: 1
+EvictionType:
+  values:
+    JoinParty: 2
+    LeaveParty: 3
+    Outsider: 0
+    OutsiderParty: 1
+    ServerExpiryAggressive: 5
+    ServerExpiryNormal: 4
+    ServerExpiryParty: 6
 ExcludedCensorSources:
   values:
     All: 255
@@ -3028,59 +3268,68 @@ FontStringScaleAnimationMode:
     Vertex: 1
 ForbiddenAspect:
   values:
+    AddAnimations: 16384
     AlwaysPropagateInput: 32
     ChangeAnimationTarget: 256
     ChangeParent: 1024
     EventRegistrations: 16
+    QueryAnimationProgress: 8192
     QueryFocus: 128
+    QueryRotation: 4096
     RemoveSecretAspects: 512
     ScriptBindings: 2
     ScriptedInput: 64
+    SetTexture: 2048
     SetToDefaults: 1
     UntrustedLayoutScriptExecution: 8
     UntrustedScriptExecution: 4
+ForeverExperiencePreset:
+  values:
+    Classic: 0
+    Modern: 1
 FragmentID:
   values:
-    Actor: 15
-    CgObject: 2
-    ClientObservablesData: 6
-    DeferredMessages: 9
-    EntityPosition: 1
-    FHousingDecor: 20
-    FHousingDecorActor: 28
-    FHousingDecorProxy: 26
-    FHousingFixture: 34
-    FHousingHouseDecorSet: 24
-    FHousingHouseFixtureSet: 35
-    FHousingHouseRoomSet: 25
-    FHousingPlayerHouse: 23
-    FHousingPlotAreaTrigger: 29
-    FHousingRoom: 21
-    FHousingRoomComponentMesh: 22
-    FHousingStorageMirrorData: 33
-    FJamHousingCornerstone: 27
-    FLootObjectList: 12
-    FMapObject: 43
-    FMeshObjectData: 19
-    FMirroredPositionData: 31
-    FNeighborhoodMirrorData: 30
-    FNeighborhoodStateData: 38
-    FPathingDoor: 41
-    FPathingDynamicLinks: 40
-    FPersistableJamServers: 10
-    FPhaseShiftData: 16
-    FPlayerHouseInfo: 32
-    FPlayerInitiativeInfo: 37
-    FPlayerJamServers: 11
-    FPlayerOwnershipLink: 13
-    FTransportLink: 5
-    FUnitAIGroupLink: 39
-    FUnitAreaTriggerLink: 14
-    FVendor: 17
-    FWorldStateListenerData: 42
-    HeartbeatData: 4
-    JamDispatcher: 3
-    MirroredObjectC: 18
+    Actor: 16
+    AuthMirrorState: 1
+    CgObject: 3
+    ClientObservablesData: 7
+    DeferredMessages: 10
+    EntityPosition: 2
+    FHousingDecor: 21
+    FHousingDecorActor: 29
+    FHousingDecorProxy: 27
+    FHousingFixture: 35
+    FHousingHouseDecorSet: 25
+    FHousingHouseFixtureSet: 36
+    FHousingHouseRoomSet: 26
+    FHousingPlayerHouse: 24
+    FHousingPlotAreaTrigger: 30
+    FHousingRoom: 22
+    FHousingRoomComponentMesh: 23
+    FHousingStorageMirrorData: 34
+    FJamHousingCornerstone: 28
+    FLootObjectList: 13
+    FMapObject: 44
+    FMeshObjectData: 20
+    FMirroredPositionData: 32
+    FNeighborhoodMirrorData: 31
+    FNeighborhoodStateData: 39
+    FPathingDoor: 42
+    FPathingDynamicLinks: 41
+    FPersistableJamServers: 11
+    FPhaseShiftData: 17
+    FPlayerHouseInfo: 33
+    FPlayerInitiativeInfo: 38
+    FPlayerJamServers: 12
+    FPlayerOwnershipLink: 14
+    FTransportLink: 6
+    FUnitAIGroupLink: 40
+    FUnitAreaTriggerLink: 15
+    FVendor: 18
+    FWorldStateListenerData: 43
+    HeartbeatData: 5
+    JamDispatcher: 4
+    MirroredObjectC: 19
     MirrorState: 0
     ReservedArchetypeSeparator: 255
     TagActiveClientS: 216
@@ -3115,9 +3364,9 @@ FragmentID:
     TestFragment_3: 252
     TestFragment_4: 253
     TestFragment_5: 254
-    Timer: 36
-    TimerQueues: 7
-    TransferSuspensionData: 8
+    Timer: 37
+    TimerQueues: 8
+    TransferSuspensionData: 9
 FrameTutorialAccount:
   values:
     AccountWideReputation: 9
@@ -3158,6 +3407,7 @@ FrameTutorialAccount:
     NpcCraftingOrderTabNew: 18
     PerksProgramActivitiesIntro: 2
     PerksProgramActivitiesOpen: 32
+    Reserved1: 51
     RPETalentStarterBuild: 36
     RunesOfPower: 49
     TimerunnersAdvantage: 8
@@ -3175,6 +3425,20 @@ GameMode:
     Plunderstorm: 2
     Standard: 1
     WoWHack: 3
+GamepadPossessBarOverride:
+  values:
+    Page1BottomBar: 4
+    Page1LeftBar: 2
+    Page1RightBar: 3
+    Page2BottomBar: 8
+    Page2LeftBar: 6
+    Page2RightBar: 7
+    Page2TopBar: 5
+    Page3BottomBar: 12
+    Page3LeftBar: 10
+    Page3RightBar: 11
+    Page3TopBar: 9
+    SpecialPageTopBar: 1
 GamePadPowerLevel:
   values:
     Critical: 0
@@ -3183,19 +3447,49 @@ GamePadPowerLevel:
     Medium: 2
     Unknown: 5
     Wired: 4
+GamepadStanceBarOverride:
+  values:
+    None: 1
+    Page1BottomBar: 4
+    Page1LeftBar: 2
+    Page1RightBar: 3
+    Page2BottomBar: 8
+    Page2LeftBar: 6
+    Page2RightBar: 7
+    Page2TopBar: 5
+    Page3BottomBar: 12
+    Page3LeftBar: 10
+    Page3RightBar: 11
+    Page3TopBar: 9
+GamepadTargetingFilters:
+  values:
+    All: 2
+    Friendly: 1
+    Hostile: 0
 GameRule:
   values:
     AchievementsPanelDisabled: 40
     ActionbarIconIntroDisabled: 60
     ActionButtonTypeOverlayStrategy: 165
+    ActionCombatSpellHitIndicationEnabled: 204
     ActionCombatTargetLockEnabled: 87
+    AeLootDisabled: 89
     AfterDeathSpectatingUI: 49
+    AIGroupLeashesTogether: 259
+    AllowEmptyLoot: 251
+    AllowSimpleKeybindOption: 230
+    AllowSpecChangeInCombat: 239
     AllPlayersAreFastMovers: 53
     AlwaysAllowAlliedRaces: 59
     AutoAttacksDisabled: 103
+    AutoLearnPetSpells: 182
     BagSpaceOverride: 172
     BagsUIDisabled: 64
+    BinarySpellPushbackResist: 90
     BlockWhileSheathedAllowed: 88
+    CameraZoomMax: 208
+    CameraZoomMin: 207
+    CannotSkinCreaturesTooHighLevelForYourSkinningSkill: 247
     CharacterCreateUseFixedBackgroundModel: 55
     CharacterlessLogin: 14
     CharacterPanelDisabled: 37
@@ -3206,27 +3500,50 @@ GameRule:
     CollectionsPanelDisabled: 36
     CommunitiesPanelDisabled: 41
     CompactRaidFrameManagerDisabled: 81
+    ContentSetAccountConfig: 226
+    ContentSetAccountKeyBindings: 210
+    CraftFromBankRestricted: 211
+    CreatureDamageMultiplierAllowedSources: 174
     CustomActionbarOverlayHeightOffset: 33
     DeleteItemConfirmationDisabled: 62
+    DisableArmorCalculations: 224
+    DisableBlocks: 221
     DisableCampsites: 114
+    DisableDodges: 223
+    DisableGlobalAurasOnPlayers: 245
     DisableHonorDecay: 23
+    DisableMinLevelForRaid: 229
+    DisableMisses: 222
+    DisablePaidServices: 246
     DisablePct: 9
     DisableQuickJoin: 162
     DisableRaidGroups: 163
     DisableRealmSelection: 113
+    DisableSpellBlock: 225
     DisableVas: 119
+    DisallowAbandoningLastPet: 180
     DoesNotCountTowardAccountCharacterMax: 142
+    DontAllowPartialTicks: 241
+    DynamicDistrictAffinityAssignmentAlgorithm: 216
     EditModeDisabled: 82
     EjDungeonsDisabled: 149
     EjItemSetsDisabled: 151
     EjJourneysDisabled: 156
     EjRaidsDisabled: 150
     EjSuggestedContentDisabled: 148
+    EmergencySafeLocationID: 240
+    EnableAmmoSystem: 177
+    EnableDifficultyMessages: 237
+    EnableInstanceRunSaveMgr: 227
+    EnableMaxBuffLevelDifference: 242
     EncounterJournalDisabled: 42
     EtaRealmLaunchTime: 5
     ExperienceBarDisabled: 159
     FastAreaTriggerTick: 52
     FinderPanelDisabled: 43
+    FishingClassicDifficulty: 209
+    FlashActionButtonOnInsufficientResource: 218
+    FocusFrameDisabled: 254
     ForceAlteredFormsOn: 56
     ForcedChatLanguage: 34
     ForcedMultiActionBarSetting: 133
@@ -3245,17 +3562,21 @@ GameRule:
     HideUnavailableTransmogSlots: 160
     HousingDashboardDisabled: 102
     HousingEnabled: 154
+    IgnoreAttackPowerFromWeaponDamage: 257
     IgnoreChrclassDisabledFlag: 54
+    IgnoreSpecLevelReq: 215
     IngameCalendarDisabled: 75
     IngameFriendsListDisabled: 79
     IngameMailNotificationDisabled: 74
     IngameTrackingDisabled: 76
     IngameWhoListDisabled: 77
     InstanceDifficultyBannerDisabled: 83
+    InstanceExitSpellEnabled: 235
     LandingPageFactionID: 35
     LootMethodStyle: 157
     MacrosDisabled: 80
     MailGameRule: 132
+    ManaRegenBonusStatMeansMp5: 244
     MapPlunderstormCircle: 48
     MaxAccountCharReservationsPerContentset: 4
     MaxCharactersPerContentSet: 139
@@ -3267,8 +3588,11 @@ GameRule:
     MerchantFilterDisabled: 101
     MicrobarScale: 26
     MinimapDisabled: 146
+    MinimumXPDecayCoefficient: 200
     MinUndeleteLevelRequired: 140
     NameplateCastBarDisabled: 107
+    NoAccountBank: 234
+    NoCharacterBank: 233
     NoDebuffLimit: 1
     NonPlayerNameplateScale: 31
     ObjectiveTrackerDisabled: 104
@@ -3281,20 +3605,37 @@ GameRule:
     PlayerNameplateDifficultyIcon: 57
     PlunderstormAreaSelection: 94
     PremadeGroupFinderStyle: 93
+    PreventUnlootableItemsFromDropping: 253
+    PreventXPAndLootForExcessiveOutsideHelp: 243
+    ProfessionsPanelDisabled: 38
     PvPInitialRatingOverride: 190
+    PvPRuleset: 213
     QuestLogMicrobuttonDisabled: 47
     QuestLogPanelDisabled: 71
     QuestLogSuperTrackingDisabled: 72
+    QuestLootRoundRobin: 197
     RaceAlteredFormsDisabled: 78
+    RangedAttackDelay: 249
+    ReagentBagsFitItemsOfTheirBagFamily: 206
     RecommendLeastPopulatedRealm: 169
     ReleaseSpiritGhostDisabled: 61
     RepairArmorDisabled: 147
     ReplaceAbsentGmSeconds: 11
     ReplaceGmRankLastOnlineSeconds: 12
+    RequirePvPFlagForPvPKillCredit: 255
+    RestrictAchievementNotificationsToCategoryID: 231
     RestrictedAchievementCategoryID: 155
+    RestrictPartyLeaderChangeInInstances: 238
+    RewardsShopFlags: 217
+    RPEDisabled: 195
+    RPRuleset: 214
     Runecarving: 17
+    SecuredQuests: 236
     SelfFoundAllowed: 22
-    SpellbookPanelDisabled: 38
+    ShowTargetFrameForOtherPlayersOnly: 219
+    SingleTargetComboPoints: 112
+    SmallBag: 232
+    StandardQuestXPDecayLevelOffset: 199
     StoreDisabled: 44
     SummoningStones: 108
     TalentRespecCostMax: 19
@@ -3304,26 +3645,32 @@ GameRule:
     TargetCastBarDisabled: 106
     TargetFrameBuffsDisabled: 85
     TargetFrameDisabled: 130
+    ThrownWeaponsUseDurability: 181
     TimerunningAllowed: 137
+    TrackAchievementsDisabled: 228
     TransmogEnabled: 109
     TrivialGroupXPPercent: 7
     TutorialFrameDisabled: 73
     UnflaggedPlayersCanAttackPvPFlaggedPlayers: 173
     UnitFramePvPContextualDisabled: 86
     UniversalNameplateOcclusion: 51
+    UsableCollectionsDisabled: 256
     UseGameTableVariation: 164
     UserAddonsDisabled: 29
     UserScriptsDisabled: 30
     UseSimpleCharacterSelectList: 115
+    UsesTemporaryCharacters: 248
     VanillaAccountMailInstant: 91
     VanillaNpcKnockback: 16
     VanillaRageGenerationModifier: 21
+    WeaponSwapIgnoresCombatSwapCd: 252
     WorldMapDisabled: 145
     WorldMapFrameStrata: 100
     WorldMapHelpPlateDisabled: 70
     WorldMapLegendDisabled: 99
     WorldMapTrackingOptionsDisabled: 68
     WorldMapTrackingPinDisabled: 69
+    ZoneMinimapNameHiddenInInstances: 198
 GameRuleFlags:
   values:
     AllowClient: 1
@@ -3536,12 +3883,14 @@ GossipNpcOption:
     PersonalTabardVendor: 54
     PetitionVendor: 7
     PetSpecializationMaster: 13
+    PetUntrainer: 67
     ProfessionRespec: 58
     ProfessionsCraftingOrder: 48
     ProfessionsCustomerOrder: 50
     ProfessionsOpen: 49
     QueueScenario: 25
     RenameNeighborhood: 59
+    RewardsShop: 70
     RuneforgeLegendaryCrafting: 42
     RuneforgeLegendaryUpgrade: 44
     ShipmentCrafter: 28
@@ -3555,6 +3904,8 @@ GossipNpcOption:
     TieredEntrance: 66
     Trainer: 3
     TraitSystem: 51
+    TransmogOptIn: 68
+    TransmogOptOut: 69
     Transmogrify: 34
     UIItemInteraction: 37
     Vendor: 1
@@ -3635,6 +3986,7 @@ GuildErrorType:
     AlreadyInGuild: 2
     BadItem: 29
     BankNotFound: 43
+    BankSelfFound: 53
     BankTabFull: 28
     BankTabLocked: 35
     Busy: 20
@@ -3647,6 +3999,7 @@ GuildErrorType:
     Ignored: 19
     InCooldown: 49
     InvalidBankTab: 24
+    InviteBadSuperDistrict: 54
     InvitedToGuild: 4
     LockedForMove: 39
     NameAlreadyExists: 7
@@ -3698,6 +4051,7 @@ HolidayFlags:
     DurationUseMinutes: 32
     IsRegionwide: 1
     NotAvailableClientSide: 16
+    StagesUseDatetimes: 128
 HouseEditingContext:
   values:
     Decor: 1
@@ -4092,48 +4446,49 @@ HousingResult:
     MaxPlacedDecorReached: 67
     MaxPreviewDecorReached: 69
     MaxStorageDecorReached: 70
-    MissingCoreFixture: 71
-    MissingDye: 72
-    MissingExpansionAccess: 73
-    MissingFactionMap: 74
-    MissingPrivateNeighborhoodInvite: 75
-    MoreHouseSlotsNeeded: 76
-    MoreSignaturesNeeded: 77
-    NeighborhoodNotFound: 78
-    NoNeighborhoodOwnershipRequests: 79
-    NotInDecorEditMode: 80
-    NotInFixtureEditMode: 81
-    NotInLayoutEditMode: 82
-    NotInsideHouse: 83
-    NotOnOwnedPlot: 84
-    OperationAborted: 85
-    OwnerNotInGuild: 86
-    PermissionDenied: 87
-    PlacementTargetInvalid: 88
-    PlayerNotFound: 89
-    PlayerNotInInstance: 90
-    PlotNotFound: 91
-    PlotNotVacant: 92
-    PlotReservationCooldown: 93
-    PlotReserved: 94
-    RoomNotFound: 95
-    RoomPlacementOutOfBounds: 96
-    RoomUpdateFailed: 97
-    RpcFailure: 98
-    ServiceNotAvailable: 99
-    StaticDataNotFound: 100
+    MessageTooLong: 71
+    MissingCoreFixture: 72
+    MissingDye: 73
+    MissingExpansionAccess: 74
+    MissingFactionMap: 75
+    MissingPrivateNeighborhoodInvite: 76
+    MoreHouseSlotsNeeded: 77
+    MoreSignaturesNeeded: 78
+    NeighborhoodNotFound: 79
+    NoNeighborhoodOwnershipRequests: 80
+    NotInDecorEditMode: 81
+    NotInFixtureEditMode: 82
+    NotInLayoutEditMode: 83
+    NotInsideHouse: 84
+    NotOnOwnedPlot: 85
+    OperationAborted: 86
+    OwnerNotInGuild: 87
+    PermissionDenied: 88
+    PlacementTargetInvalid: 89
+    PlayerNotFound: 90
+    PlayerNotInInstance: 91
+    PlotNotFound: 92
+    PlotNotVacant: 93
+    PlotReservationCooldown: 94
+    PlotReserved: 95
+    RoomNotFound: 96
+    RoomPlacementOutOfBounds: 97
+    RoomUpdateFailed: 98
+    RpcFailure: 99
+    ServiceNotAvailable: 100
+    StaticDataNotFound: 101
     Success: 0
-    TimeoutLimit: 101
-    TimerunningNotAllowed: 102
-    TokenRequired: 103
-    TooManyRequests: 104
-    TransactionFailure: 105
-    UncollectedExteriorFixture: 106
-    UncollectedHouseType: 107
-    UncollectedRoom: 108
-    UncollectedRoomMaterial: 109
-    UncollectedRoomTheme: 110
-    UnlockOperationFailed: 111
+    TimeoutLimit: 102
+    TimerunningNotAllowed: 103
+    TokenRequired: 104
+    TooManyRequests: 105
+    TransactionFailure: 106
+    UncollectedExteriorFixture: 107
+    UncollectedHouseType: 108
+    UncollectedRoom: 109
+    UncollectedRoomMaterial: 110
+    UncollectedRoomTheme: 111
+    UnlockOperationFailed: 112
 HousingRoomComponentCeilingType:
   values:
     Flat: 0
@@ -4247,6 +4602,10 @@ ImageSharingResult:
     RetrievedExisting: 3
     SetAccountDataRequestFailure: 8
     Success: 1
+InclusionMode:
+  values:
+    Included: 1
+    PlayerSelectable: 2
 InitiativeMilestoneFlags:
   values:
     FinalMilestone: 1
@@ -4259,6 +4618,10 @@ InputContext:
     Keyboard: 1
     Mouse: 2
     None: 0
+InputDeviceInterfaceType:
+  values:
+    Gamepad: 1
+    Mkb: 0
 InvalidPlotScreenshotReason:
   values:
     Facing: 2
@@ -4397,23 +4760,43 @@ ItemConsumableSubclass:
   values:
     Bandage: 7
     CombatCurio: 11
+    Device: 14
+    Draught: 13
     Elixir: 2
     Flasksphials: 3
     Fooddrink: 5
     Generic: 0
     Itemenhancement: 6
+    ItemenhancementTemporary: 15
     Other: 8
     Potion: 1
     Relic: 12
     Scroll: 4
     UtilityCurio: 10
     VantusRune: 9
+ItemContainerSubclass:
+  values:
+    Bag: 0
+    Cooking: 10
+    Enchanting: 3
+    Engineering: 4
+    Gem: 5
+    Herb: 2
+    Inscription: 8
+    Leatherworking: 7
+    Mining: 6
+    Reagent: 11
+    Soul: 1
+    Tacklebox: 9
 ItemConversionFlags:
   values:
     UseInputItemStats: 1
 ItemCreationContext:
   values:
     BlackMarket: 15
+    BoeEpic: 195
+    BoeRare: 194
+    BoeUncommon: 193
     BonusRoll_1: 187
     BonusRoll_2: 188
     BonusRoll_3: 189
@@ -4501,6 +4884,7 @@ ItemCreationContext:
     MissionReward_2: 32
     NewCharacter: 75
     None: 0
+    Placeholder_12_2: 196
     PvPBrawl_1: 77
     PvPBrawl_2: 78
     PvPHonorReward: 24
@@ -4566,6 +4950,7 @@ ItemCreationContext:
     TournamentRealm_3: 163
     TournamentRealm_4: 164
     TradeSkill: 13
+    UpdgradeAdventurer: 192
     Vendor: 14
     Warbound_1: 165
     Warbound_10: 174
@@ -4605,6 +4990,21 @@ ItemCreationContext:
     WorldQuest_8: 37
     WorldQuest_9: 42
     WorldQuestJackpot: 74
+ItemDiscoverySource:
+  values:
+    GameObjectKey: 7
+    GuildReward: 9
+    ItemCreated: 1
+    LootItem: 4
+    MailItem: 6
+    Miscellaneous: 12
+    PlayerCollection: 8
+    Quest: 3
+    SpellLearned: 10
+    SpellTrainer: 11
+    SpellVisualKit: 2
+    Unknown: -1
+    VendorItem: 5
 ItemDisplayTextDisplayStyle:
   values:
     ItemNameAndInfoText: 1
@@ -4615,6 +5015,12 @@ ItemDisplayTooltipEnabledType:
   values:
     Disabled: 1
     Enabled: 0
+ItemEnchantType:
+  values:
+    Imbue: 3
+    None: 0
+    Permanent: 1
+    Temporary: 2
 ItemGemColor:
   values:
     Arcane: 1024
@@ -4773,6 +5179,12 @@ ItemQuality:
     Rare: 3
     Uncommon: 2
     WoWToken: 8
+ItemQuiverSubclass:
+  values:
+    Ammopouch: 3
+    ObsoleteBolts: 1
+    ObsoleteQuiver: 0
+    Quiver: 2
 ItemReagentSubclass:
   values:
     ContextToken: 2
@@ -4999,6 +5411,10 @@ JournalLinkTypes:
     Instance: 0
     Section: 2
     Tier: 3
+KioskExperience:
+  values:
+    One: 0
+    Two: 1
 LanguageFlag:
   values:
     HiddenFromPlayer: 2
@@ -5021,6 +5437,12 @@ LFGEntryPlaystyle:
     Hardcore: 3
     None: 0
     Standard: 1
+LFGEntryVoiceMode:
+  values:
+    Custom: 3
+    Discord: 2
+    Legacy: 1
+    None: 0
 LFGListDisplayType:
   values:
     ClassEnumerate: 2
@@ -5108,6 +5530,16 @@ LoadConfigResult:
     LoadInProgress: 2
     NoChangesNecessary: 1
     Ready: 3
+LocaleTransform:
+  values:
+    AddLikelySubtags: 1
+    Canonicalize: 0
+    Language: 3
+    ParentLocale: 7
+    Region: 5
+    RemoveLikelySubtags: 2
+    Script: 4
+    Variant: 6
 LogicLogicop:
   values:
     And: 1
@@ -5154,6 +5586,23 @@ LootMethodStyles:
   values:
     Mainline: 0
     Vanilla: 1
+LootRollDisabledReason:
+  values:
+    GreedOnly: 5
+    HasBetterExactItem: 6
+    InsufficientEnchantSkill: 4
+    MissingProfession: 7
+    None: 0
+    NotAllowed: 1
+    NotDisenchantable: 3
+    UniqueRestriction: 2
+LootRollType:
+  values:
+    Disenchant: 3
+    Greed: 2
+    Need: 1
+    Pass: 0
+    Transmog: 4
 LootSlotType:
   values:
     Currency: 3
@@ -5244,11 +5693,13 @@ MinimapTrackingFilter:
     Stablemaster: 2048
     Target: 16384
     TaxiNode: 8
+    TrainerClass: 8388608
     TrainerProfession: 128
     Transmogrifier: 4096
     TrivialQuests: 1024
     Unfiltered: 0
     VenderFood: 16
+    VendorAmmo: 16777216
     VendorPoison: 1048576
     VendorReagent: 256
 ModelBlendOperation:
@@ -5306,6 +5757,14 @@ MountTypeFlag:
     IsDragonRidingMount: 4
     IsFlyingMount: 1
     IsRideAlongMount: 8
+NamegenType:
+  values:
+    CharacterName: 0
+    Surname: 1
+NamePartType:
+  values:
+    Firstname: 0
+    Surname: 1
 NamePlateCastBarDisplay:
   values:
     HighlightImportantCasts: 4
@@ -5483,6 +5942,12 @@ NodeOpFailureReason:
     WrongSelection: 11
     WrongSpec: 10
     WrongTreeID: 21
+NormalizationForm:
+  values:
+    Nfc: 0
+    Nfd: 1
+    Nfkc: 2
+    Nfkd: 3
 NoRPEReason:
   values:
     BNetToken: 8
@@ -5493,12 +5958,19 @@ NoRPEReason:
     PlayerLocked: 9
     RecentlyActive: 4
     RecentlyBoosted: 5
+    RPEDisabled: 10
     Timerunner: 2
     UpgradeInProgress: 6
 NpcCraftingOrderSetFlags:
   values:
     AllowDuplicate: 2
     AllowMultiple: 1
+NumberStyle:
+  values:
+    Currency: 3
+    Decimal: 0
+    Integer: 1
+    Percent: 2
 NumericRuleFormatRounding:
   values:
     Down: 2
@@ -5554,12 +6026,20 @@ PersonalResourceDisplayVisibleSetting:
     InCombat: 1
 PetActionbuttonType:
   values:
-    Max: 18
+    Max: 26
     Mode: 6
     None: 0
     Orders: 7
     Slot1: 8
     Slot10: 17
+    Slot11: 18
+    Slot12: 19
+    Slot13: 20
+    Slot14: 21
+    Slot15: 22
+    Slot16: 23
+    Slot17: 24
+    Slot18: 25
     Slot1Obsolete: 2
     Slot2: 9
     Slot2Obsolete: 3
@@ -5573,7 +6053,7 @@ PetActionbuttonType:
     Slot8: 15
     Slot9: 16
     Spell: 1
-    VehicleAction: 19
+    VehicleAction: 27
 PetActionFeedback:
   values:
     Dead: 1
@@ -5668,6 +6148,7 @@ PhaseReason:
   values:
     ChromieTime: 3
     Phasing: 0
+    RuleSet: 5
     Sharding: 1
     TimerunningHwt: 4
     WarMode: 2
@@ -5823,6 +6304,12 @@ PlayerCurrencyFlagsDbFlags:
     Reuse1: 2
     Reuse2: 16
     UnusedInUI: 8
+PlayerDataElementAccountFlags:
+  values:
+    Log: 1
+PlayerDataElementCharacterFlags:
+  values:
+    Log: 1
 PlayerDataElementType:
   values:
     Float: 1
@@ -5882,6 +6369,7 @@ PlayerInteractionType:
     PerksProgramVendor: 57
     PersonalTabardVendor: 65
     PetitionVendor: 13
+    PetUntrainer: 80
     PlayerChoice: 37
     ProfessionRespec: 69
     Professions: 59
@@ -5891,6 +6379,7 @@ PlayerInteractionType:
     Registrar: 11
     RenameNeighborhood: 71
     Renown: 55
+    RewardsShop: 81
     ScrappingMachine: 40
     ShipmentCrafter: 33
     Soulbind: 50
@@ -5925,6 +6414,10 @@ PlunderstormQueueState:
     Proposed: 2
     Queued: 1
     Suspended: 3
+PluralType:
+  values:
+    Cardinal: 0
+    Ordinal: 1
 PowerType:
   values:
     Alternate: 10
@@ -6411,6 +6904,16 @@ RaidGroupDisplayType:
     CombineGroupsVertical: 2
     SeparateGroupsHorizontal: 1
     SeparateGroupsVertical: 0
+RaidMarkerSpellids:
+  values:
+    RaidMarker_0: 84996
+    RaidMarker_1: 84997
+    RaidMarker_2: 84998
+    RaidMarker_3: 84999
+    RaidMarker_4: 85000
+    RaidMarker_5: 171555
+    RaidMarker_6: 171556
+    RaidMarker_7: 171557
 RcoCloseReason:
   values:
     Cancel: 2
@@ -6420,7 +6923,7 @@ RcoCloseReason:
     GmCancel: 4
     Invalid: 6
     Reject: 3
-RecentAlliesFriendTag:
+RecentAlliesInteractionCategoryFilter:
   values:
     Delves: 4
     Dungeons: 3
@@ -6576,6 +7079,14 @@ ResidentType:
     Manager: 1
     Owner: 2
     Resident: 0
+RespecType:
+  values:
+    Glyphs: 1
+    Legacy: 4
+    PetTalents: 3
+    SetPrimarySpecialization: 2
+    Specialization: 5
+    Talents: 0
 RestrictPingsTo:
   values:
     Assist: 2
@@ -6585,6 +7096,10 @@ RestrictPingsTo:
 RetroactiveDecorRewardFlags:
   values:
     AllCriteriaRequired: 1
+    None: 0
+RewardsShopFlags:
+  values:
+    Enabled: 1
     None: 0
 RolodexContactMigrationResult:
   values:
@@ -6662,6 +7177,12 @@ ScreenshotSource:
     Automatic: 0
     Cheat: 2
     PlayerReport: 1
+ScribeClassID:
+  values:
+    Inquisitor: 1498
+    None: 1492
+    Slayer: 1497
+    Witch: 1496
 ScriptBindingType:
   values:
     Extrinsic: 1
@@ -6708,6 +7229,18 @@ ScrubStringFlags:
     None: 0
     StripControlCodes: 4
     TruncateNewLines: 1
+SdToggleUsageLocation:
+  values:
+    BarberShop: 2
+    BeforeLogin: 0
+    CharacterCreation: 1
+    OptionsMenu: 3
+SdToggleUsageLocationUI:
+  values:
+    BarberShop: 2
+    BeforeLogin: 0
+    CharacterCreation: 1
+    OptionsMenu: 3
 SeasonID:
   values:
     Fresh: 11
@@ -6752,6 +7285,7 @@ SecretAspect:
     Cursor: 1024
     Desaturation: 4096
     FrameLevel: 256
+    FrameStrata: 16777216
     Hierarchy: 1
     ID: 2
     MinimumWidth: 131072
@@ -6773,6 +7307,11 @@ SecretAspect:
     TooltipTexture: 1048576
     Toplevel: 4
     VertexColor: 2048
+SelectionConstraint:
+  values:
+    None: 0
+    Repeatable: 2
+    Unique: 1
 SelfResurrectOptionType:
   values:
     Item: 1
@@ -6937,6 +7476,13 @@ SoulbindNodeState:
 SoundBusFlag:
   values:
     Disablepositionallpf: 1
+SpecGroup:
+  values:
+    Primary: 0
+    Secondary: 1
+SpecializationSpellsFlag:
+  values:
+    DevOnly: 1
 SpecializationSystem:
   values:
     ChrSpecialization: 1
@@ -7176,8 +7722,14 @@ SurveyDeliveryFlags:
   values:
     EncounterSucccessOnly: 1
     None: 0
+    PvPLossOnly: 16
+    PvPRatedOnly: 2
+    PvPUnratedOnly: 4
+    PvPWinOnly: 8
 SurveyDeliveryMoment:
   values:
+    AchievementCompleted: 6
+    BattlegroundEnd: 7
     ChestLooted: 3
     EncounterEnd: 5
     Login: 0
@@ -7195,13 +7747,17 @@ TieredEntranceRewardType:
     Item: 0
 TieredEntranceTierFlag:
   values:
+    DisableTraitSystem: 2
     IsLFG: 1
+    None: 0
 TieredEntranceType:
   values:
     Delve: 1
     Invalid: 0
     Lairs: 4
+    Placeholder_5: 5
     Sites: 2
+    Tale: 6
     WorldTier: 3
 TimeEventFlag:
   values:
@@ -7234,6 +7790,7 @@ TooltipDataItemBinding:
     Soulbound: 3
 TooltipDataLineType:
   values:
+    AuraCaster: 51
     AzeriteEssencePower: 5
     AzeriteEssenceSlot: 4
     AzeriteItemPowerDescription: 9
@@ -7277,6 +7834,7 @@ TooltipDataLineType:
     ToySource: 29
     ToyText: 25
     TradeTimeRemaining: 36
+    UnitCriteriaProgress: 50
     UnitDead: 49
     UnitLevel: 47
     UnitName: 2
@@ -7398,9 +7956,16 @@ TradeskillSlotDataType:
     Currency: 3
     ModifiedReagent: 2
     Reagent: 1
+TrainerType:
+  values:
+    General: 0
+    Pet: 3
+    TalentsObsolete: 1
+    Tradeskills: 2
 TraitCombatConfigFlags:
   values:
     ActiveForSpec: 1
+    SecondarySpec: 8
     SharedActionBars: 4
     StarterBuild: 2
 TraitCondFlag:
@@ -7408,6 +7973,7 @@ TraitCondFlag:
     IsAlwaysMet: 2
     IsGate: 1
     IsSufficient: 4
+    SuppressGrantIfPurchased: 8
 TraitConditionType:
   values:
     Available: 0
@@ -7424,6 +7990,7 @@ TraitConfigDbState:
     Removed: 2
 TraitConfigType:
   values:
+    CamelotCombat: 4
     Combat: 1
     Generic: 3
     Invalid: 0
@@ -7515,6 +8082,11 @@ TraitTreeFlag:
   values:
     CannotRefund: 1
     HideSingleRankNumbers: 2
+TraitVendorResetFailureReason:
+  values:
+    ClassPointDeficit: 2
+    DataError: 1
+    None: 0
 TransformManipulatorAxis:
   values:
     X: 1
@@ -7587,6 +8159,7 @@ TransmogCollectionType:
 TransmogIllusionFlags:
   values:
     AllowedRangedShieldsHoldables: 4
+    HiddenIllusion: 8
     HideUntilCollected: 1
     PlayerConditionGrantsOnLogin: 2
 TransmogModification:
@@ -7676,6 +8249,10 @@ TransmogOutfitSlotFlags:
     IsSecondarySlot: 4
 TransmogOutfitSlotOption:
   values:
+    ArmorCloth: 12
+    ArmorLeather: 13
+    ArmorMail: 14
+    ArmorPlate: 15
     ArtifactSpecFour: 11
     ArtifactSpecOne: 8
     ArtifactSpecThree: 10
@@ -7707,13 +8284,16 @@ TransmogOutfitSlotPosition:
 TransmogOutfitSlotSaveFlags:
   values:
     AppearanceIsNotValid: 1
+    AppearanceIsOverridden: 2
 TransmogOutfitSlotWarning:
   values:
+    EquippedItemLowLevel: 4
     InvalidEquippedDestinationItem: 1
-    NothingEquipped: 5
+    NothingEquipped: 7
     Ok: 0
-    PendingWeaponChanges: 3
-    WeaponDoesNotSupportIllusions: 4
+    PendingWeaponChanges: 5
+    WeaponDoesNotSupportIllusions: 6
+    WrongArmorTypeEquipped: 3
     WrongWeaponCategoryEquipped: 2
 TransmogOutfitTransactionFlags:
   values:
@@ -7745,6 +8325,10 @@ TransmogSearchType:
     BaseSets: 2
     Items: 1
     UsableSets: 3
+TransmogSettingsUpdateType:
+  values:
+    None: 0
+    OptOut: 1
 TransmogSituation:
   values:
     AllEquipmentSets: 17
@@ -7800,6 +8384,7 @@ TransmogSituationTrigger:
     Manual: 1
     Movement: 4
     None: 0
+    SettingsUpdate: 11
     Specialization: 5
     TimeOfDay: 10
     TransmogUpdate: 2
@@ -7828,6 +8413,7 @@ TransmogSlot:
     Legs: 9
     Mainhand: 11
     Offhand: 12
+    Ranged: 13
     Shoulder: 1
     Tabard: 5
     Waist: 8
@@ -7900,12 +8486,13 @@ UIActionType:
 UICovenantDisplayInfoFlags:
   values:
     DisplayCovenantAsJourney: 1
+    HideRenownLevelUpToast: 8
     UseJourneyRewardTrack: 2
-    UseJourneyUnlockToastText: 3
+    UseJourneyUnlockToastText: 4
 UICursorType:
   values:
     ActionBar: 6
-    AmmoObsolete: 8
+    Ammo: 8
     BattlePet: 16
     ConduitCollectionItem: 19
     Currency: 13
@@ -7989,6 +8576,7 @@ UIMapType:
     Zone: 3
 UIModelSceneActorFlag:
   values:
+    AddDropShadowAtM2Feet: 16
     Deprecated1: 1
     UseCenterForOriginX: 2
     UseCenterForOriginY: 4
@@ -8413,6 +9001,11 @@ VasTransactionPurchaseResult:
     ProxyWeeklyRewardNotFound: 48
     UnknownError: 10
     VasPurchaseDisabled: 1
+VcInitState:
+  values:
+    VcIsInitialized: 2
+    VcIsInitializing: 1
+    VcIsReset: 0
 ViewArenaSize:
   values:
     Three: 1
@@ -8537,6 +9130,7 @@ VoiceChatStatusCode:
     LoginProhibited: 3
     OperationPending: 1
     PlayerSilenced: 21
+    PlayerVoiceChatAgeVerificationRestricted: 25
     PlayerVoiceChatParentalDisabled: 22
     ProxyConnectionTimeOut: 15
     ProxyConnectionUnableToConnect: 16
@@ -8547,6 +9141,10 @@ VoiceChatStatusCode:
     TooManyRequests: 2
     UnableToLaunchProxy: 14
     UnsupportedChatChannelType: 19
+VoiceProviderID:
+  values:
+    Discord: 1
+    Legacy: 0
 VoiceTtsStatusCode:
   values:
     DestinationQueueFull: 8
@@ -8574,6 +9172,14 @@ WeaponSlot:
   values:
     MainHand: 0
     OffHand: 1
+    Ranged: 2
+WeatherType:
+  values:
+    Clear: 0
+    Miscellaneous: 4
+    Rain: 1
+    Sandstorm: 3
+    Snow: 2
 WeeklyRewardChestActivityType:
   values:
     LFGDungeons: 1

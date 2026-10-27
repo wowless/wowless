@@ -115,18 +115,6 @@ lies:
           _change:
             from: unknown
             to: any
-    table.count:
-      inputs:
-      - type:
-          _change:
-            from: unknown
-            to: any
-    table.create:
-      outputs:
-      - type:
-          _change:
-            from: unknown
-            to: table
     UnitFactionGroup:
       _add:
         mayreturnnothing: true
@@ -146,6 +134,37 @@ lies:
         _add:
         - name: unregistered
           type: boolean
+  enums:
+    DiscordChannelID:
+      InvalidDiscordID:
+        _change:
+          from: 0
+          to: '0x0000000000000000'
+    DiscordGuildID:
+      InvalidDiscordID:
+        _change:
+          from: 0
+          to: '0x0000000000000000'
+    DiscordID:
+      InvalidDiscordID:
+        _change:
+          from: 0
+          to: '0x0000000000000000'
+    DiscordLobbyID:
+      InvalidDiscordID:
+        _change:
+          from: 0
+          to: '0x0000000000000000'
+    DiscordMemberID:
+      InvalidDiscordID:
+        _change:
+          from: 0
+          to: '0x0000000000000000'
+    DiscordMessageID:
+      InvalidDiscordID:
+        _change:
+          from: 0
+          to: '0x0000000000000000'
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:
@@ -170,6 +189,7 @@ lies:
     CharCreateAnimTurnType:
     CharSectionCondition:
     ConfigurationWarning:
+    PlayerSwingType:
     RestrictionType:
     UnitTokenType:
     WarbandEventState:
@@ -470,6 +490,8 @@ script_objects:
     luaobject: LuaDurationManualClock
   LuaDurationObjectAPI:
     luaobject: LuaDurationObject
+  LuaLocaleContextAPI:
+    luaobject: LuaLocaleContext
   MinimapFrameAPI:
     uiobject: Minimap
   NumericFormatterAPI:
@@ -560,6 +582,8 @@ script_objects:
     uiobject: TextureBase
   SimpleVectorGraphicsAPI:
     uiobject: VectorGraphics
+  TimedSignalMapAPI:
+    luaobject: LuaTimedSignalMapObject
   UnitHealPredictionCalculatorAPI:
     luaobject: UnitHealPredictionCalculator
 typedefs:
@@ -571,6 +595,8 @@ typedefs:
       luaobject: AbbreviatedNumberFormatter
   AnimationDataEnum:
     type: number
+  any:
+    type: any
   ArtifactTiers:
     type: number
   AuraFilters:
@@ -614,15 +640,7 @@ typedefs:
       uiobject: UIObject
   cstring:
     type: string
-  DiscordID:
-    type: string
-  DurationMillisecondsPrimitive:
-    type: number
-  DurationSeconds:
-    type: number
-  DurationSecondsDouble:
-    type: number
-  DurationSecondsPrimitive:
+  DiscordMemberOpaqueID:
     type: number
   DurationTextBinding:
     type:
@@ -703,10 +721,15 @@ typedefs:
     type: number
   LuaInventorySlot:
     type: number
+  LuaLocaleContext:
+    type:
+      luaobject: LuaLocaleContext
   LuaValueReference:
     type: unknown
   LuaValueVariant:
     type: table
+  Milliseconds:
+    type: number
   ModelAsset:
     type: string
   ModelSceneFrame:
@@ -733,6 +756,8 @@ typedefs:
   NumericRuleFormatter:
     type:
       luaobject: NumericRuleFormatter
+  PreferredPlaySettingsStatus:
+    type: string
   QuestObjectiveType:
     type: number
   RecruitAcceptanceID:
@@ -743,6 +768,8 @@ typedefs:
       uiobject: Region
   ScriptTypeName:
     type: string
+  Seconds:
+    type: number
   SecondsFormatter:
     type:
       luaobject: SecondsFormatter
@@ -805,6 +832,8 @@ typedefs:
     type: string
   stringView:
     type: string
+  table:
+    type: table
   TBFFlags:
     type: string
   TextureAsset:
@@ -820,6 +849,9 @@ typedefs:
       luaobject: LuaFunctionContainer
   time_t:
     type: number
+  TimedSignalMap:
+    type:
+      luaobject: LuaTimedSignalMapObject
   TimerCallback:
     type:
       luaobject: LuaFunctionContainer
@@ -838,6 +870,8 @@ typedefs:
     type: string
   uiUnit:
     type: number
+  UnitCastBarID:
+    type: number
   UnitHealPredictionCalculator:
     type:
       luaobject: UnitHealPredictionCalculator
@@ -853,6 +887,8 @@ typedefs:
     type: unit
   UnitTokenVariant:
     type: unit
+  VoiceChatID:
+    type: number
   WeeklyRewardItemDBID:
     type: string
   WOWGUID:

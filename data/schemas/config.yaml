@@ -110,6 +110,8 @@ type:
           family:
             required: true
             type: string
+          filenameonlysubstitution:
+            type: flag
           gametype:
             required: true
             type: string

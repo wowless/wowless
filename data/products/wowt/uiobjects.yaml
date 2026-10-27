@@ -445,6 +445,13 @@ Actor:
       outputs:
       - name: success
         type: boolean
+    SetModelByUnitCreatureDisplayID:
+      inputs:
+      - name: unit
+        type: unit
+      outputs:
+      - name: success
+        type: boolean
     SetObeyHideInTransmogFlag:
       impl:
         setter:
@@ -2446,6 +2453,7 @@ Cooldown:
     SetSwipeTexture:
       inputs:
       - name: texture
+        nilable: true
         type: FileAsset
       - name: colorR
         nilable: true
@@ -5513,6 +5521,11 @@ Minimap:
       - name: asset
         type: TextureAsset
       outputs:
+    SetUsingSoftCursor:
+      inputs:
+      - name: usingSoftCursor
+        type: boolean
+      outputs:
     SetZoom:
       impl:
         setter:
@@ -5523,6 +5536,13 @@ Minimap:
       outputs:
     UpdateBlips:
       inputs:
+      outputs:
+    UpdateMouseoverAtPoint:
+      inputs:
+      - name: pointX
+        type: number
+      - name: pointY
+        type: number
       outputs:
   singleton: true
 Model:
@@ -7170,6 +7190,18 @@ Region:
         name: enable
         type: boolean
       outputs:
+    FocusEnter:
+      inputs:
+      - default: true
+        name: fromMouseMotion
+        type: boolean
+      outputs:
+    FocusExit:
+      inputs:
+      - default: true
+        name: fromMouseMotion
+        type: boolean
+      outputs:
     GetBottom:
       impl:
         uiobjectimpl: Region/GetBottom
@@ -7294,6 +7326,11 @@ Region:
       outputs:
       - name: right
         type: number
+    GetRoundLayoutToNearestPixel:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
     GetScaledRect:
       impl:
         uiobjectimpl: Region/GetScaledRect
@@ -7463,6 +7500,18 @@ Region:
       outputs:
       - name: isValid
         type: boolean
+    MouseDown:
+      inputs:
+      - default: LeftButton
+        name: button
+        type: string
+      outputs:
+    MouseUp:
+      inputs:
+      - default: LeftButton
+        name: button
+        type: string
+      outputs:
     SetAllPoints:
       impl:
         uiobjectimpl: Region/SetAllPoints
@@ -7554,6 +7603,11 @@ Region:
     SetPropagateMouseMotion:
       inputs:
       - name: propagate
+        type: boolean
+      outputs:
+    SetRoundLayoutToNearestPixel:
+      inputs:
+      - name: enabled
         type: boolean
       outputs:
     SetSize:

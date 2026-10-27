@@ -1,9 +1,8 @@
 local T, GetAddOnMetadata = ...
+local toccfg = T.data.config.toc
 local kv = {
   Notes = 'WoW client unit tests',
   Title = 'Wowless',
-  ['X-Family'] = T.data.config.toc.family,
-  ['X-GameType'] = T.data.config.toc.gametype,
 }
 local knil = {
   'Dependencies',
@@ -11,6 +10,13 @@ local knil = {
   'SavedVariables',
   'WowlessNonsense',
 }
+if toccfg.filenameonlysubstitution then
+  table.insert(knil, 'X-Family')
+  table.insert(knil, 'X-GameType')
+else
+  kv['X-Family'] = toccfg.family
+  kv['X-GameType'] = toccfg.gametype
+end
 local tests = {}
 for k, v in pairs(kv) do
   tests[k] = function()

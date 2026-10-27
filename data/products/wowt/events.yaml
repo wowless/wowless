@@ -34,6 +34,14 @@ ACHIEVEMENT_PLAYER_NAME:
     type: number
 ACHIEVEMENT_SEARCH_UPDATED:
   payload:
+ACTION_COMBAT_ACTION_RANGE_CHECK_UPDATE:
+  payload:
+  - name: slot
+    type: number
+  - name: isInRange
+    type: boolean
+  - name: checksRange
+    type: boolean
 ACTION_RANGE_CHECK_UPDATE:
   payload:
   - name: slot
@@ -180,6 +188,8 @@ AJ_REFRESH_DISPLAY:
   - name: newAdventureNotice
     type: boolean
 AJ_REWARD_DATA_RECEIVED:
+  payload:
+ALERT_AGE_VERIFICATION_RESTRICTED:
   payload:
 ALERT_REGIONAL_CHAT_DISABLED:
   payload:
@@ -590,6 +600,20 @@ BATTLEPET_FORCE_NAME_DECLENSION:
     type: string
   - name: battlePetGUID
     type: string
+BC_26_COLD_SWAP_FEATURE_ENABLED_CHANGED:
+  payload:
+  - name: newEnabled
+    type: boolean
+  - name: oldEnabled
+    type: boolean
+BC_26_EXPERIENCE_CHANGED:
+  payload:
+  - name: newExperience
+    type:
+      enum: Bc26Experience
+  - name: oldExperience
+    type:
+      enum: Bc26Experience
 BEHAVIORAL_NOTIFICATION:
   payload:
   - name: notificationType
@@ -1846,6 +1870,45 @@ CHAT_MSG_CHANNEL_NOTICE:
     type:
       structure: DiscordChatInfo
 CHAT_MSG_CHANNEL_NOTICE_USER:
+  payload:
+  - name: text
+    type: string
+  - name: playerName
+    type: string
+  - name: languageName
+    type: string
+  - name: channelName
+    type: string
+  - name: playerName2
+    type: string
+  - name: specialFlags
+    type: string
+  - name: zoneChannelID
+    type: number
+  - name: channelIndex
+    type: number
+  - name: channelBaseName
+    type: string
+  - name: languageID
+    type: number
+  - name: lineID
+    type: number
+  - name: guid
+    type: string
+  - name: bnSenderID
+    type: number
+  - name: isMobile
+    type: boolean
+  - name: isSubtitle
+    type: boolean
+  - name: hideSenderInLetterbox
+    type: boolean
+  - name: suppressRaidIcons
+    type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
+CHAT_MSG_COLLECTED_APPEARANCE:
   payload:
   - name: text
     type: string
@@ -4533,6 +4596,9 @@ DELETE_ITEM_CONFIRM:
     type: number
   - name: questWarn
     type: number
+  - name: itemGUID
+    nilable: true
+    type: string
 DELVE_ASSIST_ACTION:
   payload:
   - name: data
@@ -4540,6 +4606,10 @@ DELVE_ASSIST_ACTION:
       structure: DelveAssistActionData
 DELVES_ACCOUNT_DATA_ELEMENT_CHANGED:
   payload:
+DIEL_CYCLE_CHANGED:
+  payload:
+  - name: isDayTime
+    type: boolean
 DISABLE_DECLINE_GUILD_INVITE:
   payload:
 DISABLE_LOW_LEVEL_RAID:
@@ -4792,7 +4862,11 @@ EXPAND_BAG_BAR_CHANGED:
     type: boolean
 EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED:
   payload:
-EXTERNAL_EVENT_LAUNCH_URL_FAILED:
+EXTERNAL_EVENT_LAUNCH_URL_RESULT:
+  payload:
+  - name: result
+    type: boolean
+EXTERNAL_EVENT_URL_CHANGED:
   payload:
 EXTRA_BROWSE_INFO_RECEIVED:
   payload:
@@ -4847,9 +4921,15 @@ GAME_MODE_DISPLAY_MODE_TOGGLE_DISABLED:
     type: number
   - name: disabled
     type: boolean
+GAME_MODE_EXP_BAR_DATA_UPDATED:
+  payload:
 GAME_PAD_ACTIVE_CHANGED:
   payload:
   - name: isActive
+    type: boolean
+GAME_PAD_ALLOW_HOVER_EVENTS_WITH_FREE_LOOK_CHANGED:
+  payload:
+  - name: enabled
     type: boolean
 GAME_PAD_CONFIGS_CHANGED:
   payload:
@@ -4862,6 +4942,24 @@ GAME_PAD_POWER_CHANGED:
   - name: powerLevel
     type:
       enum: GamePadPowerLevel
+GAME_RULES_CHANGED:
+  payload:
+GAMEPAD_POSSESS_BAR_OVERRIDE_CHANGED:
+  payload:
+  - name: oldOverride
+    type:
+      enum: GamepadPossessBarOverride
+  - name: newOverride
+    type:
+      enum: GamepadPossessBarOverride
+GAMEPAD_STANCE_BAR_OVERRIDE_CHANGED:
+  payload:
+  - name: oldOverride
+    type:
+      enum: GamepadStanceBarOverride
+  - name: newOverride
+    type:
+      enum: GamepadStanceBarOverride
 GARRISON_ARCHITECT_CLOSED:
   payload:
 GARRISON_ARCHITECT_OPENED:
@@ -5166,6 +5264,20 @@ GLOBAL_MOUSE_UP:
   payload:
   - name: button
     type: string
+GLOBAL_REGION_MOUSE_DOWN:
+  payload:
+  - name: region
+    type:
+      uiobject: Region
+  - name: button
+    type: string
+GLOBAL_REGION_MOUSE_UP:
+  payload:
+  - name: region
+    type:
+      uiobject: Region
+  - name: button
+    type: string
 GLUE_SCREENSHOT_FAILED:
   payload:
 GLUE_SCREENSHOT_STARTED:
@@ -5274,6 +5386,18 @@ GUILD_PARTY_STATE_UPDATED:
   payload:
   - name: inGuildParty
     type: boolean
+GUILD_PREFERRED_PLAY_SETTINGS_UPDATED:
+  payload:
+  - name: status
+    type: string
+  - name: preferredLocaleID
+    type: number
+  - name: preferredDatacenterLocalityID
+    type: number
+  - name: lastPreferredLocaleChangeDate
+    type: number
+  - name: lastPreferredDatacenterLocalityChangeDate
+    type: number
 GUILD_RANKS_UPDATE:
   payload:
 GUILD_RANKS_UPDATE_ACTIVE_PLAYER:
@@ -5878,6 +6002,14 @@ INITIATIVE_TASKS_TRACKED_LIST_CHANGED:
     type: boolean
 INITIATIVE_TASKS_TRACKED_UPDATED:
   payload:
+INPUT_DEVICE_INTERFACE_TRANSITION:
+  payload:
+  - name: newMode
+    type:
+      enum: InputDeviceInterfaceType
+  - name: oldMode
+    type:
+      enum: InputDeviceInterfaceType
 INSPECT_ACHIEVEMENT_READY:
   payload:
   - name: guid
@@ -6194,6 +6326,8 @@ LFG_LIST_JOINED_GROUP:
     type: string
 LFG_LIST_REVEALED_CENSORED_ACTIVE_ENTRY:
   payload:
+LFG_LIST_ROLE_UPDATE:
+  payload:
 LFG_LIST_SEARCH_FAILED:
   payload:
   - name: reason
@@ -6205,6 +6339,14 @@ LFG_LIST_SEARCH_RESULT_UPDATED:
     type: number
 LFG_LIST_SEARCH_RESULTS_RECEIVED:
   payload:
+LFG_LIST_SHOW_SEARCH:
+  payload:
+  - name: activityIDsFilter
+    nilable: true
+    type:
+      arrayof: number
+  - name: showAllLevelRanges
+    type: boolean
 LFG_LIST_UPDATE_SEARCH_RESULTS:
   payload:
 LFG_LOCK_INFO_RECEIVED:
@@ -6317,13 +6459,13 @@ LOOT_HISTORY_ONE_HUNDRED_ROLL:
   payload:
   - name: encounterID
     type: number
-  - name: lootListID
+  - name: lootListKey
     type: number
 LOOT_HISTORY_UPDATE_DROP:
   payload:
   - name: encounterID
     type: number
-  - name: lootListID
+  - name: lootListKey
     type: number
 LOOT_HISTORY_UPDATE_ENCOUNTER:
   payload:
@@ -6426,6 +6568,8 @@ MAIL_LOCK_SEND_ITEMS:
     type: number
   - name: itemLink
     type: string
+MAIL_OPEN_ALL_CANCELED:
+  payload:
 MAIL_SEND_INFO_UPDATE:
   payload:
 MAIL_SEND_SUCCESS:
@@ -7085,9 +7229,11 @@ PET_JOURNAL_TRAP_LEVEL_SET:
   payload:
   - name: trapLevel
     type: number
-PET_SPECIALIZATION_CHANGED:
+PET_ORDER_MOVE_TO_PENDING_CHANGED:
   payload:
-PET_SPELL_POWER_UPDATE:
+  - name: isPetOrderMoveToPending
+    type: boolean
+PET_SPECIALIZATION_CHANGED:
   payload:
 PET_STABLE_CLOSED:
   payload:
@@ -7096,6 +7242,8 @@ PET_STABLE_FAVORITES_UPDATED:
 PET_STABLE_SHOW:
   payload:
 PET_STABLE_UPDATE:
+  payload:
+PET_STATS_UPDATE:
   payload:
 PET_UI_CLOSE:
   payload:
@@ -7272,6 +7420,8 @@ PLAYER_LEVEL_UP:
     type: number
   - name: intellectDelta
     type: number
+  - name: spiritDelta
+    type: number
 PLAYER_LOGIN:
   payload:
 PLAYER_LOGOUT:
@@ -7296,6 +7446,10 @@ PLAYER_MONEY:
   payload:
 PLAYER_MOUNT_DISPLAY_CHANGED:
   payload:
+PLAYER_PVP_FLAG_CHANGED:
+  payload:
+  - name: isPvpFlagged
+    type: boolean
 PLAYER_PVP_KILLS_CHANGED:
   payload:
   - name: unitTarget
@@ -7349,6 +7503,10 @@ PLAYER_STOPPED_LOOKING:
 PLAYER_STOPPED_MOVING:
   payload:
 PLAYER_STOPPED_TURNING:
+  payload:
+PLAYER_SWING:
+  payload:
+PLAYER_SWING_RANGE_UPDATE:
   payload:
 PLAYER_TALENT_UPDATE:
   payload:
@@ -7900,17 +8058,24 @@ SCREENSHOT_STARTED:
   payload:
 SCREENSHOT_SUCCEEDED:
   payload:
+SCRIBE_CLASS_CHANGED:
+  payload:
+  - name: classID
+    type:
+      enum: ScribeClassID
 SCRIPTED_ANIMATIONS_UPDATE:
   payload:
 SEARCH_DB_LOADED:
   payload:
 SECURE_TRANSFER_CANCEL:
   payload:
-SECURE_TRANSFER_CONFIRM_HOUSING_PURCHASE:
-  payload:
 SECURE_TRANSFER_CONFIRM_SEND_MAIL:
   payload:
+SECURE_TRANSFER_CONFIRM_TAKE_MAIL_MONEY:
+  payload:
 SECURE_TRANSFER_CONFIRM_TRADE_ACCEPT:
+  payload:
+SECURE_TRANSFER_CONFIRM_VC_PRODUCT_PURCHASE:
   payload:
 SECURE_TRANSFER_HOUSING_CURRENCY_PURCHASE_CONFIRMATION:
   payload:
@@ -7943,6 +8108,12 @@ SETTINGS_PANEL_OPEN:
   - name: scrollToElementName
     nilable: true
     type: string
+SHARD_TRANSFER:
+  payload:
+SHARD_TRANSFER_CANCELLED:
+  payload:
+SHARD_TRANSFER_IMMINENT:
+  payload:
 SHIPMENT_CRAFTER_CLOSED:
   payload:
 SHIPMENT_CRAFTER_INFO:
@@ -8127,6 +8298,8 @@ SOCIAL_QUEUE_UPDATE:
     nilable: true
     type: number
 SOCIAL_UI_FRIENDS_LIST_SYSTEM_STATUS_UPDATED:
+  payload:
+SOCIAL_UI_RAID_LIST_SYSTEM_STATUS_UPDATED:
   payload:
 SOCIAL_UI_SOCIAL_QUEUE_SYSTEM_STATUS_UPDATED:
   payload:
@@ -8489,6 +8662,10 @@ TABARD_CANSAVE_CHANGED:
   payload:
 TABARD_SAVE_PENDING:
   payload:
+TALE_RUN_CLEAR_RESULT:
+  payload:
+  - name: success
+    type: boolean
 TALENTS_INVOLUNTARILY_RESET:
   payload:
   - name: isPetTalents
@@ -9075,6 +9252,10 @@ UNIT_GUILD_LEVEL:
   payload:
   - name: newLevel
     type: number
+UNIT_HAPPINESS:
+  payload:
+  - name: unitTarget
+    type: unit
 UNIT_HEAL_ABSORB_AMOUNT_CHANGED:
   payload:
   - name: unitTarget
@@ -9144,6 +9325,10 @@ UNIT_PET:
   - name: unitTarget
     type: unit
 UNIT_PET_EXPERIENCE:
+  payload:
+  - name: unitTarget
+    type: unit
+UNIT_PET_TRAINING_POINTS:
   payload:
   - name: unitTarget
     type: unit
@@ -9631,6 +9816,14 @@ VIEWED_TRANSMOG_OUTFIT_SECONDARY_SLOTS_CHANGED:
   payload:
 VIEWED_TRANSMOG_OUTFIT_SITUATIONS_CHANGED:
   payload:
+VIEWED_TRANSMOG_OUTFIT_SLOT_OPTION_CHANGED:
+  payload:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  - name: option
+    type:
+      enum: TransmogOutfitSlotOption
 VIEWED_TRANSMOG_OUTFIT_SLOT_REFRESH:
   payload:
 VIEWED_TRANSMOG_OUTFIT_SLOT_SAVE_SUCCESS:
@@ -9642,14 +9835,6 @@ VIEWED_TRANSMOG_OUTFIT_SLOT_SAVE_SUCCESS:
     type:
       enum: TransmogType
   - name: option
-    type:
-      enum: TransmogOutfitSlotOption
-VIEWED_TRANSMOG_OUTFIT_SLOT_WEAPON_OPTION_CHANGED:
-  payload:
-  - name: slot
-    type:
-      enum: TransmogOutfitSlot
-  - name: weaponOption
     type:
       enum: TransmogOutfitSlotOption
 VIGNETTE_MINIMAP_UPDATED:
@@ -9664,6 +9849,11 @@ VOICE_CHAT_ACTIVE_INPUT_DEVICE_UPDATED:
   payload:
 VOICE_CHAT_ACTIVE_OUTPUT_DEVICE_UPDATED:
   payload:
+VOICE_CHAT_ACTIVE_VOICE_PROVIDER_CHANGED:
+  payload:
+  - name: voiceProviderID
+    type:
+      enum: VoiceProviderID
 VOICE_CHAT_AUDIO_CAPTURE_ENERGY:
   payload:
   - name: isSpeaking
@@ -9833,6 +10023,8 @@ VOICE_CHAT_DEAFENED_CHANGED:
   payload:
   - name: isDeafened
     type: boolean
+VOICE_CHAT_DISCORD_SETTINGS_UPDATED:
+  payload:
 VOICE_CHAT_ERROR:
   payload:
   - name: platformCode
@@ -9915,6 +10107,13 @@ VOICE_CHAT_TTS_VOICES_UPDATE:
   payload:
 VOICE_CHAT_VAD_SETTINGS_UPDATED:
   payload:
+VOICE_CHAT_VOICE_PROVIDER_CHANGED:
+  payload:
+  - name: voiceProviderID
+    type:
+      enum: VoiceProviderID
+VOICE_CHAT_VOICE_PROVIDERS_AVAILABLE_CHANGED:
+  payload:
 VOTE_KICK_REASON_NEEDED:
   payload:
   - name: name
@@ -9961,6 +10160,8 @@ WAYPOINT_UPDATE:
 WEAPON_ENCHANT_CHANGED:
   payload:
 WEAPON_SLOT_CHANGED:
+  payload:
+WEATHER_CHANGED:
   payload:
 WEEKLY_REWARDS_ITEM_CHANGED:
   payload:

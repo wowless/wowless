@@ -64,15 +64,34 @@ local function gametypestate(toccfg)
   return state
 end
 
+local function substitute(toccfg, s)
+  s = s:gsub('%[Game%]', toccfg.gametype)
+  return (s:gsub('%[Family%]', toccfg.family))
+end
+
 local function parse(toccfg, content)
   local state = gametypestate(toccfg)
-  content = content:gsub('%[Game%]', toccfg.gametype)
-  content = content:gsub('%[Family%]', toccfg.family)
+  if not toccfg.filenameonlysubstitution then
+    content = substitute(toccfg, content)
+  end
+  -- Fixed stand-in; the real client's value for this token is not yet determined.
+  content = content:gsub('%[RegionalTextLocale%]', 'enUS')
   local toc = { attrs = {}, deps = {}, files = {}, optionaldeps = {} }
   for line in content:gmatch('[^\r\n]+') do
     local allok = true
     local tags = {}
-    line = line:match('^%s*(.-)%s*$'):gsub('%[([^:%]%s]*):?%s*([^%]]-)%]', function(filter, fdata)
+    line = line:match('^%s*(.-)%s*$')
+    local directive = line:sub(1, 3) == '## '
+    if toccfg.filenameonlysubstitution and not directive then
+      line = substitute(toccfg, line)
+    end
+    line = line:gsub('%[([^:%]%s]*):?%s*([^%]]-)%]', function(filter, fdata)
+      if filter == 'Game' or filter == 'Family' then
+        -- Unsubstituted directive; the client's GetAddOnMetadata returns nil for it.
+        assert(directive and toccfg.filenameonlysubstitution)
+        allok = false
+        return ''
+      end
       local ok, tag = assert(filters[filter], filter)(fdata, state)
       allok = allok and ok
       tags[filter] = tag

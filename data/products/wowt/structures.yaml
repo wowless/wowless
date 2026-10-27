@@ -64,6 +64,9 @@ AppearanceSourceInfo:
     isHideVisual:
       nilable: true
       type: boolean
+    isValidForEquippedItem:
+      nilable: true
+      type: boolean
     isValidSourceForPlayer:
       type: boolean
     itemID:
@@ -799,12 +802,23 @@ C_AuraContainerUtil.CustomAuraButtonApplicationBarOptions:
         enum: StatusBarInterpolation
     maxApplications:
       type: number
+    minApplications:
+      default: 0
+      type: number
 C_AuraContainerUtil.CustomAuraButtonApplicationCountOptions:
   fields:
     formatter:
       nilable: true
       type:
         luaobject: NumericFormatter
+C_AuraContainerUtil.CustomAuraButtonCasterNameOptions:
+  fields:
+    showRealmName:
+      default: false
+      type: boolean
+    useClassColors:
+      default: false
+      type: boolean
 C_AuraContainerUtil.CustomAuraButtonDispelTypeTextOptions:
   fields:
     customDispelTextMap:
@@ -1463,6 +1477,10 @@ C_CatalogShop.CatalogShopBundleChildInfo:
       type: number
     quantityInBundle:
       type: number
+    selectionConstraint:
+      nilable: true
+      type:
+        enum: SelectionConstraint
 C_CatalogShop.CatalogShopCategoryInfo:
   fields:
     displayName:
@@ -1590,13 +1608,20 @@ C_CatalogShop.CatalogShopProductInfo:
       nilable: true
       type:
         structure: C_CatalogShop.DecorQuantity
+    deferredGameTimeDays:
+      type: number
     description:
       type: string
     discountPercentage:
       type: number
+    doNotShowWebString:
+      type: boolean
     foregroundTexture:
       nilable: true
       type: string
+    hasAllRequiredAchievements:
+      nilable: true
+      type: boolean
     hasPendingOrders:
       type: boolean
     iconTexture:
@@ -1623,6 +1648,9 @@ C_CatalogShop.CatalogShopProductInfo:
       type: number
     licenseTermType:
       type: number
+    missingAchievementName:
+      nilable: true
+      type: string
     mountID:
       type: number
     mountTypeName:
@@ -1647,6 +1675,12 @@ C_CatalogShop.CatalogShopProductInfo:
       type: string
     price:
       type: string
+    purchaseEligibility:
+      type:
+        enum: CatalogShopPurchaseEligibility
+    purchaseEligibilityText:
+      nilable: true
+      type: string
     refundable:
       type: boolean
     shouldShowOriginalPrice:
@@ -1668,6 +1702,9 @@ C_CatalogShop.CatalogShopProductInfo:
     transmogSetID:
       type: number
     type:
+      nilable: true
+      type: string
+    vcCurrencyCode:
       nilable: true
       type: string
     virtualCurrencies:
@@ -1700,6 +1737,21 @@ C_CatalogShop.CatalogShopSectionInfo:
       type: number
     shouldShowRecommendationOptOutDisclaimer:
       type: boolean
+C_CatalogShop.CatalogShopSelectionGroupInfo:
+  fields:
+    description:
+      type: string
+    inclusionMode:
+      type:
+        enum: InclusionMode
+    name:
+      type: string
+    products:
+      type:
+        arrayof:
+          structure: C_CatalogShop.CatalogShopBundleChildInfo
+    quantity:
+      type: number
 C_CatalogShop.CatalogShopSpellVisualInfo:
   fields:
     animID:
@@ -1739,6 +1791,8 @@ C_CatalogShop.DecorQuantity:
       type: number
 C_CatalogShop.RefundableDecorInfo:
   fields:
+    currencyCode:
+      type: string
     decorGUID:
       type: string
     name:
@@ -2584,6 +2638,8 @@ C_CooldownViewer.CooldownViewerCooldown:
       type: number
 C_CooldownViewer.GroupBuffItem:
   fields:
+    displaySpellID:
+      type: number
     flags:
       type:
         enum: GroupBuffItemFlags
@@ -3080,6 +3136,14 @@ C_DeathInfo.SelfResurrectOption:
       type: number
 C_DeathRecap.DeathRecapEventInfo:
   fields:
+C_DelvesUI.TieredEntranceProgressInfo:
+  fields:
+    completed:
+      type: boolean
+    description:
+      type: string
+    questID:
+      type: number
 C_DelvesUI.TieredEntranceRewardInfo:
   fields:
     context:
@@ -3133,6 +3197,10 @@ C_EditMode.EditModeAnchorInfo:
       type: string
 C_EditMode.EditModeLayoutInfo:
   fields:
+    interfaceStyle:
+      nilable: true
+      type:
+        enum: InputDeviceInterfaceType
     layoutName:
       type: string
     layoutType:
@@ -3487,9 +3555,6 @@ C_EventToastManager.EventToastInfo:
       type: number
     flags:
       type: number
-    hideDefaultAtlas:
-      nilable: true
-      type: boolean
     hideSoundKitID:
       nilable: true
       type: number
@@ -3537,6 +3602,30 @@ C_EventToastManager.EventToastInfo:
     uiWidgetSetID:
       nilable: true
       type: number
+C_Flyout.FlyoutInfo:
+  fields:
+    description:
+      type: string
+    isKnown:
+      type: boolean
+    name:
+      type: string
+    numSlots:
+      type: number
+C_Flyout.FlyoutSlotInfo:
+  fields:
+    isKnown:
+      type: boolean
+    name:
+      nilable: true
+      type: string
+    overrideSpellID:
+      type: number
+    specID:
+      nilable: true
+      type: number
+    spellID:
+      type: number
 C_FogOfWar.FogOfWarInfo:
   fields:
     backgroundAtlas:
@@ -3573,6 +3662,23 @@ C_FriendList.FriendInfo:
     rafLinkType:
       type:
         enum: RafLinkType
+C_FriendList.SendWhoFilters:
+  fields:
+    classIDs:
+      type:
+        arrayof: number
+    raceIDs:
+      type:
+        arrayof: number
+    uiMapIDs:
+      type:
+        arrayof: number
+C_FriendList.WhoFilter:
+  fields:
+    ID:
+      type: number
+    name:
+      type: string
 C_FriendList.WhoInfo:
   fields:
     area:
@@ -4625,6 +4731,21 @@ C_Item.ItemUpgradeInfo:
     trackStringID:
       nilable: true
       type: number
+C_Item.WeaponEnchantInfo:
+  fields:
+    charges:
+      type: number
+    enchantIconID:
+      type: number
+    enchantID:
+      type: number
+    enchantType:
+      type:
+        enum: ItemEnchantType
+    hasEnchant:
+      type: boolean
+    timeLeft:
+      type: number
 C_ItemInteraction.ConversionCurrencyCost:
   fields:
     amount:
@@ -5002,6 +5123,9 @@ C_LFGList.LfgEntryData:
       type: number
     voiceChat:
       type: string
+    voiceMode:
+      type:
+        enum: LFGEntryVoiceMode
 C_LFGList.LfgListingCreateData:
   fields:
     activityIDs:
@@ -5039,6 +5163,10 @@ C_LFGList.LfgListingCreateData:
     requiredPvpRating:
       default: 0
       type: number
+    voiceMode:
+      default: 0
+      type:
+        enum: LFGEntryVoiceMode
 C_LFGList.LfgSearchResultData:
   fields:
     activityIDs:
@@ -5121,6 +5249,9 @@ C_LFGList.LfgSearchResultData:
       type: number
     voiceChat:
       type: string
+    voiceMode:
+      type:
+        enum: LFGEntryVoiceMode
 C_LFGList.LfgSearchResultPlayerInfo:
   fields:
     areaName:
@@ -5175,7 +5306,7 @@ C_LootHistory.EncounterLootDropInfo:
       type: boolean
     itemHyperlink:
       type: string
-    lootListID:
+    lootListKey:
       type: number
     playerRollState:
       type:
@@ -5285,6 +5416,8 @@ C_MajorFactions.MajorFactionData:
         structure: DBColorExport
     factionID:
       type: number
+    hideRenownLevelUpToast:
+      type: boolean
     highlights:
       type:
         arrayof:
@@ -5318,6 +5451,22 @@ C_MajorFactions.MajorFactionData:
       type: string
     useJourneyUnlockToast:
       type: boolean
+C_MajorFactions.MajorFactionProgressionInfo:
+  fields:
+    currentWeekProgressiveMaxLevel:
+      type: number
+    maxLevel:
+      type: number
+    previousWeekProgressiveMaxLevel:
+      type: number
+    renownLevel:
+      type: number
+    renownLevelThreshold:
+      type: number
+    renownReputationEarned:
+      type: number
+    weekNumber:
+      type: number
 C_MajorFactions.MajorFactionRenownInfo:
   fields:
     renownLevel:
@@ -5563,6 +5712,8 @@ C_ModelInfo.UIModelSceneActorDisplayInfo:
       type: number
 C_ModelInfo.UIModelSceneActorInfo:
   fields:
+    addDropShadowAtM2Feet:
+      type: boolean
     modelActorDisplayID:
       nilable: true
       type: number
@@ -6610,6 +6761,8 @@ C_PvP.PVPScoreInfo:
       type: number
     faction:
       type: number
+    gender:
+      type: number
     guid:
       type: string
     healingDone:
@@ -6915,6 +7068,12 @@ C_QuestLog.QuestTheme:
       type: string
     signature:
       type: string
+C_QuestLog.QuestTimerInfo:
+  fields:
+    questID:
+      type: number
+    questTimer:
+      type: number
 C_QuestOffer.QuestRequiredCurrencyInfo:
   fields:
     currencyID:
@@ -6935,10 +7094,10 @@ C_QuestSession.QuestSessionPlayerDetails:
       type: string
 C_RecentAllies.RecentAlliesSearchInfo:
   fields:
-    interests:
+    interactionCategoryFilters:
       type:
         arrayof:
-          enum: RecentAlliesFriendTag
+          enum: RecentAlliesInteractionCategoryFilter
     isAFK:
       type: boolean
     isDND:
@@ -7330,7 +7489,11 @@ C_ScenarioInfo.ScenarioCriteriaInfo:
       type: number
 C_ScenarioInfo.ScenarioDisplayInfo:
   fields:
+    startSoundKitID:
+      nilable: true
+      type: number
     themeColor:
+      nilable: true
       type:
         structure: colorRGB
 C_ScenarioInfo.ScenarioIconInfo:
@@ -7404,6 +7567,16 @@ C_ScenarioInfo.ScenarioStepSpellInfo:
     name:
       type: string
     spellID:
+      type: number
+C_ScribeUI.ScribeClassInfo:
+  fields:
+    classDescription:
+      type: string
+    className:
+      type: string
+    classTextureAtlasName:
+      type: string
+    traitTreeID:
       type: number
 C_ScriptedAnimations.ScriptedAnimationEffect:
   fields:
@@ -7482,6 +7655,52 @@ C_SecureTransfer.MailInfo:
       type: number
     target:
       type: string
+C_SecureTransfer.MailReceiveInfo:
+  fields:
+    money:
+      type: number
+    sender:
+      type: string
+C_SecureTransfer.MailSendInfo:
+  fields:
+    sendMoney:
+      type: number
+    target:
+      type: string
+C_SkillInfo.SkillLineAttributes:
+  fields:
+    costType:
+      type: number
+    description:
+      type: string
+    isAbandonable:
+      type: boolean
+    isCollapsed:
+      type: boolean
+    isHeader:
+      type: boolean
+    maxRank:
+      type: number
+    minLevel:
+      type: number
+    modifier:
+      type: number
+    name:
+      type: string
+    parentSkillLineID:
+      type: number
+    rank:
+      type: number
+    rankCost:
+      type: number
+    skillID:
+      type: number
+    skillLineCategoryID:
+      type: number
+    stepCost:
+      type: number
+    tempPoints:
+      type: number
 C_SocialQueue.SocialQueueConfig:
   fields:
     DELAY_DURATION:
@@ -7829,6 +8048,14 @@ C_Spell.SpellInfo:
       type: number
     spellID:
       type: number
+C_Spell.StatAuraChangeInfo:
+  fields:
+    critPercentChange:
+      type: number
+    maxStatChange:
+      type: number
+    meleeHitChanceTakenChange:
+      type: number
 C_SpellBook.SpellBookItemInfo:
   fields:
     actionID:
@@ -7938,8 +8165,14 @@ C_StableInfo.PetInfo:
       type: number
     displayID:
       type: number
+    experience:
+      type: number
+    experienceNeeded:
+      type: number
     familyName:
       type: string
+    happinessLevel:
+      type: number
     icon:
       type: number
     isExotic:
@@ -7948,6 +8181,10 @@ C_StableInfo.PetInfo:
       type: boolean
     level:
       type: number
+    loyaltyLevel:
+      type: number
+    loyaltyName:
+      type: string
     name:
       type: string
     petAbilities:
@@ -8062,6 +8299,14 @@ C_TooltipComparison.TooltipItemComparisonInfo:
       default: 0
       type:
         enum: TooltipComparisonMethod
+C_Traits.GroupCurrencyInfo:
+  fields:
+    currencyInfos:
+      type:
+        arrayof:
+          structure: C_Traits.TreeCurrencyInfo
+    traitNodeGroupID:
+      type: number
 C_Traits.IncreasedTraitData:
   fields:
     itemNameIncreasing:
@@ -8187,6 +8432,20 @@ C_Traits.TraitGateInfo:
     conditionID:
       type: number
     topLeftNodeID:
+      type: number
+C_Traits.TraitGroupDisplayInfo:
+  fields:
+    displayName:
+      type: string
+    groupID:
+      type: number
+    icon:
+      type: number
+    orderIndex:
+      type: number
+    skillLineID:
+      type: number
+    treeID:
       type: number
 C_Traits.TraitNodeInfo:
   fields:
@@ -8334,6 +8593,8 @@ C_Traits.TraitSubTreeInfo:
       type: number
 C_Traits.TraitTreeInfo:
   fields:
+    cannotRefund:
+      type: boolean
     gates:
       type:
         arrayof:
@@ -8358,6 +8619,9 @@ C_Traits.TreeCurrencyInfo:
     quantity:
       type: number
     spent:
+      type: number
+    spentInTree:
+      nilable: true
       type: number
     traitCurrencyID:
       type: number
@@ -8478,6 +8742,10 @@ C_TransmogCollection.TransmogCategoryAppearanceInfo:
       type: boolean
     isUsable:
       type: boolean
+    isValidForEquippedItem:
+      type: boolean
+    minIlvl:
+      type: number
     uiOrder:
       type: number
     visualID:
@@ -8496,6 +8764,14 @@ C_TransmogCollection.TransmogIllusionInfo:
       type: number
     visualID:
       type: number
+C_TransmogOutfitInfo.TransmogOutfitCollectionInfo:
+  fields:
+    canHaveIllusions:
+      type: boolean
+    isWeapon:
+      type: boolean
+    name:
+      type: string
 C_TransmogOutfitInfo.TransmogOutfitEntryInfo:
   fields:
     icon:
@@ -8521,6 +8797,15 @@ C_TransmogOutfitInfo.TransmogOutfitLinkedSlotInfo:
     secondarySlotInfo:
       type:
         structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
+C_TransmogOutfitInfo.TransmogOutfitOptionInfo:
+  fields:
+    enabled:
+      type: boolean
+    name:
+      type: string
+    type:
+      type:
+        enum: TransmogOutfitSlotOption
 C_TransmogOutfitInfo.TransmogOutfitOptionSheatheCategoryInfo:
   fields:
     categoryName:
@@ -8556,23 +8841,6 @@ C_TransmogOutfitInfo.TransmogOutfitSlotInfo:
     type:
       type:
         enum: TransmogType
-C_TransmogOutfitInfo.TransmogOutfitWeaponCollectionInfo:
-  fields:
-    canHaveIllusions:
-      type: boolean
-    isWeapon:
-      type: boolean
-    name:
-      type: string
-C_TransmogOutfitInfo.TransmogOutfitWeaponOptionInfo:
-  fields:
-    enabled:
-      type: boolean
-    name:
-      type: string
-    weaponOption:
-      type:
-        enum: TransmogOutfitSlotOption
 C_TransmogOutfitInfo.TransmogSituationCategory:
   fields:
     description:
@@ -8629,6 +8897,8 @@ C_TransmogOutfitInfo.ViewedTransmogOutfitSlotInfo:
     errorText:
       type: string
     hasPending:
+      type: boolean
+    isAppearanceOverridden:
       type: boolean
     isPendingCollected:
       type: boolean
@@ -10663,6 +10933,14 @@ C_WarbandScene.WarbandSceneSearchInfo:
     ownedOnly:
       default: false
       type: boolean
+C_Weather.WeatherInfo:
+  fields:
+    intensity:
+      type: number
+    type:
+      default: 0
+      type:
+        enum: WeatherType
 C_WeeklyRewards.ConquestWeeklyProgress:
   fields:
     displayType:
@@ -10814,6 +11092,22 @@ CharacterAlternateFormData:
       type: string
     raceID:
       type: number
+CharacterProperties:
+  fields:
+    blockCode:
+      type: string
+    codePoint:
+      type: number
+    generalCategory:
+      type: string
+    isAlphabetic:
+      type: boolean
+    isDigit:
+      type: boolean
+    isWhitespace:
+      type: boolean
+    scriptCode:
+      type: string
 CharCustomizationCategory:
   fields:
     cameraDistanceOffset:
@@ -11586,6 +11880,47 @@ CreateFontFamilyMemberInfo:
       type: string
     height:
       type: number
+CreateFrameOptions:
+  fields:
+    forbidden:
+      default: false
+      type: boolean
+    frameType:
+      type: string
+    hidden:
+      default: false
+      type: boolean
+    id:
+      nilable: true
+      type: number
+    inherits:
+      nilable: true
+      type:
+        arrayof: string
+    name:
+      nilable: true
+      type: string
+    parent:
+      nilable: true
+      type:
+        uiobject: Frame
+CreditsDisplayInfo:
+  fields:
+    background:
+      type: string
+    creditsFileID:
+      type: number
+    isDefault:
+      type: boolean
+    keyArt:
+      type: string
+    logo:
+      type: number
+    name:
+      type: string
+    soundKit:
+      nilable: true
+      type: number
 CriteriaRequiredValue:
   fields:
     criteriaID:
@@ -11604,6 +11939,12 @@ CurrencyCost:
       type: number
     currencyID:
       type: number
+CurrencyParseResult:
+  fields:
+    amount:
+      type: number
+    currencyCode:
+      type: string
 DBColorExport:
   fields:
     baseTag:
@@ -11658,7 +11999,7 @@ DiscordChatInfo:
       type:
         enum: DiscordDisplayNameType
     userID:
-      type: string
+      type: number
 DurationTextBindingColorOptions:
   fields:
     curve:
@@ -12886,6 +13227,16 @@ RuneforgePower:
     state:
       type:
         enum: RuneforgePowerState
+ScriptBucketThrottleLimits:
+  fields:
+    luaScriptBucketThrottleMaxMsBurstNormal:
+      type: number
+    luaScriptBucketThrottleMaxMsBurstRestricted:
+      type: number
+    luaScriptBucketThrottleMaxMsPerSecondNormal:
+      type: number
+    luaScriptBucketThrottleMaxMsPerSecondRestricted:
+      type: number
 SecureCopyOptions:
   fields:
     maxTraversalDepth:
@@ -13220,6 +13571,9 @@ UnitAuraSoundInfo:
       nilable: true
       type: string
     spellID:
+      type: number
+    throttleSeconds:
+      nilable: true
       type: number
     unitToken:
       type: string

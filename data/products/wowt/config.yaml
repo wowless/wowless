@@ -109,6 +109,7 @@ runner:
     USERANDOM:
 runtime:
   bareScriptWarning: true
+  createframetaint: true
   discord: true
   enummetafix: true
   expansion_level: 10
@@ -121,8 +122,10 @@ runtime:
     worldframe:
 toc:
   excludedgametypes:
+    camelot:
     cata:
     classic:
+    forever:
     mists:
     plunderstorm:
     tbc:
@@ -130,4 +133,5 @@ toc:
     wowhack:
     wrath:
   family: Mainline
+  filenameonlysubstitution: true
   gametype: Standard
