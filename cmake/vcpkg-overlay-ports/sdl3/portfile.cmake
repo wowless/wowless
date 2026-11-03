@@ -12,7 +12,8 @@
 # referenced from there directly instead of being duplicated here.
 
 set(sdl3_upstream_port_dir
-    "${CMAKE_CURRENT_LIST_DIR}/../../../vcpkg/ports/sdl3")
+    "${CMAKE_CURRENT_LIST_DIR}/../../../vcpkg/ports/sdl3"
+)
 
 vcpkg_from_github(
   OUT_SOURCE_PATH
@@ -26,7 +27,8 @@ vcpkg_from_github(
   HEAD_REF
   main
   PATCHES
-  "${sdl3_upstream_port_dir}/fix-freebsd.patch")
+  "${sdl3_upstream_port_dir}/fix-freebsd.patch"
+)
 
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "static" SDL_STATIC)
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" SDL_SHARED)
@@ -49,50 +51,54 @@ vcpkg_check_features(
   x11
   SDL_X11
   libusb
-  SDL_HIDAPI_LIBUSB)
+  SDL_HIDAPI_LIBUSB
+)
 
 if(VCPKG_TARGET_IS_EMSCRIPTEN)
-  vcpkg_check_features(OUT_FEATURE_OPTIONS EMSCRIPTEN_FEATURE_OPTIONS FEATURES
-                       emscripten-pthreads SDL_PTHREADS)
-  vcpkg_list(APPEND FEATURE_OPTIONS "${EMSCRIPTEN_FEATURE_OPTIONS}")
+    vcpkg_check_features(OUT_FEATURE_OPTIONS EMSCRIPTEN_FEATURE_OPTIONS FEATURES
+                         emscripten-pthreads SDL_PTHREADS
+    )
+    vcpkg_list(APPEND FEATURE_OPTIONS "${EMSCRIPTEN_FEATURE_OPTIONS}")
 endif()
 
 if("x11" IN_LIST FEATURES)
-  message(
-    WARNING
-      "You will need to install Xorg dependencies to use feature x11:\nsudo apt install libx11-dev libxft-dev libxext-dev\n"
-  )
+    message(
+        WARNING
+        "You will need to install Xorg dependencies to use feature x11:\nsudo apt install libx11-dev libxft-dev libxext-dev\n"
+    )
 endif()
 if("wayland" IN_LIST FEATURES)
-  message(
-    WARNING
-      "You will need to install Wayland dependencies to use feature wayland:\nsudo apt install libwayland-dev libxkbcommon-dev libegl1-mesa-dev\n"
-  )
+    message(
+        WARNING
+        "You will need to install Wayland dependencies to use feature wayland:\nsudo apt install libwayland-dev libxkbcommon-dev libegl1-mesa-dev\n"
+    )
 endif()
 if("ibus" IN_LIST FEATURES)
-  message(
-    WARNING
-      "You will need to install ibus dependencies to use feature ibus:\nsudo apt install libibus-1.0-dev\n"
-  )
+    message(
+        WARNING
+        "You will need to install ibus dependencies to use feature ibus:\nsudo apt install libibus-1.0-dev\n"
+    )
 endif()
 
 if("libusb" IN_LIST FEATURES)
-  if(VCPKG_LIBRARY_LINKAGE STREQUAL "dynamic")
-    vcpkg_list(APPEND FEATURE_OPTIONS "-DSDL_HIDAPI_LIBUSB_SHARED=ON")
-  else()
-    vcpkg_list(APPEND FEATURE_OPTIONS "-DSDL_HIDAPI_LIBUSB_SHARED=OFF")
-  endif()
+    if(VCPKG_LIBRARY_LINKAGE STREQUAL "dynamic")
+        vcpkg_list(APPEND FEATURE_OPTIONS "-DSDL_HIDAPI_LIBUSB_SHARED=ON")
+    else()
+        vcpkg_list(APPEND FEATURE_OPTIONS "-DSDL_HIDAPI_LIBUSB_SHARED=OFF")
+    endif()
 endif()
 
 # option for not need to show windows
 list(APPEND FEATURE_OPTIONS -DSDL_UNIX_CONSOLE_BUILD=ON)
-if(VCPKG_TARGET_IS_LINUX
-   AND NOT "x11" IN_LIST FEATURES
-   AND NOT "wayland" IN_LIST FEATURES)
-  message(
-    WARNING
-      "The selected features don't allow sdl3 to create windows, which is usually unintentional. You can get windowing support by installing the x11 and/or wayland features."
-  )
+if(
+    VCPKG_TARGET_IS_LINUX
+    AND NOT "x11" IN_LIST FEATURES
+    AND NOT "wayland" IN_LIST FEATURES
+)
+    message(
+        WARNING
+        "The selected features don't allow sdl3 to create windows, which is usually unintentional. You can get windowing support by installing the x11 and/or wayland features."
+    )
 endif()
 
 vcpkg_cmake_configure(
@@ -115,19 +121,25 @@ vcpkg_cmake_configure(
   -DHAVE_GETRESUID=1
   -DHAVE_GETRESGID=1
   MAYBE_UNUSED_VARIABLES
-  SDL_FORCE_STATIC_VCRT)
+  SDL_FORCE_STATIC_VCRT
+)
 
 vcpkg_cmake_install()
 vcpkg_cmake_config_fixup()
 
-file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include"
-     "${CURRENT_PACKAGES_DIR}/debug/share")
+file(
+    REMOVE_RECURSE
+    "${CURRENT_PACKAGES_DIR}/debug/include"
+    "${CURRENT_PACKAGES_DIR}/debug/share"
+)
 
 vcpkg_copy_pdbs()
 vcpkg_fixup_pkgconfig()
 
-file(INSTALL "${sdl3_upstream_port_dir}/usage"
-     DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
+file(
+    INSTALL "${sdl3_upstream_port_dir}/usage"
+    DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}"
+)
 vcpkg_install_copyright(
   FILE_LIST
   "${SOURCE_PATH}/LICENSE.txt"
