@@ -3259,7 +3259,7 @@ ForbiddenAspect:
 ForeverExperiencePreset:
   values:
     Classic: 0
-    Modern: 1
+    Enhanced: 1
 FragmentID:
   values:
     Actor: 16
@@ -5693,6 +5693,7 @@ NamegenType:
     Surname: 1
 NamePartType:
   values:
+    Combined: 2
     Firstname: 0
     Surname: 1
 NamePlateCastBarDisplay:
@@ -7611,6 +7612,7 @@ SubscriptionInterstitialType:
     LeftNpeArea: 1
     MaxLevel: 2
     Standard: 0
+    SubscriptionPeriod: 3
 SummonReason:
   values:
     Scenario: 1
@@ -8864,7 +8866,7 @@ VasTransactionPurchaseResult:
     DisallowedDestinationAccount: 9
     DisallowedSourceAccount: 8
     EndDbErrors: 20097
-    EndProxyErrors: 56
+    EndProxyErrors: 57
     EndServerErrors: 16
     InvalidBpayDeliverableID: 14
     InvalidBpayProductID: 13
@@ -8907,6 +8909,7 @@ VasTransactionPurchaseResult:
     ProxyLostProxyConnection: 23
     ProxyMissingResultsPtr: 25
     ProxyMoneyLimitExceeded: 32
+    ProxyNoMixedAlliance: 56
     ProxyNoReturnValue: 27
     ProxyObjDropped: 29
     ProxyObjNotInDb: 19

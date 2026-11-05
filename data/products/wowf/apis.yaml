@@ -833,6 +833,13 @@ C_ActionBar.IsHelpfulAction:
   outputs:
   - name: isHelpful
     type: boolean
+C_ActionBar.IsHighestSpellRank:
+  inputs:
+  - name: spellID
+    type: string
+  outputs:
+  - name: isHighestRank
+    type: boolean
 C_ActionBar.IsInterruptAction:
   inputs:
   - name: slotID
@@ -3722,6 +3729,14 @@ C_BattleNet.GetCustomTitleFriendName:
   mayreturnnothing: true
   outputs:
   - name: customName
+    type: string
+C_BattleNet.GetDefaultTitleWhisperTarget:
+  inputs:
+  - name: id
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: whisperTarget
     type: string
 C_BattleNet.GetFriendAccountInfo:
   inputs:
@@ -12663,7 +12678,13 @@ C_GameRules.IsWoWHack:
   outputs:
   - name: active
     type: boolean
-C_GameRules.SetForeverExperiencePreset:
+C_GameRules.SetForeverExperiencePresetPostLogin:
+  inputs:
+  - name: preset
+    type:
+      enum: ForeverExperiencePreset
+  outputs:
+C_GameRules.SetForeverExperiencePresetPreLogin:
   inputs:
   - name: preset
     type:
@@ -21397,6 +21418,11 @@ C_PetInfo.IsPetActionPassive:
   outputs:
   - name: isPassive
     type: boolean
+C_PetInfo.IsPetOrderMoveToPending:
+  inputs:
+  outputs:
+  - name: isPetOrderMoveToPending
+    type: boolean
 C_PetInfo.PetAbandon:
   inputs:
   - name: petNumber
@@ -28322,6 +28348,9 @@ C_Texture.GetTitleIconTexture:
       enum: TitleIconVersion
   - name: callback
     type: function
+  - name: subIcon
+    nilable: true
+    type: string
   outputs:
 C_Texture.IsTitleIconTextureReady:
   inputs:
@@ -28330,6 +28359,9 @@ C_Texture.IsTitleIconTextureReady:
   - name: version
     type:
       enum: TitleIconVersion
+  - name: subIcon
+    nilable: true
+    type: string
   outputs:
   - name: ready
     type: boolean
@@ -28343,6 +28375,9 @@ C_Texture.SetTitleIconTexture:
   - name: version
     type:
       enum: TitleIconVersion
+  - name: subIcon
+    nilable: true
+    type: string
   outputs:
 C_Texture.SetURLTexture:
   inputs:

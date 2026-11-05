@@ -76,7 +76,7 @@ advflypitchcontrolgrounddebounce:
   account: true
   default: '0'
 agentuid:
-  default: wow_beta
+  default: ''
 aibrain:
   default: '0'
 aicontroller:
@@ -2135,8 +2135,6 @@ gamepadcursorspeedmax:
   default: '1'
 gamepadcursorspeedstart:
   default: '0.1'
-gamepaddisabletooltips:
-  default: '0'
 gamepademulatealt:
   default: none
 gamepademulatectrl:
@@ -2226,7 +2224,7 @@ gamepadtankturnspeed:
 gamepadtargetinganalogdeadzone:
   default: '0.600000'
 gamepadtargetinganalogpullbackthreshold:
-  default: '0.100000'
+  default: '0.150000'
 gamepadtargetingmodifiervisualdelay:
   character: true
   default: '0.350000'
@@ -2857,7 +2855,7 @@ nameplategameobjectmaxdistance:
   secure: true
 nameplateinfodisplay:
   account: true
-  default: "\x02"
+  default: "\x02D"
 nameplatemaxalpha:
   character: true
   default: '1.000000'
@@ -3601,7 +3599,7 @@ seenregionalchatdisabled:
 seentimerunningfirstloginpopup:
   default: '0'
 serveralert:
-  default: https://breaking-news.support.blizzard.com/service/wow-forever-client/ptr/us/en-US
+  default: https://breaking-news.support.blizzard.com/service/wow-forever-client/live/us/en-US
   readonly: true
 servermessageeventlog:
   default: '0'
@@ -4155,9 +4153,9 @@ targetprioritycombatlockhighlight:
 targetprioritypvp:
   default: '1'
 telemetrywowlabspackage:
-  default: Blizzard.Telemetry.Wow_Camelot_PTR
+  default: Blizzard.Telemetry.Wow_Camelot
 telemetrywowpackage:
-  default: Blizzard.Telemetry.Wow_Camelot_PTR
+  default: Blizzard.Telemetry.Wow_Camelot
 teleportmaxnoloaddist:
   default: '200'
 terrainloddist:

@@ -7219,6 +7219,10 @@ PET_JOURNAL_TRAP_LEVEL_SET:
   payload:
   - name: trapLevel
     type: number
+PET_ORDER_MOVE_TO_PENDING_CHANGED:
+  payload:
+  - name: isPetOrderMoveToPending
+    type: boolean
 PET_SPECIALIZATION_CHANGED:
   payload:
 PET_STABLE_CLOSED:
@@ -8091,6 +8095,8 @@ SET_SEEN_PRODUCTS:
   - name: productIds
     type:
       arrayof: number
+SETTINGS_HEADER_TEXT_UPDATE:
+  payload:
 SETTINGS_LOADED:
   payload:
 SETTINGS_PANEL_OPEN:

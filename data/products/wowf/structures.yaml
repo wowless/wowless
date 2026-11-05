@@ -1160,6 +1160,9 @@ C_BattleNet.BNetGameAccountInfo:
     richPresence:
       nilable: true
       type: string
+    subIcon:
+      nilable: true
+      type: string
     timerunningSeasonID:
       nilable: true
       type: number
