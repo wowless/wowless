@@ -27536,6 +27536,9 @@ C_Texture.GetTitleIconTexture:
       enum: TitleIconVersion
   - name: callback
     type: function
+  - name: subIcon
+    nilable: true
+    type: string
   outputs:
 C_Texture.IsTitleIconTextureReady:
   inputs:
@@ -27544,6 +27547,9 @@ C_Texture.IsTitleIconTextureReady:
   - name: version
     type:
       enum: TitleIconVersion
+  - name: subIcon
+    nilable: true
+    type: string
   outputs:
   - name: ready
     type: boolean
@@ -27557,6 +27563,9 @@ C_Texture.SetTitleIconTexture:
   - name: version
     type:
       enum: TitleIconVersion
+  - name: subIcon
+    nilable: true
+    type: string
   outputs:
 C_Texture.SetURLTexture:
   inputs:
