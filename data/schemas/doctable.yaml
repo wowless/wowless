@@ -332,6 +332,8 @@ type:
               type: flag
             SecretWhenLossOfControlInfoRestricted:
               type: flag
+            SecretWhenLossOfControlRestricted:
+              type: flag
             SecretWhenLuaTableHasSecretKeys:
               type: flag
             SecretWhenNumericFormatterSecret:

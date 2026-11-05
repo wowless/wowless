@@ -2237,7 +2237,7 @@ gamepadtankturnspeed:
 gamepadtargetinganalogdeadzone:
   default: '0.600000'
 gamepadtargetinganalogpullbackthreshold:
-  default: '0.100000'
+  default: '0.150000'
 gamepadtargetingmodifiervisualdelay:
   character: true
   default: '0.350000'

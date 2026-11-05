@@ -1160,6 +1160,9 @@ C_BattleNet.BNetGameAccountInfo:
     richPresence:
       nilable: true
       type: string
+    subIcon:
+      nilable: true
+      type: string
     timerunningSeasonID:
       nilable: true
       type: number
@@ -5731,6 +5734,8 @@ C_ModelInfo.UIModelSceneActorInfo:
       type: number
     scriptTag:
       type: string
+    showFloatingProjectedTextures:
+      type: boolean
     useCenterForOriginX:
       type: boolean
     useCenterForOriginY:

@@ -853,6 +853,13 @@ C_ActionBar.IsHelpfulAction:
   outputs:
   - name: isHelpful
     type: boolean
+C_ActionBar.IsHighestSpellRank:
+  inputs:
+  - name: spellID
+    type: string
+  outputs:
+  - name: isHighestRank
+    type: boolean
 C_ActionBar.IsInterruptAction:
   inputs:
   - name: slotID
@@ -12814,7 +12821,13 @@ C_GameRules.SetAlreadyShownOnce:
   - name: alreadyShownOnce
     type: boolean
   outputs:
-C_GameRules.SetForeverExperiencePreset:
+C_GameRules.SetForeverExperiencePresetPostLogin:
+  inputs:
+  - name: preset
+    type:
+      enum: ForeverExperiencePreset
+  outputs:
+C_GameRules.SetForeverExperiencePresetPreLogin:
   inputs:
   - name: preset
     type:
@@ -28528,6 +28541,9 @@ C_Texture.GetTitleIconTexture:
       enum: TitleIconVersion
   - name: callback
     type: function
+  - name: subIcon
+    nilable: true
+    type: string
   outputs:
 C_Texture.IsTitleIconTextureReady:
   inputs:
@@ -28536,6 +28552,9 @@ C_Texture.IsTitleIconTextureReady:
   - name: version
     type:
       enum: TitleIconVersion
+  - name: subIcon
+    nilable: true
+    type: string
   outputs:
   - name: ready
     type: boolean
@@ -28549,6 +28568,9 @@ C_Texture.SetTitleIconTexture:
   - name: version
     type:
       enum: TitleIconVersion
+  - name: subIcon
+    nilable: true
+    type: string
   outputs:
 C_Texture.SetURLTexture:
   inputs:
@@ -34669,6 +34691,15 @@ C_WoWHackCharacterStats.GetStatPointsBySpellID:
   outputs:
   - name: estimatedPoints
     type: number
+C_WoWHackCharacterStats.GetStatPointsChangeBySpellID:
+  inputs:
+  - name: statSpellID
+    type: number
+  - name: increaseSpellID
+    type: number
+  outputs:
+  - name: estimatedPointsChange
+    type: number
 C_WowSurvey.OpenSurvey:
   inputs:
   outputs:
@@ -36715,6 +36746,11 @@ GetFunctionCPUUsage:
     type: number
   - name: call_count
     type: number
+GetGameFamily:
+  inputs:
+  outputs:
+  - name: gameFamily
+    type: string
 GetGameMessageInfo:
   inputs:
   - name: gameErrorIndex
@@ -36736,6 +36772,11 @@ GetGameTime:
     type: number
   - name: minute
     type: number
+GetGameType:
+  inputs:
+  outputs:
+  - name: gameType
+    type: string
 GetGlancingBlowChance:
   inputs:
   - name: playerWeaponSkill
@@ -37112,6 +37153,9 @@ GetInstanceInfo:
   - default: false
     name: hasWorldTier
     type: boolean
+  - name: instanceServerID
+    nilable: true
+    type: number
 GetInstanceLockTimeRemaining:
   inputs:
   outputs:

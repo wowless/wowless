@@ -260,6 +260,11 @@ Actor:
       outputs:
       - name: preferringCollisionBounds
         type: boolean
+    IsShowingFloatingProjectedTextures:
+      inputs:
+      outputs:
+      - name: isShowing
+        type: boolean
     IsSlotAllowed:
       inputs:
       - name: inventorySlots
@@ -545,6 +550,11 @@ Actor:
       - name: category
         type:
           enum: TransmogOutfitSlotOptionSheatheCategory
+      outputs:
+    SetShowFloatingProjectedTextures:
+      inputs:
+      - name: show
+        type: boolean
       outputs:
     SetSpellVisualKit:
       inputs:

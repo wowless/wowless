@@ -3276,6 +3276,7 @@ ForbiddenAspect:
     QueryAnimationProgress: 8192
     QueryFocus: 128
     QueryRotation: 4096
+    QueryTimerDuration: 32768
     RemoveSecretAspects: 512
     ScriptBindings: 2
     ScriptedInput: 64
@@ -3286,7 +3287,7 @@ ForbiddenAspect:
 ForeverExperiencePreset:
   values:
     Classic: 0
-    Modern: 1
+    Enhanced: 1
 FragmentID:
   values:
     Actor: 16
@@ -3331,6 +3332,7 @@ FragmentID:
     JamDispatcher: 4
     MirroredObjectC: 19
     MirrorState: 0
+    RemoteMirrorState: 45
     ReservedArchetypeSeparator: 255
     TagActiveClientS: 216
     TagActiveObjectC: 217
@@ -3408,6 +3410,8 @@ FrameTutorialAccount:
     PerksProgramActivitiesIntro: 2
     PerksProgramActivitiesOpen: 32
     Reserved1: 51
+    Reserved2: 52
+    Reserved3: 53
     RPETalentStarterBuild: 36
     RunesOfPower: 49
     TimerunnersAdvantage: 8
@@ -3493,6 +3497,8 @@ GameRule:
     CharacterCreateUseFixedBackgroundModel: 55
     CharacterlessLogin: 14
     CharacterPanelDisabled: 37
+    CharacterSelectMusicOverrideID: 268
+    CharacterSelectWarbandSceneID: 264
     CharNameReservationEnabled: 2
     CharReservationsPerRealmReopenThreshold: 8
     ChatLinkLevelToastsDisabled: 63
@@ -3515,10 +3521,12 @@ GameRule:
     DisableMinLevelForRaid: 229
     DisableMisses: 222
     DisablePaidServices: 246
+    DisablePartyTimeoutNewLeader: 263
     DisablePct: 9
     DisableQuickJoin: 162
     DisableRaidGroups: 163
     DisableRealmSelection: 113
+    DisableRestedXP: 270
     DisableSpellBlock: 225
     DisableVas: 119
     DisallowAbandoningLastPet: 180
@@ -3545,6 +3553,7 @@ GameRule:
     FlashActionButtonOnInsufficientResource: 218
     FocusFrameDisabled: 254
     ForceAlteredFormsOn: 56
+    ForceCloseQuestChestsAfterTimeout: 262
     ForcedChatLanguage: 34
     ForcedMultiActionBarSetting: 133
     ForcedPartyFrameScale: 32
@@ -3584,6 +3593,7 @@ GameRule:
     MaximizeWorldMapDisabled: 67
     MaxLootDropLevel: 25
     MaxNameplateDistance: 28
+    MaxPartySizeOverride: 266
     MaxUnitNameDistance: 27
     MerchantFilterDisabled: 101
     MicrobarScale: 26
@@ -3599,6 +3609,7 @@ GameRule:
     PerksProgramActivityTrackingDisabled: 66
     PersonalResourceDisplayDisabled: 129
     PetBattlesDisabled: 65
+    PetScalingUseCreatureStatIfNoScalingRecord: 265
     PlayerCastBarDisabled: 105
     PlayerFrameDisabled: 131
     PlayerNameplateAlternateHealthColor: 58
@@ -3632,6 +3643,8 @@ GameRule:
     Runecarving: 17
     SecuredQuests: 236
     SelfFoundAllowed: 22
+    SendOverflowMailForOverworldDrops: 267
+    SendToWoWLabsTelemetryTarget: 260
     ShowTargetFrameForOtherPlayersOnly: 219
     SingleTargetComboPoints: 112
     SmallBag: 232
@@ -3646,7 +3659,7 @@ GameRule:
     TargetFrameBuffsDisabled: 85
     TargetFrameDisabled: 130
     ThrownWeaponsUseDurability: 181
-    TimerunningAllowed: 137
+    TimerunningSeason: 137
     TrackAchievementsDisabled: 228
     TransmogEnabled: 109
     TrivialGroupXPPercent: 7
@@ -5763,6 +5776,7 @@ NamegenType:
     Surname: 1
 NamePartType:
   values:
+    Combined: 2
     Firstname: 0
     Surname: 1
 NamePlateCastBarDisplay:
@@ -6379,6 +6393,7 @@ PlayerInteractionType:
     Registrar: 11
     RenameNeighborhood: 71
     Renown: 55
+    ReservedFuture: 82
     RewardsShop: 81
     ScrappingMachine: 40
     ShipmentCrafter: 33
@@ -7691,6 +7706,7 @@ SubscriptionInterstitialType:
     LeftNpeArea: 1
     MaxLevel: 2
     Standard: 0
+    SubscriptionPeriod: 3
 SummonReason:
   values:
     Scenario: 1
@@ -8578,6 +8594,7 @@ UIModelSceneActorFlag:
   values:
     AddDropShadowAtM2Feet: 16
     Deprecated1: 1
+    ShowFloatingProjectedTextures: 32
     UseCenterForOriginX: 2
     UseCenterForOriginY: 4
     UseCenterForOriginZ: 8
@@ -8947,7 +8964,7 @@ VasTransactionPurchaseResult:
     DisallowedDestinationAccount: 9
     DisallowedSourceAccount: 8
     EndDbErrors: 20097
-    EndProxyErrors: 56
+    EndProxyErrors: 57
     EndServerErrors: 16
     InvalidBpayDeliverableID: 14
     InvalidBpayProductID: 13
@@ -8990,6 +9007,7 @@ VasTransactionPurchaseResult:
     ProxyLostProxyConnection: 23
     ProxyMissingResultsPtr: 25
     ProxyMoneyLimitExceeded: 32
+    ProxyNoMixedAlliance: 56
     ProxyNoReturnValue: 27
     ProxyObjDropped: 29
     ProxyObjNotInDb: 19

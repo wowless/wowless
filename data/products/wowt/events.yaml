@@ -8098,6 +8098,8 @@ SET_SEEN_PRODUCTS:
   - name: productIds
     type:
       arrayof: number
+SETTINGS_HEADER_TEXT_UPDATE:
+  payload:
 SETTINGS_LOADED:
   payload:
 SETTINGS_PANEL_OPEN:
