@@ -6914,6 +6914,8 @@ PARTY_INVITE_REQUEST:
     type: boolean
   - name: isNativeRealm
     type: boolean
+  - name: isCrossShard
+    type: boolean
   - name: allowMultipleRoles
     type: boolean
   - name: inviterGUID
