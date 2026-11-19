@@ -8,10 +8,10 @@ repos:
   - id: pretty-format-json
     args: [--autofix]
   - id: trailing-whitespace
-- repo: https://github.com/cheshirekow/cmake-format-precommit
-  rev: v0.6.13
+- repo: https://github.com/BlankSpruce/gersemi-pre-commit
+  rev: 0.29.2
   hooks:
-  - id: cmake-format
+  - id: gersemi
 - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
   rev: '3.11.1'
   hooks:

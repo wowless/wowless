@@ -2,7 +2,9 @@ cmake_minimum_required(VERSION 3.24)
 
 set(CMAKE_TOOLCHAIN_FILE
     ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
-    CACHE STRING "Vcpkg toolchain file")
+    CACHE STRING
+    "Vcpkg toolchain file"
+)
 
 # sdl3's upstream vcpkg port fails to build on systems whose glibc declares
 # getresuid/getresgid under _GNU_SOURCE (e.g. current Arch): SDL's CMake
@@ -12,7 +14,9 @@ set(CMAKE_TOOLCHAIN_FILE
 # overlay patches the check to match.
 set(VCPKG_OVERLAY_PORTS
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/vcpkg-overlay-ports
-    CACHE STRING "Vcpkg overlay ports")
+    CACHE STRING
+    "Vcpkg overlay ports"
+)
 
 project(wowless LANGUAGES C CXX)
 
@@ -22,102 +26,111 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(CheckCCompilerFlag)
 check_c_compiler_flag(-ffast-math HAVE_FFAST_MATH)
 if(HAVE_FFAST_MATH)
-  add_compile_options(-ffast-math)
+    add_compile_options(-ffast-math)
 endif()
 
 include(CheckCXXCompilerFlag)
 check_cxx_compiler_flag(-fno-exceptions HAVE_FNO_EXCEPTIONS)
 check_cxx_compiler_flag(/EH- HAVE_EH_MINUS)
 if(HAVE_FNO_EXCEPTIONS)
-  add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>)
+    add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>)
 elseif(HAVE_EH_MINUS)
-  add_compile_options($<$<COMPILE_LANGUAGE:CXX>:/EH->)
+    add_compile_options($<$<COMPILE_LANGUAGE:CXX>:/EH->)
 endif()
 
 if(NOT BUILD_SHARED_LIBS)
-  set(CMAKE_C_VISIBILITY_PRESET hidden)
-  set(CMAKE_CXX_VISIBILITY_PRESET hidden)
-  set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
+    set(CMAKE_C_VISIBILITY_PRESET hidden)
+    set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
 endif()
 
 set(elune_SOURCE_DIR elune)
 set(elune_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/elune-build)
 add_library(
-  elune
-  ${elune_SOURCE_DIR}/liblua/lapi.c
-  ${elune_SOURCE_DIR}/liblua/lapi.c
-  ${elune_SOURCE_DIR}/liblua/lauxlib.c
-  ${elune_SOURCE_DIR}/liblua/lbaselib.c
-  ${elune_SOURCE_DIR}/liblua/lbitlib.c
-  ${elune_SOURCE_DIR}/liblua/lcode.c
-  ${elune_SOURCE_DIR}/liblua/lcorolib.c
-  ${elune_SOURCE_DIR}/liblua/ldblib.c
-  ${elune_SOURCE_DIR}/liblua/ldebug.c
-  ${elune_SOURCE_DIR}/liblua/ldo.c
-  ${elune_SOURCE_DIR}/liblua/ldump.c
-  ${elune_SOURCE_DIR}/liblua/lfunc.c
-  ${elune_SOURCE_DIR}/liblua/lgc.c
-  ${elune_SOURCE_DIR}/liblua/linit.c
-  ${elune_SOURCE_DIR}/liblua/liolib.c
-  ${elune_SOURCE_DIR}/liblua/llex.c
-  ${elune_SOURCE_DIR}/liblua/lmanip.c
-  ${elune_SOURCE_DIR}/liblua/lmathlib.c
-  ${elune_SOURCE_DIR}/liblua/lmem.c
-  ${elune_SOURCE_DIR}/liblua/loadlib.c
-  ${elune_SOURCE_DIR}/liblua/lobject.c
-  ${elune_SOURCE_DIR}/liblua/lopcodes.c
-  ${elune_SOURCE_DIR}/liblua/loslib.c
-  ${elune_SOURCE_DIR}/liblua/lparser.c
-  ${elune_SOURCE_DIR}/liblua/lreadline.c
-  ${elune_SOURCE_DIR}/liblua/lsec.c
-  ${elune_SOURCE_DIR}/liblua/lseclib.c
-  ${elune_SOURCE_DIR}/liblua/lstate.c
-  ${elune_SOURCE_DIR}/liblua/lstatslib.c
-  ${elune_SOURCE_DIR}/liblua/lstring.c
-  ${elune_SOURCE_DIR}/liblua/lstrlib.c
-  ${elune_SOURCE_DIR}/liblua/ltable.c
-  ${elune_SOURCE_DIR}/liblua/ltablib.c
-  ${elune_SOURCE_DIR}/liblua/ltm.c
-  ${elune_SOURCE_DIR}/liblua/lundump.c
-  ${elune_SOURCE_DIR}/liblua/lvm.c
-  ${elune_SOURCE_DIR}/liblua/lzio.c)
+    elune
+    ${elune_SOURCE_DIR}/liblua/lapi.c
+    ${elune_SOURCE_DIR}/liblua/lapi.c
+    ${elune_SOURCE_DIR}/liblua/lauxlib.c
+    ${elune_SOURCE_DIR}/liblua/lbaselib.c
+    ${elune_SOURCE_DIR}/liblua/lbitlib.c
+    ${elune_SOURCE_DIR}/liblua/lcode.c
+    ${elune_SOURCE_DIR}/liblua/lcorolib.c
+    ${elune_SOURCE_DIR}/liblua/ldblib.c
+    ${elune_SOURCE_DIR}/liblua/ldebug.c
+    ${elune_SOURCE_DIR}/liblua/ldo.c
+    ${elune_SOURCE_DIR}/liblua/ldump.c
+    ${elune_SOURCE_DIR}/liblua/lfunc.c
+    ${elune_SOURCE_DIR}/liblua/lgc.c
+    ${elune_SOURCE_DIR}/liblua/linit.c
+    ${elune_SOURCE_DIR}/liblua/liolib.c
+    ${elune_SOURCE_DIR}/liblua/llex.c
+    ${elune_SOURCE_DIR}/liblua/lmanip.c
+    ${elune_SOURCE_DIR}/liblua/lmathlib.c
+    ${elune_SOURCE_DIR}/liblua/lmem.c
+    ${elune_SOURCE_DIR}/liblua/loadlib.c
+    ${elune_SOURCE_DIR}/liblua/lobject.c
+    ${elune_SOURCE_DIR}/liblua/lopcodes.c
+    ${elune_SOURCE_DIR}/liblua/loslib.c
+    ${elune_SOURCE_DIR}/liblua/lparser.c
+    ${elune_SOURCE_DIR}/liblua/lreadline.c
+    ${elune_SOURCE_DIR}/liblua/lsec.c
+    ${elune_SOURCE_DIR}/liblua/lseclib.c
+    ${elune_SOURCE_DIR}/liblua/lstate.c
+    ${elune_SOURCE_DIR}/liblua/lstatslib.c
+    ${elune_SOURCE_DIR}/liblua/lstring.c
+    ${elune_SOURCE_DIR}/liblua/lstrlib.c
+    ${elune_SOURCE_DIR}/liblua/ltable.c
+    ${elune_SOURCE_DIR}/liblua/ltablib.c
+    ${elune_SOURCE_DIR}/liblua/ltm.c
+    ${elune_SOURCE_DIR}/liblua/lundump.c
+    ${elune_SOURCE_DIR}/liblua/lvm.c
+    ${elune_SOURCE_DIR}/liblua/lzio.c
+)
 block()
-set(LUA_CPATH_ESCAPED "")
-set(LUA_DISABLE_LOADLIB ON)
-set(LUA_PATH_ESCAPED "")
-set(LUAI_BITSINT 32)
-if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-  set(LUA_DIRSEP_ESCAPED "/")
-  set(LUA_USE_LINUX OFF)
-  set(LUA_USE_MACOS ON)
-  set(LUA_USE_POSIX ON)
-  set(LUA_USE_WINDOWS OFF)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  set(LUA_DIRSEP_ESCAPED "/")
-  set(LUA_USE_LINUX ON)
-  set(LUA_USE_MACOS OFF)
-  set(LUA_USE_POSIX ON)
-  set(LUA_USE_WINDOWS OFF)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  set(LUA_DIRSEP_ESCAPED "\\\\")
-  set(LUA_USE_LINUX OFF)
-  set(LUA_USE_MACOS OFF)
-  set(LUA_USE_POSIX OFF)
-  set(LUA_USE_WINDOWS ON)
-else()
-  message(FATAL_ERROR "unsupported platform")
-endif()
-configure_file(${elune_SOURCE_DIR}/liblua/include/luaconf.h.in
-               ${elune_BINARY_DIR}/luaconf.h)
+    set(LUA_CPATH_ESCAPED "")
+    set(LUA_DISABLE_LOADLIB ON)
+    set(LUA_PATH_ESCAPED "")
+    set(LUAI_BITSINT 32)
+    if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+        set(LUA_DIRSEP_ESCAPED "/")
+        set(LUA_USE_LINUX OFF)
+        set(LUA_USE_MACOS ON)
+        set(LUA_USE_POSIX ON)
+        set(LUA_USE_WINDOWS OFF)
+    elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+        set(LUA_DIRSEP_ESCAPED "/")
+        set(LUA_USE_LINUX ON)
+        set(LUA_USE_MACOS OFF)
+        set(LUA_USE_POSIX ON)
+        set(LUA_USE_WINDOWS OFF)
+    elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+        set(LUA_DIRSEP_ESCAPED "\\\\")
+        set(LUA_USE_LINUX OFF)
+        set(LUA_USE_MACOS OFF)
+        set(LUA_USE_POSIX OFF)
+        set(LUA_USE_WINDOWS ON)
+    else()
+        message(FATAL_ERROR "unsupported platform")
+    endif()
+    configure_file(
+        ${elune_SOURCE_DIR}/liblua/include/luaconf.h.in
+        ${elune_BINARY_DIR}/luaconf.h
+    )
 endblock()
 find_path(UTF8H_INCLUDE_DIRS utf8h/utf8.h)
 target_include_directories(elune PRIVATE ${UTF8H_INCLUDE_DIRS}/utf8h)
-target_include_directories(elune PUBLIC ${elune_SOURCE_DIR}/liblua/include
-                                        ${elune_BINARY_DIR})
-target_link_libraries(elune PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:m>
-                                    $<$<PLATFORM_ID:Windows>:bcrypt>)
-target_compile_definitions(elune
-                           PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:_GNU_SOURCE>)
+target_include_directories(
+    elune
+    PUBLIC ${elune_SOURCE_DIR}/liblua/include ${elune_BINARY_DIR}
+)
+target_link_libraries(
+    elune
+    PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:m> $<$<PLATFORM_ID:Windows>:bcrypt>
+)
+target_compile_definitions(
+    elune
+    PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:_GNU_SOURCE>
+)
 set_target_properties(elune PROPERTIES C_STANDARD 11)
 
 add_executable(bootstraplua ${elune_SOURCE_DIR}/lua/lua.c)
@@ -126,37 +139,42 @@ target_link_libraries(bootstraplua PRIVATE elune)
 find_package(expat CONFIG REQUIRED)
 
 function(lua2c name)
-  foreach(arg ${ARGN})
-    string(FIND ${arg} "=" eqpos)
-    math(EXPR eqposy "${eqpos} + 1")
-    string(SUBSTRING ${arg} 0 ${eqpos} package)
-    string(SUBSTRING ${arg} ${eqposy} -1 file)
-    if(${file} STREQUAL "p")
-      list(APPEND preloads ${package})
-    elseif(NOT (${file} STREQUAL "c"))
-      string(REPLACE "." "_" pkg ${package})
-      set(output lua2c/${pkg}.c)
-      set(cmd ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua)
-      if(IS_ABSOLUTE "${file}")
-        file(RELATIVE_PATH displayfile ${CMAKE_SOURCE_DIR} "${file}")
-      else()
-        set(displayfile "${file}")
-      endif()
-      add_custom_command(
-        OUTPUT ${output}
-        COMMAND bootstraplua ${cmd} ${package} ${file} ${output} ${displayfile}
-        DEPENDS ${cmd} ${file})
-      list(APPEND deps ${output})
-    endif()
-  endforeach()
-  add_custom_command(
-    OUTPUT ${name}.c
-    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name}
+    foreach(arg ${ARGN})
+        string(FIND ${arg} "=" eqpos)
+        math(EXPR eqposy "${eqpos} + 1")
+        string(SUBSTRING ${arg} 0 ${eqpos} package)
+        string(SUBSTRING ${arg} ${eqposy} -1 file)
+        if(${file} STREQUAL "p")
+            list(APPEND preloads ${package})
+        elseif(NOT (${file} STREQUAL "c"))
+            string(REPLACE "." "_" pkg ${package})
+            set(output lua2c/${pkg}.c)
+            set(cmd ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua)
+            if(IS_ABSOLUTE "${file}")
+                file(RELATIVE_PATH displayfile ${CMAKE_SOURCE_DIR} "${file}")
+            else()
+                set(displayfile "${file}")
+            endif()
+            add_custom_command(
+                OUTPUT ${output}
+                COMMAND
+                    bootstraplua ${cmd} ${package} ${file} ${output}
+                    ${displayfile}
+                DEPENDS ${cmd} ${file}
+            )
+            list(APPEND deps ${output})
+        endif()
+    endforeach()
+    add_custom_command(
+        OUTPUT ${name}.c
+        COMMAND
+            bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name}
             ${ARGN}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps})
-  add_library(${name} ${name}.c tools/file2c.h tools/lua2c.h ${deps})
-  target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-  target_link_libraries(${name} PRIVATE elune ${preloads})
+        DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps}
+    )
+    add_library(${name} ${name}.c tools/file2c.h tools/lua2c.h ${deps})
+    target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+    target_link_libraries(${name} PRIVATE elune ${preloads})
 endfunction()
 
 set(luaexpat_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/luaexpat)
@@ -213,7 +231,8 @@ lua2c(
   luassert.state=${luassert_SOURCE_DIR}/src/state.lua
   luassert.stub=${luassert_SOURCE_DIR}/src/stub.lua
   luassert.util=${luassert_SOURCE_DIR}/src/util.lua
-  say=p)
+  say=p
+)
 
 set(argparse_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/argparse)
 lua2c(argparse argparse=${argparse_SOURCE_DIR}/src/argparse.lua)
@@ -245,7 +264,8 @@ lua2c(
   path.win32.ffi.types=${luapath_SOURCE_DIR}/lua/path/win32/ffi/types.lua
   path.win32.ffi.wcs=${luapath_SOURCE_DIR}/lua/path/win32/ffi/wcs.lua
   path.win32.fs=${luapath_SOURCE_DIR}/lua/path/win32/fs.lua
-  path.win32.wcs=${luapath_SOURCE_DIR}/lua/path/win32/wcs.lua)
+  path.win32.wcs=${luapath_SOURCE_DIR}/lua/path/win32/wcs.lua
+)
 
 set(penlight_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/penlight)
 lua2c(
@@ -289,7 +309,8 @@ lua2c(
   pl.types=${penlight_SOURCE_DIR}/lua/pl/types.lua
   pl.url=${penlight_SOURCE_DIR}/lua/pl/url.lua
   pl.utils=${penlight_SOURCE_DIR}/lua/pl/utils.lua
-  pl.xml=${penlight_SOURCE_DIR}/lua/pl/xml.lua)
+  pl.xml=${penlight_SOURCE_DIR}/lua/pl/xml.lua
+)
 
 set(vstruct_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/vstruct)
 lua2c(
@@ -329,48 +350,62 @@ lua2c(
   vstruct.io.u=${vstruct_SOURCE_DIR}/io/u.lua
   vstruct.io.x=${vstruct_SOURCE_DIR}/io/x.lua
   vstruct.io.z=${vstruct_SOURCE_DIR}/io/z.lua
-  vstruct.lexer=${vstruct_SOURCE_DIR}/lexer.lua)
+  vstruct.lexer=${vstruct_SOURCE_DIR}/lexer.lua
+)
 
-add_library(luamain tools/luamain.c tools/luamain.h tools/lua2c.h
-                    tools/file2c.h)
+add_library(
+    luamain
+    tools/luamain.c
+    tools/luamain.h
+    tools/lua2c.h
+    tools/file2c.h
+)
 target_include_directories(luamain PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(luamain PUBLIC elune)
 
 function(add_lua_executable name main)
-  file(RELATIVE_PATH main_displayfile ${CMAKE_SOURCE_DIR} "${main}")
-  add_custom_command(
-    OUTPUT ${name}luafile.c
-    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua main
+    file(RELATIVE_PATH main_displayfile ${CMAKE_SOURCE_DIR} "${main}")
+    add_custom_command(
+        OUTPUT ${name}luafile.c
+        COMMAND
+            bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua main
             ${main} ${name}luafile.c ${main_displayfile}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua ${main})
-  set(luamain ${name}luamain.c)
-  add_custom_command(
-    OUTPUT ${luamain}
-    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua
+        DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua ${main}
+    )
+    set(luamain ${name}luamain.c)
+    add_custom_command(
+        OUTPUT ${luamain}
+        COMMAND
+            bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua
             ${luamain} ${ARGN}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main})
-  add_executable(${name} ${luamain} ${name}luafile.c)
-  target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-  target_link_libraries(${name} PRIVATE ${ARGN} luamain)
+        DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main}
+    )
+    add_executable(${name} ${luamain} ${name}luafile.c)
+    target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+    target_link_libraries(${name} PRIVATE ${ARGN} luamain)
 endfunction()
 
 lua2c(wowlessyaml wowapi.cyaml=c
-      wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
+      wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua
+)
 target_sources(wowlessyaml PRIVATE wowapi/cyaml.c)
 target_link_libraries(wowlessyaml PRIVATE yaml)
 
 add_lua_executable(yaml2lua ${CMAKE_CURRENT_SOURCE_DIR}/tools/yaml2lua.lua
-                   penlight toolsutil wowlessyaml)
+                   penlight toolsutil wowlessyaml
+)
 add_lua_executable(lua2yaml ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2yaml.lua
-                   penlight wowlessyaml)
+                   penlight wowlessyaml
+)
 
 function(yaml2lua basename)
-  set(input ${CMAKE_CURRENT_SOURCE_DIR}/data/${basename}.yaml)
-  set(output runtime/${basename}.lua)
-  add_custom_command(
-    OUTPUT ${output}
-    COMMAND yaml2lua ${input} ${output}
-    DEPENDS yaml2lua ${input})
+    set(input ${CMAKE_CURRENT_SOURCE_DIR}/data/${basename}.yaml)
+    set(output runtime/${basename}.lua)
+    add_custom_command(
+        OUTPUT ${output}
+        COMMAND yaml2lua ${input} ${output}
+        DEPENDS yaml2lua ${input}
+    )
 endfunction()
 
 yaml2lua(datafiles)
@@ -378,70 +413,89 @@ yaml2lua(modules)
 yaml2lua(products)
 
 lua2c(toolsprettywrite
-      tools.prettywrite=${CMAKE_CURRENT_SOURCE_DIR}/tools/prettywrite.lua)
+      tools.prettywrite=${CMAKE_CURRENT_SOURCE_DIR}/tools/prettywrite.lua
+)
 lua2c(toolsutil tools.util=${CMAKE_CURRENT_SOURCE_DIR}/tools/util.lua
-      toolsprettywrite=p)
+      toolsprettywrite=p
+)
 
 add_lua_executable(sqls ${CMAKE_CURRENT_SOURCE_DIR}/tools/sqls.lua penlight
-                   toolsutil wowlessyaml)
+                   toolsutil wowlessyaml
+)
 add_custom_command(
-  COMMENT "Collecting SQL"
-  OUTPUT stamp/sqls.txt
-  BYPRODUCTS runtime/sqls.yaml
-  COMMAND sqls ${CMAKE_CURRENT_BINARY_DIR}/generated/sqls.yaml
-  COMMAND
-    ${CMAKE_COMMAND} -E copy_if_different
-    ${CMAKE_CURRENT_BINARY_DIR}/generated/sqls.yaml
-    ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
-  COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/stamp/sqls.txt
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-  DEPFILE generated/sqls.yaml.d
-  DEPENDS sqls data/sql.yaml)
+    COMMENT "Collecting SQL"
+    OUTPUT stamp/sqls.txt
+    BYPRODUCTS runtime/sqls.yaml
+    COMMAND sqls ${CMAKE_CURRENT_BINARY_DIR}/generated/sqls.yaml
+    COMMAND
+        ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_CURRENT_BINARY_DIR}/generated/sqls.yaml
+        ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
+    COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/stamp/sqls.txt
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    DEPFILE generated/sqls.yaml.d
+    DEPENDS sqls data/sql.yaml
+)
 add_custom_target(stamp_sqls DEPENDS stamp/sqls.txt)
 
 lua2c(wowlessutil luapath=p wowless.mixin=c
-      wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
+      wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua
+)
 target_sources(wowlessutil PRIVATE wowless/mixin.c)
 
 lua2c(wowlessxmlutil
-      wowless.xmlutil=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xmlutil.lua)
+      wowless.xmlutil=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xmlutil.lua
+)
 
 set(cjson_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/cjson)
 lua2c(luacjson cjson=c)
 target_sources(
-  luacjson PRIVATE ${cjson_SOURCE_DIR}/fpconv.c ${cjson_SOURCE_DIR}/lua_cjson.c
-                   ${cjson_SOURCE_DIR}/strbuf.c)
+    luacjson
+    PRIVATE
+        ${cjson_SOURCE_DIR}/fpconv.c
+        ${cjson_SOURCE_DIR}/lua_cjson.c
+        ${cjson_SOURCE_DIR}/strbuf.c
+)
 
 add_lua_executable(listfile ${CMAKE_CURRENT_SOURCE_DIR}/tools/listfile.lua
-                   argparse luacjson penlight toolsutil)
+                   argparse luacjson penlight toolsutil
+)
 
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/generated
-     ${CMAKE_CURRENT_BINARY_DIR}/lua2c ${CMAKE_CURRENT_BINARY_DIR}/runtime
-     ${CMAKE_CURRENT_BINARY_DIR}/stamp)
+file(
+    MAKE_DIRECTORY
+        ${CMAKE_CURRENT_BINARY_DIR}/generated
+        ${CMAKE_CURRENT_BINARY_DIR}/lua2c
+        ${CMAKE_CURRENT_BINARY_DIR}/runtime
+        ${CMAKE_CURRENT_BINARY_DIR}/stamp
+)
 
 add_custom_command(
-  OUTPUT stamp/listfile.txt
-  BYPRODUCTS runtime/listfile.lua
-  COMMAND listfile ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json
-          generated/listfile.lua
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/listfile.lua
-          runtime/listfile.lua
-  COMMAND ${CMAKE_COMMAND} -E touch stamp/listfile.txt
-  DEPENDS listfile ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json)
+    OUTPUT stamp/listfile.txt
+    BYPRODUCTS runtime/listfile.lua
+    COMMAND
+        listfile ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json
+        generated/listfile.lua
+    COMMAND
+        ${CMAKE_COMMAND} -E copy_if_different generated/listfile.lua
+        runtime/listfile.lua
+    COMMAND ${CMAKE_COMMAND} -E touch stamp/listfile.txt
+    DEPENDS listfile ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json
+)
 add_custom_target(listfilelua DEPENDS stamp/listfile.txt)
 lua2c(runtimelistfile runtime.listfile=runtime/listfile.lua)
 add_dependencies(runtimelistfile listfilelua)
 
 set_property(
-  DIRECTORY
-  APPEND
-  PROPERTY CMAKE_CONFIGURE_DEPENDS
-           ${CMAKE_CURRENT_SOURCE_DIR}/data/products.yaml)
+    DIRECTORY
+    APPEND
+    PROPERTY
+        CMAKE_CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/data/products.yaml
+)
 file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/data/products.yaml products_yaml)
 foreach(line ${products_yaml})
-  if(line MATCHES "^- (.+)$")
-    list(APPEND products ${CMAKE_MATCH_1})
-  endif()
+    if(line MATCHES "^- (.+)$")
+        list(APPEND products ${CMAKE_MATCH_1})
+    endif()
 endforeach()
 
 add_lua_executable(
@@ -451,28 +505,36 @@ add_lua_executable(
   penlight
   toolsutil
   wowlesssqlite
-  wowlessyaml)
+  wowlessyaml
+)
 
 foreach(product ${products})
-  set(f ${product}_dblist.lua)
-  add_custom_command(
-    OUTPUT stamp/${f}
-    BYPRODUCTS runtime/${f}
-    COMMAND dblist ${product}
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/${f} runtime/${f}
-    COMMAND ${CMAKE_COMMAND} -E touch stamp/${f}
-    DEPENDS dblist runtime/sqls.yaml runtime/${product}.lua)
-  add_custom_target(stamp_${product}_dblist DEPENDS stamp/${f})
-  add_dependencies(stamp_${product}_dblist datalua_${product}_lua stamp_sqls)
+    set(f ${product}_dblist.lua)
+    add_custom_command(
+        OUTPUT stamp/${f}
+        BYPRODUCTS runtime/${f}
+        COMMAND dblist ${product}
+        COMMAND
+            ${CMAKE_COMMAND} -E copy_if_different generated/${f} runtime/${f}
+        COMMAND ${CMAKE_COMMAND} -E touch stamp/${f}
+        DEPENDS dblist runtime/sqls.yaml runtime/${product}.lua
+    )
+    add_custom_target(stamp_${product}_dblist DEPENDS stamp/${f})
+    add_dependencies(stamp_${product}_dblist datalua_${product}_lua stamp_sqls)
 endforeach()
 
 set(lpeg_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/lpeg)
 lua2c(lpeg lpeg=c)
 target_sources(
-  lpeg
-  PRIVATE ${lpeg_SOURCE_DIR}/lpcap.c ${lpeg_SOURCE_DIR}/lpcode.c
-          ${lpeg_SOURCE_DIR}/lpcset.c ${lpeg_SOURCE_DIR}/lpprint.c
-          ${lpeg_SOURCE_DIR}/lptree.c ${lpeg_SOURCE_DIR}/lpvm.c)
+    lpeg
+    PRIVATE
+        ${lpeg_SOURCE_DIR}/lpcap.c
+        ${lpeg_SOURCE_DIR}/lpcode.c
+        ${lpeg_SOURCE_DIR}/lpcset.c
+        ${lpeg_SOURCE_DIR}/lpprint.c
+        ${lpeg_SOURCE_DIR}/lptree.c
+        ${lpeg_SOURCE_DIR}/lpvm.c
+)
 
 set(luadbd_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/luadbd)
 lua2c(luadbd luadbd.parser=${luadbd_SOURCE_DIR}/luadbd/parser.lua)
@@ -484,30 +546,34 @@ add_lua_executable(
   lpeg
   luadbd
   penlight
-  toolsutil)
+  toolsutil
+)
 
 foreach(product ${products})
-  if(CMAKE_GENERATOR MATCHES "Ninja")
-    set(dblist_dep runtime/${product}_dblist.lua)
-  else()
-    set(dblist_dep stamp/${product}_dblist.lua)
-  endif()
-  set(f ${product}_dbdefs.lua)
-  add_custom_command(
-    OUTPUT stamp/${f}
-    BYPRODUCTS runtime/${f}
-    COMMAND dbdefs ${product} ${CMAKE_CURRENT_SOURCE_DIR}
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/${f} runtime/${f}
-    COMMAND ${CMAKE_COMMAND} -E touch stamp/${f}
-    DEPFILE generated/${f}.d
-    DEPENDS dbdefs ${dblist_dep} runtime/products/${product}/build.lua)
-  add_custom_target(stamp_${product}_dbdefs DEPENDS stamp/${f})
-  add_dependencies(stamp_${product}_dbdefs stamp_${product}_dblist)
+    if(CMAKE_GENERATOR MATCHES "Ninja")
+        set(dblist_dep runtime/${product}_dblist.lua)
+    else()
+        set(dblist_dep stamp/${product}_dblist.lua)
+    endif()
+    set(f ${product}_dbdefs.lua)
+    add_custom_command(
+        OUTPUT stamp/${f}
+        BYPRODUCTS runtime/${f}
+        COMMAND dbdefs ${product} ${CMAKE_CURRENT_SOURCE_DIR}
+        COMMAND
+            ${CMAKE_COMMAND} -E copy_if_different generated/${f} runtime/${f}
+        COMMAND ${CMAKE_COMMAND} -E touch stamp/${f}
+        DEPFILE generated/${f}.d
+        DEPENDS dbdefs ${dblist_dep} runtime/products/${product}/build.lua
+    )
+    add_custom_target(stamp_${product}_dbdefs DEPENDS stamp/${f})
+    add_dependencies(stamp_${product}_dbdefs stamp_${product}_dblist)
 endforeach()
 
 lua2c(toolsenum tools.enum=${CMAKE_CURRENT_SOURCE_DIR}/tools/enum.lua)
 lua2c(toolsxmlcontainment
-      tools.xmlcontainment=${CMAKE_CURRENT_SOURCE_DIR}/tools/xmlcontainment.lua)
+      tools.xmlcontainment=${CMAKE_CURRENT_SOURCE_DIR}/tools/xmlcontainment.lua
+)
 
 add_lua_executable(
   prep
@@ -518,38 +584,43 @@ add_lua_executable(
   toolsutil
   wowlessutil
   wowlessxmlutil
-  wowlessyaml)
+  wowlessyaml
+)
 
 foreach(product ${products})
-  add_custom_command(
-    OUTPUT stamp/${product}.txt
-    BYPRODUCTS runtime/${product}.lua generated/${product}_stubs.cpp
-    COMMAND
-      prep ${product} --sqls ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
-      --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua --coutput
-      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp
-    COMMAND
-      ${CMAKE_COMMAND} -E copy_if_different
-      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
-      ${CMAKE_CURRENT_BINARY_DIR}/runtime/${product}.lua
-    COMMAND ${CMAKE_COMMAND} -E touch
+    add_custom_command(
+        OUTPUT stamp/${product}.txt
+        BYPRODUCTS runtime/${product}.lua generated/${product}_stubs.cpp
+        COMMAND
+            prep ${product} --sqls ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
+            --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
+            --coutput ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp
+        COMMAND
+            ${CMAKE_COMMAND} -E copy_if_different
+            ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
+            ${CMAKE_CURRENT_BINARY_DIR}/runtime/${product}.lua
+        COMMAND
+            ${CMAKE_COMMAND} -E touch
             ${CMAKE_CURRENT_BINARY_DIR}/stamp/${product}.txt
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    DEPFILE generated/${product}.lua.d
-    DEPENDS prep runtime/sqls.yaml)
-  add_custom_target(datalua_${product}_lua DEPENDS stamp/${product}.txt)
-  add_dependencies(datalua_${product}_lua stamp_sqls)
-  lua2c(datalua_${product}
-        build.products.${product}.data=runtime/${product}.lua
-        build.products.${product}.stubs=c)
-  target_sources(
-    datalua_${product}
-    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp)
-  if(MSVC)
-    target_compile_options(datalua_${product} PRIVATE /Gy-)
-  endif()
-  add_dependencies(datalua_${product} datalua_${product}_lua)
-  list(APPEND dataluas datalua_${product})
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        DEPFILE generated/${product}.lua.d
+        DEPENDS prep runtime/sqls.yaml
+    )
+    add_custom_target(datalua_${product}_lua DEPENDS stamp/${product}.txt)
+    add_dependencies(datalua_${product}_lua stamp_sqls)
+    lua2c(datalua_${product}
+          build.products.${product}.data=runtime/${product}.lua
+          build.products.${product}.stubs=c
+    )
+    target_sources(
+        datalua_${product}
+        PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp
+    )
+    if(MSVC)
+        target_compile_options(datalua_${product} PRIVATE /Gy-)
+    endif()
+    add_dependencies(datalua_${product} datalua_${product}_lua)
+    list(APPEND dataluas datalua_${product})
 endforeach()
 
 lua2c(toolssqlite3ext tools.sqlite3ext=c)
@@ -563,25 +634,28 @@ add_lua_executable(
   penlight
   toolsdb2
   toolssqlite3ext
-  wowlesssqlite)
+  wowlesssqlite
+)
 
 foreach(product ${products})
-  if(CMAKE_GENERATOR MATCHES "Ninja")
-    set(dblist_dep runtime/${product}_dblist.lua)
-    set(dbdefs_dep runtime/${product}_dbdefs.lua)
-  else()
-    set(dblist_dep stamp/${product}_dblist.lua)
-    set(dbdefs_dep stamp/${product}_dbdefs.lua)
-  endif()
-  add_custom_command(
-    OUTPUT ${product}_schema.sqlite3
-    COMMAND sqlite ${product}
-    DEPENDS sqlite ${dbdefs_dep} ${dblist_dep})
-  list(APPEND schemadbs ${product}_schema.sqlite3)
-  add_custom_command(
-    OUTPUT ${product}_data.sqlite3
-    COMMAND sqlite -f ${product}
-    DEPENDS sqlite ${dbdefs_dep} ${dblist_dep} ${product}_fetch.txt)
+    if(CMAKE_GENERATOR MATCHES "Ninja")
+        set(dblist_dep runtime/${product}_dblist.lua)
+        set(dbdefs_dep runtime/${product}_dbdefs.lua)
+    else()
+        set(dblist_dep stamp/${product}_dblist.lua)
+        set(dbdefs_dep stamp/${product}_dbdefs.lua)
+    endif()
+    add_custom_command(
+        OUTPUT ${product}_schema.sqlite3
+        COMMAND sqlite ${product}
+        DEPENDS sqlite ${dbdefs_dep} ${dblist_dep}
+    )
+    list(APPEND schemadbs ${product}_schema.sqlite3)
+    add_custom_command(
+        OUTPUT ${product}_data.sqlite3
+        COMMAND sqlite -f ${product}
+        DEPENDS sqlite ${dbdefs_dep} ${dblist_dep} ${product}_fetch.txt
+    )
 endforeach()
 
 find_package(CURL REQUIRED)
@@ -597,12 +671,14 @@ target_link_libraries(toolstactless PRIVATE tactless)
 
 find_package(CascLib CONFIG REQUIRED)
 lua2c(toolscasclib tools.casclib=c)
-target_sources(toolscasclib
-               PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tools/casclib.cpp)
+target_sources(
+    toolscasclib
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tools/casclib.cpp
+)
 if(TARGET CascLib::casc_static)
-  target_link_libraries(toolscasclib PRIVATE CascLib::casc_static)
+    target_link_libraries(toolscasclib PRIVATE CascLib::casc_static)
 else()
-  target_link_libraries(toolscasclib PRIVATE CascLib::casc)
+    target_link_libraries(toolscasclib PRIVATE CascLib::casc)
 endif()
 add_lua_executable(casc ${CMAKE_CURRENT_SOURCE_DIR}/tools/casc.lua toolscasclib)
 
@@ -619,28 +695,35 @@ add_lua_executable(
   toolsdb2
   toolstactless
   toolsutil
-  wowlesstoc)
+  wowlesstoc
+)
 
 foreach(product ${products})
-  if(CMAKE_GENERATOR MATCHES "Ninja")
-    set(dblist_dep runtime/${product}_dblist.lua)
-  else()
-    set(dblist_dep stamp/${product}_dblist.lua)
-  endif()
-  set(out ${product}_fetch.txt)
-  add_custom_command(
-    OUTPUT ${out}
-    COMMAND fetch ${product}
-    COMMAND ${CMAKE_COMMAND} -E touch ${out}
-    DEPENDS fetch ${dblist_dep} runtime/products/${product}/build.lua
-            runtime/products/${product}/config.lua)
+    if(CMAKE_GENERATOR MATCHES "Ninja")
+        set(dblist_dep runtime/${product}_dblist.lua)
+    else()
+        set(dblist_dep stamp/${product}_dblist.lua)
+    endif()
+    set(out ${product}_fetch.txt)
+    add_custom_command(
+        OUTPUT ${out}
+        COMMAND fetch ${product}
+        COMMAND ${CMAKE_COMMAND} -E touch ${out}
+        DEPENDS
+            fetch
+            ${dblist_dep}
+            runtime/products/${product}/build.lua
+            runtime/products/${product}/config.lua
+    )
 endforeach()
 
 lua2c(wowlessblp vstruct=p
-      wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua)
+      wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
+)
 
 lua2c(wowlessrender
-      wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua)
+      wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua
+)
 
 add_lua_executable(
   gentest
@@ -651,7 +734,8 @@ add_lua_executable(
   toolsutil
   toolsxmlcontainment
   wowlessxmlutil
-  wowlessyaml)
+  wowlessyaml
+)
 
 # A generated WowlessBatchN LoadOnDemand addon is capacity for one gentest.lua
 # warning batch (see warningBatchSize/warningBatchItems there); this is the one
@@ -664,95 +748,111 @@ set(warningbatchcount 4)
 # (toc record).
 set(builddeps)
 foreach(product ${products})
-  list(APPEND builddeps data/products/${product}/build.yaml
-       data/products/${product}/config.yaml)
+    list(
+        APPEND builddeps
+        data/products/${product}/build.yaml
+        data/products/${product}/config.yaml
+    )
 endforeach()
 
 foreach(product ${products})
-  set(d ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData)
-  set(staging ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/gentest-staging)
-  file(MAKE_DIRECTORY ${d} ${staging})
-  set(outs)
-  macro(gentestto destdir file name)
-    set(staged ${staging}/${file})
-    set(out ${destdir}/${file})
+    set(d ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData)
+    set(staging ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/gentest-staging)
+    file(MAKE_DIRECTORY ${d} ${staging})
+    set(outs)
+    macro(gentestto destdir file name)
+        set(staged ${staging}/${file})
+        set(out ${destdir}/${file})
+        list(APPEND outs ${out})
+        add_custom_command(
+            OUTPUT ${staged}
+            COMMAND gentest ${product} ${name} ${staged} ${ARGN}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            DEPFILE ${staged}.d
+            DEPENDS gentest
+        )
+        add_custom_command(
+            OUTPUT ${out}
+            COMMAND
+                ${CMAKE_COMMAND} -DSRC=${staged} -DDST_DIR=${destdir} -P
+                ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
+            DEPENDS ${staged}
+        )
+    endmacro()
+    macro(gentest file name)
+        gentestto(${d} ${file} ${name})
+    endmacro()
+    gentest(WowlessData.toc toc)
+    gentest(build.lua build)
+    gentest(config.lua config)
+    gentest(containment.lua containment)
+    gentest(cvars.lua cvars)
+    gentest(events.lua events)
+    gentest(expectedgametypes.lua expectedgametypes)
+    gentest(GameTypesComboAllowAllExclusions.lua allowAllExclusions)
+    gentest(GameTypesComboAllowAllExclusionsPlusNonsense.lua
+            allowAllExclusionsPlusNonsense
+    )
+    gentest(GameTypesComboAllowAllKnown.lua allowAllKnown)
+    gentest(GameTypesComboExcludeAllExclusions.lua excludeAllExclusions)
+    gentest(GameTypesComboExcludeAllExclusionsPlusNonsense.lua
+            excludeAllExclusionsPlusNonsense
+    )
+    gentest(GameTypesComboExcludeAllKnown.lua excludeAllKnown)
+    gentest(globalapis.lua globalapis)
+    gentest(globals.lua globals)
+    gentest(impltests.lua impltests)
+    gentest(luaobjects.lua luaobjects)
+    gentest(namespaceapis.lua namespaceapis)
+    gentest(product.lua product)
+    gentest(scripttypes.lua scripttypes)
+    gentest(templates.lua templates)
+    gentest(templates.xml templatexml)
+    gentest(uiobjectapis.lua uiobjectapis)
+    gentest(warningbatchsize.lua warningbatchsize)
+    gentest(xml.lua xml)
+    foreach(i RANGE 1 ${warningbatchcount})
+        set(bd ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessBatch${i})
+        file(MAKE_DIRECTORY ${bd})
+        gentestto(${bd} WowlessBatch${i}.toc warningbatchtoc --batch=${i}
+                  --batchcount=${warningbatchcount}
+        )
+        gentestto(${bd} WowlessBatch${i}.xml warningbatchxml --batch=${i}
+                  --batchcount=${warningbatchcount}
+        )
+    endforeach()
+    set(out ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/tocprecedence.txt)
     list(APPEND outs ${out})
     add_custom_command(
-      OUTPUT ${staged}
-      COMMAND gentest ${product} ${name} ${staged} ${ARGN}
-      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-      DEPFILE ${staged}.d
-      DEPENDS gentest)
+        OUTPUT ${out}
+        COMMAND
+            gentoc ${out} --product ${product} --tocprecedence
+            ${CMAKE_CURRENT_BINARY_DIR}/products/${product}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        DEPENDS gentoc data/products.yaml ${builddeps}
+    )
+    set(out ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/tocnonpositive.txt)
+    list(APPEND outs ${out})
     add_custom_command(
-      OUTPUT ${out}
-      COMMAND ${CMAKE_COMMAND} -DSRC=${staged} -DDST_DIR=${destdir} -P
-              ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
-      DEPENDS ${staged})
-  endmacro()
-  macro(gentest file name)
-    gentestto(${d} ${file} ${name})
-  endmacro()
-  gentest(WowlessData.toc toc)
-  gentest(build.lua build)
-  gentest(config.lua config)
-  gentest(containment.lua containment)
-  gentest(cvars.lua cvars)
-  gentest(events.lua events)
-  gentest(expectedgametypes.lua expectedgametypes)
-  gentest(GameTypesComboAllowAllExclusions.lua allowAllExclusions)
-  gentest(GameTypesComboAllowAllExclusionsPlusNonsense.lua
-          allowAllExclusionsPlusNonsense)
-  gentest(GameTypesComboAllowAllKnown.lua allowAllKnown)
-  gentest(GameTypesComboExcludeAllExclusions.lua excludeAllExclusions)
-  gentest(GameTypesComboExcludeAllExclusionsPlusNonsense.lua
-          excludeAllExclusionsPlusNonsense)
-  gentest(GameTypesComboExcludeAllKnown.lua excludeAllKnown)
-  gentest(globalapis.lua globalapis)
-  gentest(globals.lua globals)
-  gentest(impltests.lua impltests)
-  gentest(luaobjects.lua luaobjects)
-  gentest(namespaceapis.lua namespaceapis)
-  gentest(product.lua product)
-  gentest(scripttypes.lua scripttypes)
-  gentest(templates.lua templates)
-  gentest(templates.xml templatexml)
-  gentest(uiobjectapis.lua uiobjectapis)
-  gentest(warningbatchsize.lua warningbatchsize)
-  gentest(xml.lua xml)
-  foreach(i RANGE 1 ${warningbatchcount})
-    set(bd ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessBatch${i})
-    file(MAKE_DIRECTORY ${bd})
-    gentestto(${bd} WowlessBatch${i}.toc warningbatchtoc --batch=${i}
-              --batchcount=${warningbatchcount})
-    gentestto(${bd} WowlessBatch${i}.xml warningbatchxml --batch=${i}
-              --batchcount=${warningbatchcount})
-  endforeach()
-  set(out ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/tocprecedence.txt)
-  list(APPEND outs ${out})
-  add_custom_command(
-    OUTPUT ${out}
-    COMMAND gentoc ${out} --product ${product} --tocprecedence
+        OUTPUT ${out}
+        COMMAND
+            gentoc ${out} --product ${product} --tocnonpositive
             ${CMAKE_CURRENT_BINARY_DIR}/products/${product}
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    DEPENDS gentoc data/products.yaml ${builddeps})
-  set(out ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/tocnonpositive.txt)
-  list(APPEND outs ${out})
-  add_custom_command(
-    OUTPUT ${out}
-    COMMAND gentoc ${out} --product ${product} --tocnonpositive
-            ${CMAKE_CURRENT_BINARY_DIR}/products/${product}
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    DEPENDS gentoc data/products.yaml ${builddeps})
-  add_custom_command(
-    OUTPUT ${product}_addon.txt
-    COMMAND ${CMAKE_COMMAND} -E touch ${product}_addon.txt
-    DEPENDS ${outs})
-  list(APPEND addons ${product}_addon.txt)
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        DEPENDS gentoc data/products.yaml ${builddeps}
+    )
+    add_custom_command(
+        OUTPUT ${product}_addon.txt
+        COMMAND ${CMAKE_COMMAND} -E touch ${product}_addon.txt
+        DEPENDS ${outs}
+    )
+    list(APPEND addons ${product}_addon.txt)
 endforeach()
 add_custom_command(
-  OUTPUT addons.txt
-  COMMAND ${CMAKE_COMMAND} -E touch addons.txt
-  DEPENDS ${addons})
+    OUTPUT addons.txt
+    COMMAND ${CMAKE_COMMAND} -E touch addons.txt
+    DEPENDS ${addons}
+)
 
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
 
@@ -763,17 +863,20 @@ add_lua_executable(
   penlight
   runtimeproducts
   toolstactless
-  wowlessyaml)
+  wowlessyaml
+)
 foreach(product ${products})
-  add_custom_target(
-    bump-${product}
-    COMMAND bump ${product}
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    add_custom_target(
+        bump-${product}
+        COMMAND bump ${product}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    )
 endforeach()
 add_custom_target(
-  bump-all
-  COMMAND bump
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    bump-all
+    COMMAND bump
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
 
 add_lua_executable(
   gentoc
@@ -782,7 +885,8 @@ add_lua_executable(
   luapath
   penlight
   runtimeproducts
-  wowlessyaml)
+  wowlessyaml
+)
 
 yaml2lua(impl)
 yaml2lua(sql)
@@ -790,64 +894,66 @@ yaml2lua(test)
 yaml2lua(uiobjectimpl)
 
 foreach(product ${products})
-  foreach(
-    yaml
+    foreach(
+        yaml
+        apis
+        build
+        config
+        cvars
+        docs
+        enums
+        events
+        globals
+        luaobjects
+        scripttypes
+        stringenums
+        structures
+        uiobjects
+        xml
+    )
+        yaml2lua(products/${product}/${yaml})
+        list(
+            APPEND yamlluas
+            build.data.products.${product}.${yaml}=runtime/products/${product}/${yaml}.lua
+        )
+    endforeach()
+endforeach()
+list(
+    APPEND schemas
     apis
     build
     config
     cvars
+    datafiles
     docs
+    doctable
     enums
     events
+    function
     globals
+    impl
     luaobjects
+    modules
+    products
+    record
+    schema
+    schematype
     scripttypes
+    sql
     stringenums
     structures
+    test
+    type
+    uiobjectimpl
     uiobjects
-    xml)
-    yaml2lua(products/${product}/${yaml})
-    list(
-      APPEND
-      yamlluas
-      build.data.products.${product}.${yaml}=runtime/products/${product}/${yaml}.lua
-    )
-  endforeach()
-endforeach()
-list(
-  APPEND
-  schemas
-  apis
-  build
-  config
-  cvars
-  datafiles
-  docs
-  doctable
-  enums
-  events
-  function
-  globals
-  impl
-  luaobjects
-  modules
-  products
-  record
-  schema
-  schematype
-  scripttypes
-  sql
-  stringenums
-  structures
-  test
-  type
-  uiobjectimpl
-  uiobjects
-  xml)
+    xml
+)
 foreach(schema ${schemas})
-  yaml2lua(schemas/${schema})
-  list(APPEND yamlluas
-       build.data.schemas.${schema}=runtime/schemas/${schema}.lua)
+    yaml2lua(schemas/${schema})
+    list(
+        APPEND yamlluas
+        build.data.schemas.${schema}=runtime/schemas/${schema}.lua
+    )
 endforeach()
 
 lua2c(
@@ -862,7 +968,8 @@ lua2c(
   ${yamlluas}
   luapath=p
   wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
-  wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua)
+  wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua
+)
 
 lua2c(toolstedit tools.tedit=${CMAKE_CURRENT_SOURCE_DIR}/tools/tedit.lua)
 
@@ -876,51 +983,60 @@ add_lua_executable(
   toolsutil
   tsort
   wowapischema
-  wowlessyaml)
+  wowlessyaml
+)
 foreach(product ${products})
-  add_custom_target(
-    docs-${product}
-    COMMAND docs ${product}
-    DEPENDS ${product}
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-  list(APPEND docsallcmds COMMAND docs ${product})
+    add_custom_target(
+        docs-${product}
+        COMMAND docs ${product}
+        DEPENDS ${product}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+    list(APPEND docsallcmds COMMAND docs ${product})
 endforeach()
 add_custom_target(
-  docs-all
-  ${docsallcmds}
-  DEPENDS ${products}
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    docs-all
+    ${docsallcmds}
+    DEPENDS ${products}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
 
 add_lua_executable(autodocs ${CMAKE_CURRENT_SOURCE_DIR}/tools/autodocs.lua
-                   argparse penlight runtimeproducts wowlessyaml)
+                   argparse penlight runtimeproducts wowlessyaml
+)
 
 add_lua_executable(errsv ${CMAKE_CURRENT_SOURCE_DIR}/tools/errsv.lua penlight
-                   wowlessyaml)
+                   wowlessyaml
+)
 
 lua2c(toolsdb2 tools.db2=${CMAKE_CURRENT_SOURCE_DIR}/tools/db2.lua vstruct=p)
 
 add_lua_executable(db2dump ${CMAKE_CURRENT_SOURCE_DIR}/tools/db2dump.lua
-                   argparse penlight toolsdb2)
+                   argparse penlight toolsdb2
+)
 
 add_lua_executable(rewrite ${CMAKE_CURRENT_SOURCE_DIR}/tools/rewrite.lua
-                   argparse penlight wowlessyaml)
+                   argparse penlight wowlessyaml
+)
 
 add_lua_executable(schema ${CMAKE_CURRENT_SOURCE_DIR}/tools/schema.lua argparse
-                   penlight wowapischema wowlessyaml)
+                   penlight wowapischema wowlessyaml
+)
 
 add_lua_executable(yedit ${CMAKE_CURRENT_SOURCE_DIR}/tools/yedit.lua argparse
-                   penlight toolstedit wowlessyaml)
+                   penlight toolstedit wowlessyaml
+)
 
 file(
-  GENERATE
-  OUTPUT runtime/platform.lua
-  CONTENT
-    "\
+    GENERATE OUTPUT runtime/platform.lua
+    CONTENT
+        "\
 return '\
 $<$<PLATFORM_ID:Darwin>:mac>\
 $<$<PLATFORM_ID:Linux>:linux>\
 $<$<PLATFORM_ID:Windows>:windows>\
-'\n")
+'\n"
+)
 
 lua2c(
   wowlesslib
@@ -984,18 +1100,21 @@ lua2c(
   wowless.luaobject=c
   wowless.secure=c
   wowless.uiobject=c
-  toolsprettywrite=p)
+  toolsprettywrite=p
+)
 target_sources(
-  wowlesslib
-  PRIVATE wowless/bubblewrap.c
-          wowless/ext.c
-          wowless/luaobject.c
-          wowless/modules/encodingutil.c
-          wowless/modules/security.c
-          wowless/native.c
-          wowless/secure.c
-          wowless/stubs.cpp
-          wowless/uiobject.c)
+    wowlesslib
+    PRIVATE
+        wowless/bubblewrap.c
+        wowless/ext.c
+        wowless/luaobject.c
+        wowless/modules/encodingutil.c
+        wowless/modules/security.c
+        wowless/native.c
+        wowless/secure.c
+        wowless/stubs.cpp
+        wowless/uiobject.c
+)
 
 add_lua_executable(
   wowless
@@ -1013,7 +1132,8 @@ add_lua_executable(
   wowlesssqlite
   wowlesstoc
   wowlessutil
-  wowlessyaml)
+  wowlessyaml
+)
 
 # Wowless runs are resource intensive.
 set_property(GLOBAL PROPERTY JOB_POOLS wowless_run=5)
@@ -1022,57 +1142,79 @@ set(outdeps)
 set(outs)
 set(pngs)
 foreach(product ${products})
-  add_lua_executable(
-    wowless_${product}
-    ${CMAKE_CURRENT_SOURCE_DIR}/wowless.lua
-    argparse
-    datalua_${product}
-    date
-    luaexpat
-    minheap
-    penlight
-    runtimeproducts
-    tsort
-    wowlesslib
-    wowlessrender
-    wowlesssqlite
-    wowlesstoc
-    wowlessutil
-    wowlessyaml)
-  set(out products/${product}/log.txt)
-  list(APPEND outs ${out})
-  list(APPEND outdeps stamp_${product}_dbdefs stamp_${product}_dblist)
-  add_custom_target(
-    ${product} DEPENDS wowless_${product} testaddon.txt ${product}_addon.txt
-                       ${product}_data.sqlite3)
-  add_dependencies(${product} stamp_${product}_dbdefs stamp_${product}_dblist)
-  add_custom_command(
-    OUTPUT ${out}
-    COMMAND wowless_${product} run -p ${product} -e5 -o
-            ${CMAKE_CURRENT_BINARY_DIR}/${out}
-    JOB_POOL wowless_run
-    DEPENDS wowless_${product} testaddon.txt ${product}_addon.txt
+    add_lua_executable(
+      wowless_${product}
+      ${CMAKE_CURRENT_SOURCE_DIR}/wowless.lua
+      argparse
+      datalua_${product}
+      date
+      luaexpat
+      minheap
+      penlight
+      runtimeproducts
+      tsort
+      wowlesslib
+      wowlessrender
+      wowlesssqlite
+      wowlesstoc
+      wowlessutil
+      wowlessyaml
+    )
+    set(out products/${product}/log.txt)
+    list(APPEND outs ${out})
+    list(APPEND outdeps stamp_${product}_dbdefs stamp_${product}_dblist)
+    add_custom_target(
+        ${product}
+        DEPENDS
+            wowless_${product}
+            testaddon.txt
+            ${product}_addon.txt
             ${product}_data.sqlite3
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-  add_custom_command(
-    OUTPUT products/${product}/frame0.yaml products/${product}/frame1.yaml
-    COMMAND wowless_${product} run -p ${product} -e0 -o
+    )
+    add_dependencies(${product} stamp_${product}_dbdefs stamp_${product}_dblist)
+    add_custom_command(
+        OUTPUT ${out}
+        COMMAND
+            wowless_${product} run -p ${product} -e5 -o
+            ${CMAKE_CURRENT_BINARY_DIR}/${out}
+        JOB_POOL wowless_run
+        DEPENDS
+            wowless_${product}
+            testaddon.txt
+            ${product}_addon.txt
+            ${product}_data.sqlite3
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+    add_custom_command(
+        OUTPUT products/${product}/frame0.yaml products/${product}/frame1.yaml
+        COMMAND
+            wowless_${product} run -p ${product} -e0 -o
             ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/frame0.txt --frame0
-    JOB_POOL wowless_run
-    DEPENDS wowless_${product} ${product}_data.sqlite3
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-  add_custom_command(
-    OUTPUT products/${product}/frame0.png
-    COMMAND render products/${product}/frame0.yaml
-    DEPENDS render products/${product}/frame0.yaml
-            runtime/products/${product}/build.lua)
-  add_custom_command(
-    OUTPUT products/${product}/frame1.png
-    COMMAND render products/${product}/frame1.yaml
-    DEPENDS render products/${product}/frame1.yaml
-            runtime/products/${product}/build.lua)
-  list(APPEND pngs products/${product}/frame0.png
-       products/${product}/frame1.png)
+        JOB_POOL wowless_run
+        DEPENDS wowless_${product} ${product}_data.sqlite3
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+    add_custom_command(
+        OUTPUT products/${product}/frame0.png
+        COMMAND render products/${product}/frame0.yaml
+        DEPENDS
+            render
+            products/${product}/frame0.yaml
+            runtime/products/${product}/build.lua
+    )
+    add_custom_command(
+        OUTPUT products/${product}/frame1.png
+        COMMAND render products/${product}/frame1.yaml
+        DEPENDS
+            render
+            products/${product}/frame1.yaml
+            runtime/products/${product}/build.lua
+    )
+    list(
+        APPEND pngs
+        products/${product}/frame0.png
+        products/${product}/frame1.png
+    )
 endforeach()
 add_custom_target(outs DEPENDS ${outs})
 add_dependencies(outs ${outdeps})
@@ -1102,91 +1244,107 @@ add_lua_executable(
   wowlesstoc
   wowlessutil
   wowlessxmlutil
-  wowlessyaml)
+  wowlessyaml
+)
 
 add_lua_executable(
   generatexmltest ${CMAKE_CURRENT_SOURCE_DIR}/tools/generatexmltest.lua
-  argparse penlight toolsutil wowlessyaml)
+  argparse penlight toolsutil wowlessyaml
+)
 
 set(d ${CMAKE_CURRENT_BINARY_DIR}/addon/Wowless)
 file(MAKE_DIRECTORY ${d} ${CMAKE_CURRENT_BINARY_DIR}/staging/addon/Wowless)
 set(testaddon_outs)
 foreach(
-  f
-  apitemplates.xml
-  arraydiff.lua
-  asynctests.lua
-  evenmoreintrinsic.xml
-  evenmoreintrinsic2.xml
-  framework.lua
-  funtainer.lua
-  generated.lua
-  init.lua
-  luaobjects.lua
-  statemachine.lua
-  templates.lua
-  test.lua
-  test.xml
-  uiobjects.lua
-  util.lua)
-  set(out ${d}/${f})
-  list(APPEND testaddon_outs ${out})
-  add_custom_command(
-    OUTPUT ${out}
-    COMMAND
-      ${CMAKE_COMMAND} -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/addon/Wowless/${f}
-      -DDST_DIR=${d} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
-    DEPENDS addon/Wowless/${f})
+    f
+    apitemplates.xml
+    arraydiff.lua
+    asynctests.lua
+    evenmoreintrinsic.xml
+    evenmoreintrinsic2.xml
+    framework.lua
+    funtainer.lua
+    generated.lua
+    init.lua
+    luaobjects.lua
+    statemachine.lua
+    templates.lua
+    test.lua
+    test.xml
+    uiobjects.lua
+    util.lua
+)
+    set(out ${d}/${f})
+    list(APPEND testaddon_outs ${out})
+    add_custom_command(
+        OUTPUT ${out}
+        COMMAND
+            ${CMAKE_COMMAND}
+            -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/addon/Wowless/${f} -DDST_DIR=${d}
+            -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
+        DEPENDS addon/Wowless/${f}
+    )
 endforeach()
 set(out ${d}/Wowless.toc)
 list(APPEND testaddon_outs ${out})
 set(tocdeps)
 foreach(product ${products})
-  list(APPEND tocdeps data/products/${product}/build.yaml
-       data/products/${product}/config.yaml)
+    list(
+        APPEND tocdeps
+        data/products/${product}/build.yaml
+        data/products/${product}/config.yaml
+    )
 endforeach()
 add_custom_command(
-  OUTPUT ${out}
-  COMMAND gentoc ${out}
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-  DEPENDS gentoc data/products.yaml ${tocdeps})
+    OUTPUT ${out}
+    COMMAND gentoc ${out}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    DEPENDS gentoc data/products.yaml ${tocdeps}
+)
 set(out ${d}/generatedxml.xml)
 set(staged ${CMAKE_CURRENT_BINARY_DIR}/staging/addon/Wowless/generatedxml.xml)
 list(APPEND testaddon_outs ${out})
 add_custom_command(
-  OUTPUT ${staged}
-  COMMAND generatexmltest ${staged}
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-  DEPFILE ${staged}.d
-  DEPENDS generatexmltest)
+    OUTPUT ${staged}
+    COMMAND generatexmltest ${staged}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    DEPFILE ${staged}.d
+    DEPENDS generatexmltest
+)
 add_custom_command(
-  OUTPUT ${out}
-  COMMAND ${CMAKE_COMMAND} -DSRC=${staged} -DDST_DIR=${d} -P
-          ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
-  DEPENDS ${staged})
-foreach(a WowlessLoadOrderA WowlessLoadOrderC WowlessLoadOrderb)
-  set(d ${CMAKE_CURRENT_BINARY_DIR}/addon/${a})
-  file(MAKE_DIRECTORY ${d})
-  set(out ${d}/${a}.lua)
-  list(APPEND testaddon_outs ${out})
-  add_custom_command(
     OUTPUT ${out}
     COMMAND
-      ${CMAKE_COMMAND} -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/addon/${a}/${a}.lua
-      -DDST_DIR=${d} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
-    DEPENDS addon/${a}/${a}.lua)
-  set(out ${d}/${a}.toc)
-  list(APPEND testaddon_outs ${out})
-  add_custom_command(
-    OUTPUT ${out}
-    COMMAND gentoc ${out} ${a}.lua
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    DEPENDS gentoc data/products.yaml ${tocdeps})
+        ${CMAKE_COMMAND} -DSRC=${staged} -DDST_DIR=${d} -P
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
+    DEPENDS ${staged}
+)
+foreach(a WowlessLoadOrderA WowlessLoadOrderC WowlessLoadOrderb)
+    set(d ${CMAKE_CURRENT_BINARY_DIR}/addon/${a})
+    file(MAKE_DIRECTORY ${d})
+    set(out ${d}/${a}.lua)
+    list(APPEND testaddon_outs ${out})
+    add_custom_command(
+        OUTPUT ${out}
+        COMMAND
+            ${CMAKE_COMMAND}
+            -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/addon/${a}/${a}.lua -DDST_DIR=${d}
+            -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
+        DEPENDS addon/${a}/${a}.lua
+    )
+    set(out ${d}/${a}.toc)
+    list(APPEND testaddon_outs ${out})
+    add_custom_command(
+        OUTPUT ${out}
+        COMMAND gentoc ${out} ${a}.lua
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        DEPENDS gentoc data/products.yaml ${tocdeps}
+    )
 endforeach()
 add_custom_command(
-  OUTPUT testaddon.txt
-  COMMAND ${CMAKE_COMMAND} -E touch testaddon.txt
-  DEPENDS ${testaddon_outs})
+    OUTPUT testaddon.txt
+    COMMAND ${CMAKE_COMMAND} -E touch testaddon.txt
+    DEPENDS ${testaddon_outs}
+)
 
 # Built outside of addon/ so it isn't swept up by other tests' otherAddonDirs
 # parent-directory addon discovery (see wowless/modules/loader.lua).
@@ -1194,28 +1352,34 @@ set(d ${CMAKE_CURRENT_BINARY_DIR}/eluneaddon/EluneTest)
 file(MAKE_DIRECTORY ${d})
 set(eluneaddon_outs)
 foreach(f case.lua EluneTest.toc)
-  set(out ${d}/${f})
-  list(APPEND eluneaddon_outs ${out})
-  add_custom_command(
-    OUTPUT ${out}
-    COMMAND
-      ${CMAKE_COMMAND} -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/addon/EluneTest/${f}
-      -DDST_DIR=${d} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
-    DEPENDS addon/EluneTest/${f})
+    set(out ${d}/${f})
+    list(APPEND eluneaddon_outs ${out})
+    add_custom_command(
+        OUTPUT ${out}
+        COMMAND
+            ${CMAKE_COMMAND}
+            -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/addon/EluneTest/${f}
+            -DDST_DIR=${d} -P
+            ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
+        DEPENDS addon/EluneTest/${f}
+    )
 endforeach()
 set(out ${d}/luatest_scriptcases.lua)
 list(APPEND eluneaddon_outs ${out})
 add_custom_command(
-  OUTPUT ${out}
-  COMMAND
-    ${CMAKE_COMMAND}
-    -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/elune/tests/luatest_scriptcases.lua
-    -DDST_DIR=${d} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
-  DEPENDS elune/tests/luatest_scriptcases.lua)
+    OUTPUT ${out}
+    COMMAND
+        ${CMAKE_COMMAND}
+        -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/elune/tests/luatest_scriptcases.lua
+        -DDST_DIR=${d} -P
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
+    DEPENDS elune/tests/luatest_scriptcases.lua
+)
 add_custom_command(
-  OUTPUT eluneaddon.txt
-  COMMAND ${CMAKE_COMMAND} -E touch eluneaddon.txt
-  DEPENDS ${eluneaddon_outs})
+    OUTPUT eluneaddon.txt
+    COMMAND ${CMAKE_COMMAND} -E touch eluneaddon.txt
+    DEPENDS ${eluneaddon_outs}
+)
 
 set(specs
     spec/addon/arraydiff_spec.lua
@@ -1253,33 +1417,37 @@ set(specs
     spec/wowless/modules/xml_spec.lua
     spec/wowless/sqlite_spec.lua
     spec/wowless/toc_spec.lua
-    spec/wowless/util_spec.lua)
+    spec/wowless/util_spec.lua
+)
 add_custom_command(
-  COMMENT "Running tests"
-  OUTPUT test.out
-  COMMAND runtests -o ${CMAKE_CURRENT_BINARY_DIR}/test.out ${specs}
-  DEPENDS runtests
-          addons.txt
-          ${schemadbs}
-          ${specs}
-          spec/wowless/temp.blp
-          testaddon.txt
-          eluneaddon.txt
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    COMMENT "Running tests"
+    OUTPUT test.out
+    COMMAND runtests -o ${CMAKE_CURRENT_BINARY_DIR}/test.out ${specs}
+    DEPENDS
+        runtests
+        addons.txt
+        ${schemadbs}
+        ${specs}
+        spec/wowless/temp.blp
+        testaddon.txt
+        eluneaddon.txt
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
 add_custom_target(test DEPENDS test.out)
 
 add_lua_executable(yamlfmt ${CMAKE_CURRENT_SOURCE_DIR}/tools/yamlfmt.lua
-                   penlight wowlessyaml)
+                   penlight wowlessyaml
+)
 
 find_package(SDL3 CONFIG REQUIRED)
 find_package(SDL3_image CONFIG REQUIRED)
 lua2c(toolssdl tools.sdl=c)
 target_sources(toolssdl PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tools/sdl.c)
 target_link_libraries(
-  toolssdl
-  PRIVATE
-    SDL3::SDL3
-    $<IF:$<TARGET_EXISTS:SDL3_image::SDL3_image-shared>,SDL3_image::SDL3_image-shared,SDL3_image::SDL3_image-static>
+    toolssdl
+    PRIVATE
+        SDL3::SDL3
+        $<IF:$<TARGET_EXISTS:SDL3_image::SDL3_image-shared>,SDL3_image::SDL3_image-shared,SDL3_image::SDL3_image-static>
 )
 add_lua_executable(
   render
@@ -1290,14 +1458,17 @@ add_lua_executable(
   toolstactless
   wowlessblp
   wowlessutil
-  wowlessyaml)
+  wowlessyaml
+)
 
 find_package(Git REQUIRED)
 add_custom_target(
-  bump-dbdefs
-  COMMAND ${GIT_EXECUTABLE} -C vendor/dbdefs checkout master
-  COMMAND ${GIT_EXECUTABLE} -C vendor/dbdefs pull
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    bump-dbdefs
+    COMMAND ${GIT_EXECUTABLE} -C vendor/dbdefs checkout master
+    COMMAND ${GIT_EXECUTABLE} -C vendor/dbdefs pull
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
 
 add_lua_executable(warnings ${CMAKE_CURRENT_SOURCE_DIR}/tools/warnings.lua
-                   wowlessyaml)
+                   wowlessyaml
+)
