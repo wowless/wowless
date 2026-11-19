@@ -9,6 +9,9 @@ Discord at <https://discord.gg/rTwWcfJXuz>.
 
 Development is currently only supported via Docker.
 
+The container's tools are defined in `flake.nix`; `nix develop` provides the
+same tools outside the container.
+
 Using VSCode:
 Use `Clone Repository in Container Volume...`, select this repository to
 clone, and then watch as VSCode builds a container and installs all necessary
